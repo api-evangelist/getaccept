@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: Oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.getaccept.com/oauth2/authorize
+    tokenUrl: https://app.getaccept.com/oauth2/token
+    scopes: 1
+  description: For testing purpose, use client_id **api** and client_secret **app**
+  sources:
+  - openapi/getaccept-openapi-original.json
+- name: Token
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Enter your bearer token
+  sources:
+  - openapi/getaccept-openapi-original.json
