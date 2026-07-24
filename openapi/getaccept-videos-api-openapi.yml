@@ -1,0 +1,306 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Videos API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#video
+  description: You can upload videos and reuse it in many documents.
+  name: Videos
+paths:
+  /upload/video:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  file_status:
+                    description: Status of the video
+                    type: string
+                    x-ms-summary: File status
+                  filename:
+                    description: File name of the video
+                    type: string
+                    x-ms-summary: File name
+                  job_id:
+                    description: Id of the processing job converting and compressing the video. Poll for job status updates using /video/job/<ID>.
+                    type: string
+                    x-ms-summary: Job ID
+                  video_id:
+                    description: ID of the uploaded video to be used in video_id when creating a document
+                    type: string
+                    x-ms-summary: Video ID
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Videos
+      description: 'You can upload attachment files to include with documents you send.
+
+        Successful request will return the attachment_id. Use attachment_id to assign an attachment to a document.'
+      operationId: UploadVideo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                file_content:
+                  description: Send the file as base64 encoded. Note that base64 encoding files will increase the file size with about 30%
+                  type: string
+                  x-ms-summary: File content
+                file_name:
+                  description: Filename of the document, with the extension. This will be helpful for converting different file-types.
+                  type: string
+                  x-ms-summary: File name
+                file_url:
+                  description: Url to document file. File must be available for download without any authorization
+                  type: string
+                  x-ms-summary: File URL
+              type: object
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: Binary File
+                  format: binary
+                  type: string
+                  x-ms-summary: Binary File
+              type: object
+              x-ms-visibility: internal
+        description: A JSON object containing the uploaded video information
+        required: true
+      summary: Upload a video
+  /video/job/{videoId}:
+    get:
+      parameters:
+      - description: Video ID
+        in: path
+        name: videoId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VideoJobStatus'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Videos
+      description: Get current processing status of an uploaded video.
+      operationId: GetVideoJobStatus
+      summary: Get video job status
+  /videos:
+    get:
+      parameters:
+      - description: Start list from record x
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
+      - description: Number of records to list
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: Include presigned url for video
+        in: query
+        name: include_video_url
+        schema:
+          type: boolean
+      - description: Include url for thumbnail
+        in: query
+        name: include_thumb_url
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  videos:
+                    items:
+                      properties:
+                        created_at:
+                          type: string
+                        editable:
+                          type: boolean
+                        published:
+                          type: boolean
+                        saved:
+                          type: boolean
+                        thumb_url:
+                          type: string
+                        video_id:
+                          type: string
+                        video_title:
+                          type: string
+                        video_type:
+                          type: string
+                        video_url:
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Videos
+      description: Receive a list of available videos on the entity. You can add new videos in the mobile app or inside GetAccept.
+      operationId: ListVideos
+      summary: List videos
+  /videos/{videoId}:
+    get:
+      parameters:
+      - description: Video ID
+        in: path
+        name: videoId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Video'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Videos
+      description: Get a specific video based on video id.
+      operationId: GetVideo
+      summary: Get video
+components:
+  schemas:
+    VideoJobStatus:
+      description: Video processing job status
+      properties:
+        Status:
+          description: Current processing status
+          type: string
+        thumb_url:
+          description: URL to video thumbnail
+          type: string
+        video_url:
+          description: URL to processed video
+          type: string
+      title: Video Job Status
+      type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Video:
+      description: Video details
+      properties:
+        created_at:
+          description: Creation date
+          type: string
+        editable:
+          description: If video is editable
+          type: boolean
+        published:
+          description: If video is published
+          type: boolean
+        saved:
+          description: If video is saved
+          type: boolean
+        thumb_url:
+          description: Thumbnail URL
+          type: string
+        video_id:
+          description: Video ID
+          type: string
+        video_title:
+          description: Video title
+          type: string
+        video_type:
+          description: Video type
+          type: string
+        video_url:
+          description: Video URL
+          type: string
+      title: Video
+      type: object
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

@@ -1,0 +1,344 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Contacts API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#contacts
+  description: Everything related to contacts
+  name: Contacts
+paths:
+  /contacts:
+    get:
+      parameters:
+      - description: Filter list on status
+        in: query
+        name: filter
+        schema:
+          enum:
+          - active
+          - inactive
+          - signed
+          type: string
+      - description: How to sort results
+        in: query
+        name: sort_by
+        schema:
+          enum:
+          - name
+          - email
+          - company_name
+          - document_count
+          - created
+          type: string
+      - description: Sort order of results
+        in: query
+        name: sort_order
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+      - description: Include documents from team members
+        in: query
+        name: showteam
+        schema:
+          type: boolean
+      - description: Include all contacts from entity
+        in: query
+        name: showall
+        schema:
+          type: boolean
+      - description: Start list from record x
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
+      - description: Number of records to list
+        in: query
+        name: limit
+        schema:
+          default: 100
+          type: integer
+      - description: Search string to match first_name, last_name or email
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contacts'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Contacts
+      description: 'Receive a list of available contact for the current entity.
+
+        All contacts added as a recipient are saved as a contact and is available for later use on that entity.'
+      operationId: ListContacts
+      summary: List contacts
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  contact_id:
+                    description: ID of the created contact
+                    example: abc58129f
+                    type: string
+                    x-ms-summary: Contact ID
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Contacts
+      description: This will create a new contact in the database for the current entity
+      operationId: CreateContact
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  company_name: Doe Inc.
+                  company_number: '5678901'
+                  email: jane@doe.com
+                  first_name: Jane
+                  last_name: Doe
+                  mobile: '+12345678901'
+                  note: Just a random contact
+                  phone: '+46401234567'
+                  title: CEO
+            schema:
+              properties:
+                company_name:
+                  description: Associated company name
+                  type: string
+                  x-ms-summary: Company Name
+                company_number:
+                  description: Associated company number
+                  type: string
+                  x-ms-summary: Company Number
+                email:
+                  description: Email address of the contact
+                  type: string
+                  x-ms-summary: Email
+                first_name:
+                  description: First name of the contact
+                  type: string
+                  x-ms-summary: First name
+                fullname:
+                  description: Use to specify full name instead of first/last name
+                  type: string
+                  x-ms-summary: Full name
+                last_name:
+                  description: Last name of the contact
+                  type: string
+                  x-ms-summary: Last name
+                mobile:
+                  description: Mobile number in international format
+                  type: string
+                  x-ms-summary: Mobile
+                note:
+                  description: Optional internal note for contact
+                  type: string
+                  x-ms-summary: Note
+                phone:
+                  description: Phone number in international format
+                  type: string
+                  x-ms-summary: Phone
+                title:
+                  description: The title of the contact, ex. CEO, Sales manager
+                  type: string
+                  x-ms-summary: Title
+              type: object
+        description: A JSON object containing contact information
+        required: true
+      summary: Create contact
+      x-ms-visibility: important
+  /contacts/{contactId}:
+    delete:
+      parameters:
+      - description: Contact ID
+        in: path
+        name: contactId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Contacts
+      description: Delete a contact. Contacts who are connected to active or signed documents cannot be deleted.
+      operationId: DeleteContact
+      summary: Delete contact
+components:
+  schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Contacts:
+      description: Contact list
+      properties:
+        contacts:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      title: Contacts
+      type: object
+      x-ms-summary: Contacts
+    Contact:
+      description: Every unique e-mail address (or mobile number) is defined as a contact.
+      properties:
+        company_id:
+          description: Company ID
+          type: string
+          x-ms-summary: Company ID
+        company_logo_url:
+          description: Company logo
+          type: string
+          x-ms-summary: Company logo
+        company_name:
+          description: Company name of the contact
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the contact
+          type: string
+          x-ms-summary: Company number
+        contact_id:
+          description: Contact ID
+          type: string
+          x-ms-summary: Contact ID
+          x-ms-visibility: advanced
+        created_at:
+          description: Date of created contact
+          type: string
+          x-ms-summary: Created
+        document_count:
+          description: Number of documents for a contact
+          type: number
+          x-ms-summary: Documents
+          x-ms-visibility: advanced
+        email:
+          description: Name of the created document
+          type: string
+          x-ms-summary: Contact email
+        first_name:
+          description: First name of the contact
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the contact
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the contact
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the contact
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the contact
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        thumb_url:
+          description: Thumb URL of the contact
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the contact
+          type: string
+          x-ms-summary: Title
+      title: Contact
+      type: object
+      x-ms-summary: Contact
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

@@ -1,0 +1,497 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#archive
+  description: You can upload already signed documents to the document archive to make them searchable and use in your contract management process.
+  name: Archive
+paths:
+  /upload/archive:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Archive
+      description: Upload already signed files to the document archive / contract management.
+      operationId: UploadToArchive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tags:
+                  description: Document tags
+                  type: string
+                company_name:
+                  description: Associated company
+                  type: string
+                company_number:
+                  description: Associated company number
+                  type: string
+                contract_end_date:
+                  description: End date of contract
+                  type: string
+                contract_start_date:
+                  description: Start date of contract
+                  type: string
+                file_content:
+                  description: Base64 encoded file content
+                  type: string
+                file_ids:
+                  description: Previously uploaded file IDs
+                  type: string
+                file_name:
+                  description: Filename of the archived document
+                  type: string
+                file_url:
+                  description: URL to file
+                  type: string
+                name:
+                  description: Name of the document
+                  type: string
+                sender_id:
+                  description: Sender user/owner ID
+                  type: string
+                sign_date:
+                  description: Date and time when the document was signed
+                  type: string
+                type:
+                  description: 'Type of document: sales, hr, introduction, other'
+                  type: string
+                value:
+                  description: Monetary value of document
+                  type: number
+              type: object
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
+        required: true
+      summary: Upload to archive
+components:
+  schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Recipient:
+      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
+      properties:
+        company_name:
+          description: Company name of the recipient
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the recipient
+          type: string
+          x-ms-summary: Company number
+        document_url:
+          description: Unique URL for the recipient to view/sign
+          type: string
+          x-ms-summary: Document URL
+          x-ms-visibility: important
+        email:
+          description: Email of the recipient
+          type: string
+          x-ms-summary: Recipient email
+        first_name:
+          description: First name of the recipient
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the recipient
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        id:
+          description: ID of the recipient
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the recipient
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the recipient
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the recipient
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        order_num:
+          description: Signing order of the recipient
+          type: string
+          x-ms-summary: Signing order num
+          x-ms-visibility: advanced
+        role:
+          type: string
+          x-ms-visibility: internal
+        settings:
+          description: Per-recipient signature settings.
+          properties:
+            exclude_verified_eid_signature:
+              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+              type: boolean
+              x-ms-summary: Exclude verified EID signature
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Recipient settings
+          x-ms-visibility: advanced
+        signing_methods:
+          description: Signing methods used by the recipient
+          items:
+            $ref: '#/components/schemas/SigningMethod'
+          type: array
+          x-ms-summary: Signing methods
+          x-ms-visibility: advanced
+        status:
+          description: Status of the recipient
+          type: string
+          x-ms-summary: Status
+        thumb_url:
+          description: Thumb URL of the recipient
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the recipient
+          type: string
+          x-ms-summary: Title
+      title: Recipient
+      type: object
+      x-ms-summary: Recipient
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
+    Document:
+      description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
+      properties:
+        tags:
+          description: Document tags
+          type: string
+          x-ms-summary: Tags
+        auto_comment_email:
+          type: string
+          x-ms-visibility: internal
+        auto_comment_text:
+          description: Automatic chat text
+          type: string
+          x-ms-summary: Automatic chat text
+          x-ms-visibility: advanced
+        company_id:
+          description: Company ID
+          type: string
+          x-ms-summary: Company ID
+          x-ms-visibility: internal
+        company_logo_url:
+          type: string
+          x-ms-summary: Company Logo URL
+          x-ms-visibility: internal
+        company_name:
+          description: Company Name
+          type: string
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          type: string
+          x-ms-visibility: internal
+        created_at:
+          description: When document was created
+          type: string
+          x-ms-summary: Created at
+          x-ms-visibility: advanced
+        download_url:
+          description: URL to download signed document
+          type: string
+          x-ms-summary: Download URL
+        email_send_message:
+          description: Sending email message
+          type: string
+          x-ms-summary: Email message
+          x-ms-visibility: advanced
+        email_send_subject:
+          description: Email subject text
+          type: string
+          x-ms-summary: Email Subject
+          x-ms-visibility: advanced
+        email_send_template_id:
+          type: string
+          x-ms-summary: Email send template ID
+          x-ms-visibility: internal
+        entity_auto_comment_text:
+          type: string
+          x-ms-visibility: internal
+        expiration_date:
+          description: Document expiration date
+          type: string
+          x-ms-summary: Expiration date
+        external_client_id:
+          type: string
+          x-ms-summary: External Client ID
+          x-ms-visibility: advanced
+        external_editor_id:
+          description: ID in external editor
+          type: string
+          x-ms-summary: External Editor ID
+          x-ms-visibility: advanced
+        external_editor_type:
+          type: string
+          x-ms-summary: External Editor Type
+          x-ms-visibility: advanced
+        external_id:
+          type: string
+          x-ms-summary: External ID
+        field_count:
+          description: Number of fields in document
+          format: int32
+          type: integer
+          x-ms-summary: Field count
+          x-ms-visibility: advanced
+        id:
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: important
+        is_auto_comment:
+          description: If automatic chat comment is enabled
+          type: boolean
+          x-ms-summary: Auto comment
+          x-ms-visibility: advanced
+        is_auto_comment_email:
+          description: If automatic chat email is enabled
+          type: boolean
+          x-ms-summary: Auto Comment Email
+          x-ms-visibility: advanced
+        is_identify_recipient:
+          description: If document has identify recipient enabled
+          type: boolean
+          x-ms-summary: Identify Recipient
+          x-ms-visibility: advanced
+        is_private:
+          description: If the document is private
+          type: boolean
+          x-ms-summary: Is private
+          x-ms-visibility: advanced
+        is_reminder_sending:
+          description: If automatic reminders are enabled
+          type: boolean
+          x-ms-summary: Send reminders
+          x-ms-visibility: advanced
+        is_scheduled_sending:
+          description: If the document has scheduled sending
+          type: boolean
+          x-ms-summary: Scheduled sending
+          x-ms-visibility: advanced
+        is_selfsign:
+          description: If document has been self-signed by sender
+          type: boolean
+          x-ms-summary: Self-signing
+          x-ms-visibility: advanced
+        is_signed:
+          description: If the document has been signed
+          type: boolean
+          x-ms-summary: Is signed
+          x-ms-visibility: advanced
+        is_signing:
+          description: If document is signable
+          type: boolean
+          x-ms-summary: Signable document
+          x-ms-visibility: advanced
+        is_signing_biometric:
+          description: If handwritten signature is enabled
+          type: boolean
+          x-ms-summary: Handwritten signature
+          x-ms-visibility: advanced
+        is_signing_forward:
+          description: If transfer of signing rights is enabled
+          type: boolean
+          x-ms-summary: Allow signature transfer
+          x-ms-visibility: advanced
+        is_signing_initials:
+          type: boolean
+          x-ms-summary: Signing Initials
+          x-ms-visibility: internal
+        is_signing_order:
+          description: If recipient signing order is enabled
+          type: boolean
+          x-ms-summary: Signature order
+          x-ms-visibility: advanced
+        is_video:
+          description: If the document has a introduction video
+          type: boolean
+          x-ms-summary: Has Video
+          x-ms-visibility: advanced
+        name:
+          description: Name of document
+          type: string
+          x-ms-summary: Name
+          x-ms-visibility: important
+        parent_id:
+          description: ID of previous document version
+          type: string
+          x-ms-summary: Parent ID
+        preview_url:
+          description: Link to internal preview of document
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        scheduled_sending_time:
+          description: When the document was scheduled for sending
+          type: string
+          x-ms-summary: Scheduled sending time
+          x-ms-visibility: advanced
+        send_date:
+          description: Document send date
+          type: string
+          x-ms-summary: Send date
+        sender_email:
+          description: Email address of sender user
+          type: string
+          x-ms-summary: Sender email
+        sender_name:
+          description: Name of sender user
+          type: string
+          x-ms-summary: Sender name
+        sender_thumb_url:
+          description: Thumb image of sender user
+          type: string
+          x-ms-summary: Sender thumb URL
+          x-ms-visibility: advanced
+        sign_date:
+          description: Document sign date
+          type: string
+          x-ms-summary: Sign date
+        status:
+          description: Current status of document
+          type: string
+          x-ms-summary: Status
+          x-ms-visibility: important
+        thumb_url:
+          description: Thumb image of document
+          type: string
+          x-ms-summary: Thumb URL
+          x-ms-visibility: advanced
+        type:
+          description: Document type
+          type: string
+          x-ms-summary: Type
+        unique_id:
+          description: Unique ID for document
+          format: int32
+          type: integer
+          x-ms-summary: Unique ID
+        user_id:
+          description: ID of the sender user
+          type: string
+          x-ms-summary: User ID
+          x-ms-visibility: advanced
+        value:
+          description: Value of document
+          format: float
+          type: number
+          x-ms-summary: Value
+      title: Document
+      type: object
+      x-ms-summary: Document
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

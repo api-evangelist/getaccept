@@ -1,0 +1,784 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Subscriptions API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#subscriptions
+  description: To simplify the process of checking a documents status and make it more efficient in an integrated application, you can enable API Webhooks. Enable webhooks as a user with administrator privileges in the Settings | Integration | Webhooks. We support multiple webhooks for one application. Events will be POSTed to your webhook URLs and should be handled by you. A POST must be answered and your endpoint will need to return a 2xx HTTP. Otherwise, the callback will be considered a failure and will be retried later. Retries will be made after 1, 12, 24, and 48 hours. The sender (or notification_email) will receive an email notification after a failed attempt.
+  name: Subscriptions
+paths:
+  /subscriptions:
+    x-ms-notification-content:
+      schema:
+        $ref: '#/components/schemas/Webhook'
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscriptions'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Subscriptions
+      description: Receive a list of available subscriptions for the current entity.
+      operationId: ListSubscriptions
+      summary: List subscriptions
+      x-ms-visibility: internal
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Subscriptions
+      description: "This call will create a new subscription.\nThe response will be wrapped in an array even for single object according to REST hook standards.\n\n>Events\n  * `document.created` - Document is created\n  * `document.sent` - Document is sent\n  * `document.viewed` - Document is sent\n  * `document.signed` - Document is signed\n  * `document.approved` - Document is approved\n  * `document.expired` - Document has expired\n  * `document.rejected` - Document is rejected\n  * `document.downloaded` - Document is downloaded\n  * `document.printed` - Document is printed\n  * `document.forwarded` - Document is forwarded\n  * `document.partially_signed` - Document has been partially signed\n  * `document.commented` - Document is commented\n  * `document.hardbounced` - Document is hardbounced\n  * `document.imported` - Document is imported"
+      operationId: CreateSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                host:
+                  description: The host name to send the post to
+                  type: string
+                  x-ms-visibility: internal
+                event:
+                  description: Event trigger
+                  enum:
+                  - document.created
+                  - document.sent
+                  - document.viewed
+                  - document.reviewed
+                  - document.signed
+                  - document.approved
+                  - document.expired
+                  - document.rejected
+                  - document.downloaded
+                  - document.printed
+                  - document.forwarded
+                  - document.partially_signed
+                  - document.commented
+                  - document.hardbounced
+                  - document.imported
+                  example: document.signed
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListSubscriptionEvents
+                    value-path: value
+                    value-title: name
+                  x-ms-summary: Select event
+                  x-ms-visibility: important
+                global:
+                  default: true
+                  description: If the webhook should catch events for all entity users.
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: All entity users
+                notification_email:
+                  description: If the event fails, send a notification to this email instead of the sender
+                  example: hostmaster@example.com
+                  type: string
+                  x-ms-summary: Error email
+                  x-ms-visibility: advanced
+                payload:
+                  description: Additional payload data to post
+                  type: string
+                  x-ms-summary: Payload
+                  x-ms-visibility: advanced
+                target_url:
+                  description: The URL to post payload to on event
+                  example: https://abc.x.pipedream.net/
+                  type: string
+                  x-ms-notification-url: true
+                  x-ms-visibility: internal
+              required:
+              - event
+              - target_url
+              type: object
+        description: A JSON object containing subscription information
+        required: true
+      summary: Subscribe to document events
+      x-ms-summary: When a document status changes
+      x-ms-trigger: single
+      x-ms-trigger-hint: Trigger when a document status is changed
+      x-ms-visibility: important
+  /subscriptions/errors:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    created_at:
+                      type: string
+                    event:
+                      type: string
+                    payload:
+                      type: string
+                    result:
+                      type: string
+                    retry:
+                      type: string
+                    status:
+                      type: string
+                    target_url:
+                      type: string
+                  type: object
+                type: array
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Subscriptions
+      description: Get the last errors for active subscriptions.
+      operationId: GetSubscriptionErrors
+      summary: Get subscription errors
+  /subscriptions/events:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+                  type: object
+                type: array
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Subscriptions
+      description: This call will return a list of available subscription events
+      operationId: ListSubscriptionEvents
+      summary: List available subscription events
+      x-ms-visibility: internal
+  /subscriptions/test:
+    post:
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Subscriptions
+      description: Simulate or test a subscription / webhook event.
+      operationId: TestSubscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                document_id:
+                  description: The document id to trigger the event for
+                  type: string
+                event:
+                  description: The event to trigger
+                  type: string
+                recipient_id:
+                  description: The recipient to trigger the event for
+                  type: string
+              required:
+              - event
+              - document_id
+              type: object
+        required: true
+      summary: Test subscription
+  /subscriptions/{subscriptionId}:
+    delete:
+      parameters:
+      - description: Subscription ID
+        in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Subscription ID
+        x-ms-url-encoding: single
+      responses:
+        '204':
+          description: No Content
+      tags:
+      - Subscriptions
+      description: Delete a single subscription.
+      operationId: DeleteSubscription
+      summary: Delete subscription
+      x-ms-visibility: internal
+    get:
+      parameters:
+      - description: Subscription ID
+        in: path
+        name: subscriptionId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Subscription ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Subscriptions
+      description: This call will return details of a single subscription
+      operationId: GetSubscriptionDetails
+      summary: Get subscription details
+      x-ms-visibility: internal
+components:
+  schemas:
+    Webhook:
+      description: Webhook payload
+      properties:
+        custom_fields:
+          additionalProperties:
+            type: string
+          type: object
+          x-ms-summary: Custom Fields
+        document:
+          $ref: '#/components/schemas/Document'
+        entity:
+          description: Entity for the webhook
+          properties:
+            custom_domain:
+              description: Custom domain setting for entity
+              type: string
+              x-ms-summary: Entity custom domain
+              x-ms-visibility: advanced
+            email_send_message:
+              description: Default email message
+              type: string
+              x-ms-summary: Default email message
+              x-ms-visibility: advanced
+            email_send_subject:
+              description: Default email subject
+              type: string
+              x-ms-summary: Default email subject
+              x-ms-visibility: advanced
+            sub_domain:
+              description: Sub-domain for the entity
+              type: string
+              x-ms-summary: Entity sub-domain
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Entity
+        event:
+          type: string
+          x-ms-summary: Event name
+        event_action:
+          type: string
+          x-ms-summary: Event action
+        event_type:
+          type: string
+          x-ms-summary: Event type
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        subscription_id:
+          type: string
+          x-ms-summary: Subscription ID
+      title: Webhook
+      type: object
+      x-ms-summary: Webhook
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Subscriptions:
+      description: Subscription list
+      items:
+        $ref: '#/components/schemas/Subscription'
+      title: Subscriptions
+      type: array
+      x-ms-summary: Subscriptions
+    Recipient:
+      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
+      properties:
+        company_name:
+          description: Company name of the recipient
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the recipient
+          type: string
+          x-ms-summary: Company number
+        document_url:
+          description: Unique URL for the recipient to view/sign
+          type: string
+          x-ms-summary: Document URL
+          x-ms-visibility: important
+        email:
+          description: Email of the recipient
+          type: string
+          x-ms-summary: Recipient email
+        first_name:
+          description: First name of the recipient
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the recipient
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        id:
+          description: ID of the recipient
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the recipient
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the recipient
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the recipient
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        order_num:
+          description: Signing order of the recipient
+          type: string
+          x-ms-summary: Signing order num
+          x-ms-visibility: advanced
+        role:
+          type: string
+          x-ms-visibility: internal
+        settings:
+          description: Per-recipient signature settings.
+          properties:
+            exclude_verified_eid_signature:
+              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+              type: boolean
+              x-ms-summary: Exclude verified EID signature
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Recipient settings
+          x-ms-visibility: advanced
+        signing_methods:
+          description: Signing methods used by the recipient
+          items:
+            $ref: '#/components/schemas/SigningMethod'
+          type: array
+          x-ms-summary: Signing methods
+          x-ms-visibility: advanced
+        status:
+          description: Status of the recipient
+          type: string
+          x-ms-summary: Status
+        thumb_url:
+          description: Thumb URL of the recipient
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the recipient
+          type: string
+          x-ms-summary: Title
+      title: Recipient
+      type: object
+      x-ms-summary: Recipient
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
+    Document:
+      description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
+      properties:
+        tags:
+          description: Document tags
+          type: string
+          x-ms-summary: Tags
+        auto_comment_email:
+          type: string
+          x-ms-visibility: internal
+        auto_comment_text:
+          description: Automatic chat text
+          type: string
+          x-ms-summary: Automatic chat text
+          x-ms-visibility: advanced
+        company_id:
+          description: Company ID
+          type: string
+          x-ms-summary: Company ID
+          x-ms-visibility: internal
+        company_logo_url:
+          type: string
+          x-ms-summary: Company Logo URL
+          x-ms-visibility: internal
+        company_name:
+          description: Company Name
+          type: string
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          type: string
+          x-ms-visibility: internal
+        created_at:
+          description: When document was created
+          type: string
+          x-ms-summary: Created at
+          x-ms-visibility: advanced
+        download_url:
+          description: URL to download signed document
+          type: string
+          x-ms-summary: Download URL
+        email_send_message:
+          description: Sending email message
+          type: string
+          x-ms-summary: Email message
+          x-ms-visibility: advanced
+        email_send_subject:
+          description: Email subject text
+          type: string
+          x-ms-summary: Email Subject
+          x-ms-visibility: advanced
+        email_send_template_id:
+          type: string
+          x-ms-summary: Email send template ID
+          x-ms-visibility: internal
+        entity_auto_comment_text:
+          type: string
+          x-ms-visibility: internal
+        expiration_date:
+          description: Document expiration date
+          type: string
+          x-ms-summary: Expiration date
+        external_client_id:
+          type: string
+          x-ms-summary: External Client ID
+          x-ms-visibility: advanced
+        external_editor_id:
+          description: ID in external editor
+          type: string
+          x-ms-summary: External Editor ID
+          x-ms-visibility: advanced
+        external_editor_type:
+          type: string
+          x-ms-summary: External Editor Type
+          x-ms-visibility: advanced
+        external_id:
+          type: string
+          x-ms-summary: External ID
+        field_count:
+          description: Number of fields in document
+          format: int32
+          type: integer
+          x-ms-summary: Field count
+          x-ms-visibility: advanced
+        id:
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: important
+        is_auto_comment:
+          description: If automatic chat comment is enabled
+          type: boolean
+          x-ms-summary: Auto comment
+          x-ms-visibility: advanced
+        is_auto_comment_email:
+          description: If automatic chat email is enabled
+          type: boolean
+          x-ms-summary: Auto Comment Email
+          x-ms-visibility: advanced
+        is_identify_recipient:
+          description: If document has identify recipient enabled
+          type: boolean
+          x-ms-summary: Identify Recipient
+          x-ms-visibility: advanced
+        is_private:
+          description: If the document is private
+          type: boolean
+          x-ms-summary: Is private
+          x-ms-visibility: advanced
+        is_reminder_sending:
+          description: If automatic reminders are enabled
+          type: boolean
+          x-ms-summary: Send reminders
+          x-ms-visibility: advanced
+        is_scheduled_sending:
+          description: If the document has scheduled sending
+          type: boolean
+          x-ms-summary: Scheduled sending
+          x-ms-visibility: advanced
+        is_selfsign:
+          description: If document has been self-signed by sender
+          type: boolean
+          x-ms-summary: Self-signing
+          x-ms-visibility: advanced
+        is_signed:
+          description: If the document has been signed
+          type: boolean
+          x-ms-summary: Is signed
+          x-ms-visibility: advanced
+        is_signing:
+          description: If document is signable
+          type: boolean
+          x-ms-summary: Signable document
+          x-ms-visibility: advanced
+        is_signing_biometric:
+          description: If handwritten signature is enabled
+          type: boolean
+          x-ms-summary: Handwritten signature
+          x-ms-visibility: advanced
+        is_signing_forward:
+          description: If transfer of signing rights is enabled
+          type: boolean
+          x-ms-summary: Allow signature transfer
+          x-ms-visibility: advanced
+        is_signing_initials:
+          type: boolean
+          x-ms-summary: Signing Initials
+          x-ms-visibility: internal
+        is_signing_order:
+          description: If recipient signing order is enabled
+          type: boolean
+          x-ms-summary: Signature order
+          x-ms-visibility: advanced
+        is_video:
+          description: If the document has a introduction video
+          type: boolean
+          x-ms-summary: Has Video
+          x-ms-visibility: advanced
+        name:
+          description: Name of document
+          type: string
+          x-ms-summary: Name
+          x-ms-visibility: important
+        parent_id:
+          description: ID of previous document version
+          type: string
+          x-ms-summary: Parent ID
+        preview_url:
+          description: Link to internal preview of document
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        scheduled_sending_time:
+          description: When the document was scheduled for sending
+          type: string
+          x-ms-summary: Scheduled sending time
+          x-ms-visibility: advanced
+        send_date:
+          description: Document send date
+          type: string
+          x-ms-summary: Send date
+        sender_email:
+          description: Email address of sender user
+          type: string
+          x-ms-summary: Sender email
+        sender_name:
+          description: Name of sender user
+          type: string
+          x-ms-summary: Sender name
+        sender_thumb_url:
+          description: Thumb image of sender user
+          type: string
+          x-ms-summary: Sender thumb URL
+          x-ms-visibility: advanced
+        sign_date:
+          description: Document sign date
+          type: string
+          x-ms-summary: Sign date
+        status:
+          description: Current status of document
+          type: string
+          x-ms-summary: Status
+          x-ms-visibility: important
+        thumb_url:
+          description: Thumb image of document
+          type: string
+          x-ms-summary: Thumb URL
+          x-ms-visibility: advanced
+        type:
+          description: Document type
+          type: string
+          x-ms-summary: Type
+        unique_id:
+          description: Unique ID for document
+          format: int32
+          type: integer
+          x-ms-summary: Unique ID
+        user_id:
+          description: ID of the sender user
+          type: string
+          x-ms-summary: User ID
+          x-ms-visibility: advanced
+        value:
+          description: Value of document
+          format: float
+          type: number
+          x-ms-summary: Value
+      title: Document
+      type: object
+      x-ms-summary: Document
+    Subscription:
+      description: Subscription details
+      properties:
+        host:
+          description: Host
+          type: string
+          x-ms-summary: Host
+        created_at:
+          description: Created
+          type: string
+          x-ms-summary: Created
+        event:
+          description: Event
+          type: string
+          x-ms-summary: Event
+        global:
+          description: Global
+          type: boolean
+          x-ms-summary: Global
+        id:
+          description: ID of the subscription
+          type: string
+          x-ms-summary: Subscription ID
+        notification_email:
+          description: Notification Email
+          type: string
+          x-ms-summary: Notification Email
+        payload:
+          description: Payload
+          type: string
+          x-ms-summary: Payload
+        status:
+          description: Status of subscription
+          format: int32
+          nullable: true
+          type: integer
+          x-ms-summary: Status
+        subscription_id:
+          description: ID of the subscription
+          type: string
+          x-ms-summary: Subscription ID
+        target_url:
+          description: Target URL
+          type: string
+          x-ms-summary: Target URL
+      title: Subscription
+      type: object
+      x-ms-summary: Subscription
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

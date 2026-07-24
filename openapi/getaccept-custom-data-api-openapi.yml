@@ -1,0 +1,413 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Custom Data API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#custom-data
+  description: Custom Data enables you to define and use your own document properties as a complement to the default properties.
+  name: Custom Data
+paths:
+  /custom-data/entity:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityCustomData'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Custom Data
+      description: Get the custom data settings for the current entity.
+      operationId: GetEntityCustomData
+      summary: Get entity custom data properties
+    post:
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Custom Data
+      description: Add a new custom data property to the current entity.
+      operationId: AddEntityCustomDataProperty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                key:
+                  description: Unique key for the custom data property
+                  type: string
+                label:
+                  description: Human-readable label
+                  type: string
+                value_type:
+                  description: 'Type of value: string, number, boolean'
+                  enum:
+                  - string
+                  - number
+                  - boolean
+                  type: string
+              required:
+              - key
+              - value_type
+              - label
+              type: object
+        required: true
+      summary: Add entity custom data property
+  /custom-data/entity/{propertyKey}:
+    delete:
+      parameters:
+      - description: Property Key
+        in: path
+        name: propertyKey
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Custom Data
+      description: Delete a custom data property from the current entity.
+      operationId: DeleteEntityCustomDataProperty
+      summary: Delete entity custom data property
+  /documents/{documentId}/custom-data:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Number of records to list
+        in: query
+        name: limit
+        schema:
+          default: 20
+          type: integer
+      - description: Start list from record x
+        in: query
+        name: offset
+        schema:
+          default: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  custom_data:
+                    items:
+                      $ref: '#/components/schemas/CustomDataProperty'
+                    type: array
+                  total_count:
+                    type: integer
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Custom Data
+      description: Get all custom data properties for a document.
+      operationId: GetDocumentCustomData
+      summary: Get document custom data properties
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDataProperty'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Custom Data
+      description: Add a custom data property to a document.
+      operationId: AddDocumentCustomDataProperty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                property:
+                  properties:
+                    key:
+                      description: Key of the custom data property
+                      type: string
+                    label:
+                      description: Human-readable label
+                      type: string
+                    value:
+                      description: Value for the custom data property
+                      oneOf:
+                      - type: string
+                      - type: number
+                      - type: boolean
+                    value_type:
+                      description: 'Type of value: string, number, boolean'
+                      type: string
+                  required:
+                  - key
+                  - value
+                  - label
+                  - value_type
+                  type: object
+              required:
+              - property
+              type: object
+        required: true
+      summary: Add document custom data property
+  /documents/{documentId}/custom-data/{customDataId}:
+    delete:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Custom Data ID
+        in: path
+        name: customDataId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Custom Data
+      description: Delete a custom data property from a document.
+      operationId: DeleteDocumentCustomDataProperty
+      summary: Delete document custom data property
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Custom Data ID
+        in: path
+        name: customDataId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomDataProperty'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Custom Data
+      description: Get a specific custom data property for a document.
+      operationId: GetDocumentCustomDataProperty
+      summary: Get document custom data property
+    put:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Custom Data ID
+        in: path
+        name: customDataId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Custom Data
+      description: Update a custom data property for a document.
+      operationId: UpdateDocumentCustomDataProperty
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                property:
+                  properties:
+                    label:
+                      type: string
+                    value:
+                      oneOf:
+                      - type: string
+                      - type: number
+                      - type: boolean
+                    value_type:
+                      type: string
+                  type: object
+              type: object
+        required: true
+      summary: Update document custom data property
+components:
+  schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    CustomDataProperty:
+      description: Custom data property details
+      properties:
+        document_id:
+          description: Document ID
+          type: string
+        id:
+          description: Property ID
+          type: string
+        property:
+          properties:
+            key:
+              description: Property key
+              type: string
+            label:
+              description: Human-readable label
+              type: string
+            value:
+              description: Property value
+              oneOf:
+              - type: string
+              - type: number
+              - type: boolean
+            value_type:
+              description: 'Value type: string, number, boolean'
+              type: string
+          type: object
+      title: Custom Data Property
+      type: object
+    EntityCustomData:
+      description: Entity custom data settings
+      properties:
+        allowed_properties:
+          items:
+            properties:
+              key:
+                description: Property key
+                type: string
+              label:
+                description: Property label
+                type: string
+              property_type:
+                description: Property type
+                type: string
+              value_type:
+                description: Value type
+                type: string
+            type: object
+          type: array
+        entity_id:
+          description: Entity ID
+          type: string
+      title: Entity Custom Data
+      type: object
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

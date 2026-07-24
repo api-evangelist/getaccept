@@ -1,0 +1,2954 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Documents API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#documents
+  description: Everything related to documents
+  name: Documents
+paths:
+  /documents:
+    get:
+      parameters:
+      - description: Filter list on status
+        explode: false
+        in: query
+        name: filter
+        schema:
+          enum:
+          - draft
+          - sent
+          - viewed
+          - reviewed
+          - signed
+          - rejected
+          - recalled
+          example: signed
+          type: string
+        x-ms-summary: Filter list on status
+      - description: How to sort results
+        in: query
+        name: sort_by
+        schema:
+          enum:
+          - name
+          - value
+          - created
+          - recipient
+          - status
+          - owner
+          example: created
+          type: string
+        x-ms-summary: How to sort results
+      - description: Sort order of results
+        in: query
+        name: sort_order
+        schema:
+          enum:
+          - asc
+          - desc
+          example: desc
+          type: string
+        x-ms-summary: Sort order of results
+      - description: Include documents from team members
+        in: query
+        name: showteam
+        schema:
+          enum:
+          - true
+          - false
+          example: true
+          type: boolean
+        x-ms-summary: Include documents from team members
+      - description: Include all documents from entity
+        in: query
+        name: showall
+        schema:
+          enum:
+          - true
+          - false
+          example: true
+          type: boolean
+        x-ms-summary: Include all documents from entity
+      - description: An external ID is a custom field which can contain a unique record identifier from a system outside of GetAccept
+        in: query
+        name: external_id
+        schema:
+          type: string
+        x-ms-summary: External ID
+      - description: Start list from record x until limit
+        in: query
+        name: offset
+        schema:
+          example: 50
+          type: number
+        x-ms-summary: Offset
+      - description: Number of records to list
+        in: query
+        name: limit
+        schema:
+          example: 100
+          type: number
+        x-ms-summary: Limit
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Documents'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Documents
+      description: Get a list of available documents
+      operationId: ListDocuments
+      summary: List documents
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Documents
+      description: 'You must create a document to be able to send it to a recipient. When creating a document you can refer to previously uploaded files with file_id or you can choose to create a document and upload the files in on API post. You can only upload ONE file when including a file in the create document POST.
+
+
+        Use either file_ids parameter to use existing uploaded file(s), file_content to send the document as base64 encoded string or do a multipart post with file parameter.
+
+
+        All recipients must have either a valid e-mail or a mobile number.
+
+
+        All events are recorded using requestor IP address. You can override this using header CLIENT_IP containing the end-users public IP address.'
+      operationId: CreateDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                attachments:
+                  description: Attachments
+                  items:
+                    properties:
+                      id:
+                        description: Attachment ID received from list or after upload
+                        type: string
+                        x-ms-dynamic-values:
+                          operationId: ListAttachments
+                          value-collection: attachments
+                          value-path: attachment_id
+                          value-title: attachment_title
+                        x-ms-summary: ID
+                      require_view:
+                        description: Require that recipient view the attachment
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Require view
+                      type:
+                        description: file or external where file is an uploaded file and external is a link to an external file
+                        enum:
+                        - file
+                        - external
+                        type: string
+                        x-ms-summary: Type
+                    type: object
+                  type: array
+                  x-ms-summary: Attachment
+                custom_data:
+                  description: A list of custom data to include with the document. If the property is already defined on the template, it will be overridden by the value provided here.
+                  properties:
+                    properties:
+                      description: An array of objects containing custom data properties
+                      items:
+                        properties:
+                          key:
+                            description: Key of the custom data property
+                            type: string
+                            x-ms-summary: Key
+                          label:
+                            description: Label of the custom data property
+                            type: string
+                            x-ms-summary: Label
+                          value:
+                            description: Value of the custom data property
+                            type: string
+                            x-ms-summary: Value
+                          value_type:
+                            description: 'Type of the value: string, number, boolean'
+                            enum:
+                            - string
+                            - number
+                            - boolean
+                            type: string
+                            x-ms-summary: Value Type
+                        type: object
+                      type: array
+                      x-ms-summary: Properties
+                  type: object
+                  x-ms-summary: Custom Data
+                  x-ms-visibility: advanced
+                custom_fields:
+                  description: Custom field
+                  items:
+                    properties:
+                      id:
+                        description: ID of custom template field
+                        type: string
+                        x-ms-summary: Field ID
+                      name:
+                        description: Name of custom template field
+                        type: string
+                        x-ms-summary: Field Name
+                      value:
+                        description: Value of custom template field
+                        type: string
+                        x-ms-summary: Field Value
+                    type: object
+                  type: array
+                  x-ms-summary: Custom
+                custom_pricing_tables:
+                  description: Pricing
+                  items:
+                    properties:
+                      currency_settings:
+                        description: Currency Settings
+                        properties:
+                          currency:
+                            description: Currency, ex. SEK
+                            type: string
+                            x-ms-summary: Currency
+                          locale:
+                            description: Locale, ex. sv-SE
+                            type: string
+                            x-ms-summary: Locale
+                        type: object
+                        x-ms-summary: Currency Settings
+                        x-ms-visibility: advanced
+                      display_name:
+                        description: Display name of the pricing table
+                        type: string
+                        x-ms-summary: Display Name
+                        x-ms-visibility: advanced
+                      external_id:
+                        description: External ID to represent the summary object within a third-party system
+                        type: string
+                        x-ms-summary: External ID
+                        x-ms-visibility: advanced
+                      id:
+                        description: Table ID
+                        type: string
+                        x-ms-summary: Table ID
+                        x-ms-visibility: advanced
+                      pre_calculated:
+                        default: false
+                        description: If pricing table totals should be pre-calculated
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        type: boolean
+                        x-ms-summary: Precalculated totals
+                        x-ms-visibility: advanced
+                      sections:
+                        description: Sections
+                        items:
+                          properties:
+                            display_name:
+                              description: Display name of the pricing table
+                              type: string
+                              x-ms-summary: Display Name
+                            id:
+                              description: Section ID
+                              type: string
+                              x-ms-summary: ID
+                            rows:
+                              additionalProperties:
+                                items:
+                                  type: object
+                                type: array
+                              description: Array with values object with array of column_id, value
+                              example:
+                              - values:
+                                - column_id: abc123
+                                  value: My product
+                                - column_id: def456
+                                  value: 240
+                              x-ms-summary: Rows
+                            section_summary:
+                              properties:
+                                discount:
+                                  properties:
+                                    enabled:
+                                      description: If section discount should be enabled
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Enabled
+                                    flat_fee:
+                                      description: If section should use using flat fee discounts
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Flat fee
+                                    value:
+                                      description: The value for section discount
+                                      type: string
+                                      x-ms-summary: Discount Value
+                                  type: object
+                                  x-ms-summary: Discount
+                                price:
+                                  properties:
+                                    enabled:
+                                      description: If section price should be enabled
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Enabled
+                                    flat_fee:
+                                      description: If section should use using flat fee pricing
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Flat fee
+                                    value:
+                                      description: The value for section price
+                                      type: string
+                                      x-ms-summary: Price Value
+                                  type: object
+                                  x-ms-summary: Price
+                                tax:
+                                  properties:
+                                    enabled:
+                                      description: If section tax should be enabled
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Enabled
+                                    flat_fee:
+                                      description: If section should use using flat fee taxes
+                                      enum:
+                                      - true
+                                      - false
+                                      example: true
+                                      nullable: true
+                                      type: boolean
+                                      x-ms-summary: Flat fee
+                                    value:
+                                      description: The value for section tax
+                                      type: string
+                                      x-ms-summary: Tax Value
+                                  type: object
+                                  x-ms-summary: Tax
+                              type: object
+                              x-ms-summary: Summary Values
+                          type: object
+                        type: array
+                        x-ms-summary: Section
+                        x-ms-visibility: advanced
+                      summary_values:
+                        properties:
+                          discount:
+                            properties:
+                              enabled:
+                                description: If pricing table discount should be enabled
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Enabled
+                                x-ms-visibility: advanced
+                              flat_fee:
+                                description: If pricing table should use using flat fee discounts
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Flat fee
+                                x-ms-visibility: advanced
+                              value:
+                                description: The value for summary discount
+                                type: string
+                                x-ms-summary: Discount Value
+                            type: object
+                            x-ms-summary: Discount
+                          price:
+                            properties:
+                              enabled:
+                                description: If pricing table price should be enabled
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Enabled
+                                x-ms-visibility: advanced
+                              flat_fee:
+                                description: If pricing table should use using flat fee pricing
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Flat fee
+                                x-ms-visibility: advanced
+                              value:
+                                description: The value for summary price
+                                type: string
+                                x-ms-summary: Price Value
+                            type: object
+                            x-ms-summary: Price
+                          tax:
+                            properties:
+                              enabled:
+                                description: If pricing table tax should be enabled
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Enabled
+                                x-ms-visibility: advanced
+                              flat_fee:
+                                description: If pricing table should use using flat fee taxes
+                                enum:
+                                - true
+                                - false
+                                example: true
+                                nullable: true
+                                type: boolean
+                                x-ms-summary: Flat fee
+                                x-ms-visibility: advanced
+                              value:
+                                description: The value for summary tax
+                                type: string
+                                x-ms-summary: Value
+                            type: object
+                            x-ms-summary: Tax
+                        type: object
+                        x-ms-summary: Summary Values
+                        x-ms-visibility: advanced
+                    type: object
+                  type: array
+                  x-ms-summary: Pricing
+                  x-ms-visibility: advanced
+                email_send_message:
+                  description: Use this to specify a message to the recipient(s) when sending out the document
+                  type: string
+                  x-ms-summary: Email message
+                  x-ms-visibility: advanced
+                expiration_date:
+                  description: Date and time when the document should expire
+                  format: date-time
+                  type: string
+                  x-ms-summary: Expiration date
+                  x-ms-visibility: advanced
+                external_eid_signature:
+                  description: If true, enables external EID signature for the document, allowing recipients to sign using an external Electronic ID provider. Incompatible with is_selfsign.
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: External EID signature
+                  x-ms-visibility: advanced
+                external_id:
+                  description: External system ID for identification
+                  type: string
+                  x-ms-summary: External ID
+                external_signature_settings:
+                  description: Optional configuration for external EID signature. Only applicable when external_eid_signature is enabled. EID verification at signing is always required. When verify_recipient_ssn is enabled, the SSN from the EID provider is matched against the recipient's verify_eid_number.
+                  properties:
+                    identification_stages:
+                      description: Stages where additional EID identification is required. Available value is "View" (require EID verification before viewing the document). EID verification at signing is always required.
+                      items:
+                        enum:
+                        - View
+                        type: string
+                      type: array
+                  type: object
+                  x-ms-summary: External signature settings
+                  x-ms-visibility: advanced
+                file_content:
+                  description: Base64 encoded file content
+                  type: string
+                  x-ms-summary: File content
+                file_ids:
+                  description: Comma-separated, unique file-ids received when uploading files
+                  type: string
+                  x-ms-summary: File IDs
+                file_name:
+                  description: Filename of the document, with the extension. This will be helpful for converting different file-types.
+                  type: string
+                  x-ms-summary: File name
+                file_url:
+                  description: Url to document file. Documents must be public available for download
+                  type: string
+                  x-ms-summary: File URL
+                is_automatic_sending:
+                  description: If the document should be sent after creation
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Send automatically
+                  x-ms-visibility: important
+                is_reminder_sending:
+                  description: Should automatic reminders be sent
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Send reminders
+                  x-ms-visibility: advanced
+                is_scheduled_sending:
+                  description: Should the sending be scheduled for sending in the future
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Schedule sending
+                  x-ms-visibility: advanced
+                is_signing:
+                  description: Should the document be sent for signing
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Sign document
+                  x-ms-visibility: advanced
+                is_signing_biometric:
+                  description: Use handwritten signature
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Handwritten signature
+                  x-ms-visibility: advanced
+                is_signing_forward:
+                  description: Should recipients be able to transfer signature rights
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Allow signature transfer
+                  x-ms-visibility: advanced
+                is_signing_initials:
+                  description: Sign document using recipient initials
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Sign with initials
+                  x-ms-visibility: advanced
+                is_sms_sending:
+                  description: Should the document be sent to recipient mobile by text
+                  enum:
+                  - true
+                  - false
+                  example: true
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Send SMS
+                name:
+                  description: Enter a name of the document
+                  type: string
+                  x-ms-summary: Document name
+                  x-ms-visibility: important
+                recipients:
+                  items:
+                    properties:
+                      company_name:
+                        description: Company name of the recipient
+                        type: string
+                        x-ms-summary: Company name
+                        x-ms-visibility: important
+                      company_number:
+                        description: Company number of the recipient
+                        type: string
+                        x-ms-summary: Company number
+                        x-ms-visibility: important
+                      email:
+                        description: Email address of the recipient
+                        type: string
+                        x-ms-summary: Email
+                        x-ms-visibility: important
+                      first_name:
+                        description: Recipient first name
+                        type: string
+                        x-ms-summary: First name
+                        x-ms-visibility: important
+                      fullname:
+                        description: Use to specify full name instead of first/last name
+                        type: string
+                        x-ms-summary: Full name
+                        x-ms-visibility: important
+                      last_name:
+                        description: Last name of recipient
+                        type: string
+                        x-ms-summary: Last name
+                        x-ms-visibility: important
+                      mobile:
+                        description: Mobile phone in international format
+                        type: string
+                        x-ms-summary: Mobile
+                      note:
+                        description: Additional note for a recipient
+                        type: string
+                        x-ms-summary: Note
+                        x-ms-visibility: advanced
+                      order_num:
+                        description: If signing order is enabled
+                        example: 1
+                        format: int32
+                        nullable: true
+                        type: integer
+                        x-ms-summary: Signing order
+                        x-ms-visibility: advanced
+                      role:
+                        description: 'The kind of recipient in the document. Available values:
+
+                          - signer: signer of the document
+
+                          - internalApprover: used for internal approval processes and will not appear in the signing certificate
+
+                          - externalApprover: used for external approval processes and will appear in the signing certificate, alongside other signers
+
+                          - cc: view only
+
+                          '
+                        enum:
+                        - signer
+                        - internalApprover
+                        - externalApprover
+                        - cc
+                        type: string
+                        x-ms-summary: Recipient type
+                        x-ms-visibility: important
+                      role_name:
+                        description: The name of the role in a template
+                        type: string
+                        x-ms-summary: Template role
+                        x-ms-visibility: important
+                      settings:
+                        description: Per-recipient signature settings.
+                        properties:
+                          exclude_verified_eid_signature:
+                            description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+                            enum:
+                            - true
+                            - false
+                            example: true
+                            nullable: true
+                            type: boolean
+                            x-ms-summary: Exclude verified EID signature
+                            x-ms-visibility: advanced
+                        type: object
+                        x-ms-summary: Recipient settings
+                        x-ms-visibility: advanced
+                      verify_eid:
+                        description: Verify using EID
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Verify EID
+                        x-ms-visibility: advanced
+                      verify_eid_type:
+                        description: EID type to be used for personal verification
+                        type: string
+                        x-ms-summary: EID type
+                        x-ms-visibility: advanced
+                      verify_qna:
+                        description: Should a question be asked
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Enable question
+                        x-ms-visibility: advanced
+                      verify_qna_answer:
+                        description: The answer to question
+                        example: '123456789'
+                        type: string
+                        x-ms-summary: Verification answer
+                        x-ms-visibility: advanced
+                      verify_qna_open:
+                        description: Should question be asked before opening document
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Question on open
+                        x-ms-visibility: advanced
+                      verify_qna_question:
+                        description: Question to ask for verification
+                        example: Enter your SSN
+                        type: string
+                        x-ms-summary: Verification question
+                        x-ms-visibility: advanced
+                      verify_qna_sign:
+                        description: Should a question be asked before signing
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Sign question
+                        x-ms-visibility: advanced
+                      verify_sms:
+                        description: Verify recipient by SMS
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Verify SMS
+                        x-ms-visibility: advanced
+                      verify_sms_open:
+                        description: Verify SMS on open
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        type: boolean
+                        x-ms-summary: Verify SMS on open
+                        x-ms-visibility: advanced
+                      verify_sms_sign:
+                        description: Should a SMS verify the recipient before signing
+                        enum:
+                        - true
+                        - false
+                        example: true
+                        nullable: true
+                        type: boolean
+                        x-ms-summary: Verify by SMS
+                        x-ms-visibility: advanced
+                    type: object
+                  type: array
+                  x-ms-summary: Recipient
+                scheduled_sending_time:
+                  description: Date and time when the document should be sent out
+                  format: date-time
+                  type: string
+                  x-ms-summary: Schedule send date
+                  x-ms-visibility: advanced
+                sender_email:
+                  description: Send from other email than authenticated user
+                  type: string
+                  x-ms-summary: Sender email override
+                  x-ms-visibility: advanced
+                sender_id:
+                  description: Send from other user than authenticated
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListUsers
+                    value-collection: users
+                    value-path: user_id
+                    value-title: email
+                  x-ms-summary: Sender user override
+                  x-ms-visibility: advanced
+                template_id:
+                  description: Select a template to use for the sending
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListTemplates
+                    value-collection: templates
+                    value-path: id
+                    value-title: name
+                  x-ms-summary: Template ID
+                  x-ms-visibility: important
+                type:
+                  default: sales
+                  description: Set the type/category of the document
+                  enum:
+                  - sales
+                  - introduction
+                  - hr
+                  - other
+                  example: sales
+                  type: string
+                  x-ms-summary: Document type
+                  x-ms-visibility: important
+                value:
+                  description: Value of deal or document
+                  format: float
+                  nullable: true
+                  type: number
+                  x-ms-summary: Document value
+                  x-ms-visibility: important
+                video_id:
+                  description: Select a video to use for the sending
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListVideos
+                    value-collection: videos
+                    value-path: video_id
+                    value-title: video_title
+                  x-ms-summary: Video ID
+                  x-ms-visibility: advanced
+              required:
+              - name
+              type: object
+        description: A JSON object containing document information
+        required: true
+      summary: Create and send document or template
+  /documents/external/{externalId}:
+    get:
+      parameters:
+      - description: External ID
+        in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a document by the external id specified when document was created.
+      operationId: GetDocumentByExternalId
+      summary: Get document by external ID
+  /documents/{documentId}:
+    delete:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Delete a single document.
+      operationId: DeleteDocument
+      summary: Delete document
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      - description: Include document attachments
+        in: query
+        name: with_attachments
+        schema:
+          type: boolean
+      - description: Include document pages
+        in: query
+        name: with_pages
+        schema:
+          type: boolean
+      - description: Include document statistics
+        in: query
+        name: with_stats
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get document details by specifying a document id.
+      operationId: GetDocumentDetails
+      summary: Get document details
+    put:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Update different document properties during the lifecycle of the document.
+      operationId: UpdateDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                tags:
+                  description: Document tags (comma separated without space)
+                  type: string
+                contract_end_date:
+                  description: End date of contract for contract management
+                  type: string
+                contract_start_date:
+                  description: Start date of contract for contract management
+                  type: string
+                external_client_id:
+                  description: Creation source of the document
+                  type: string
+                external_id:
+                  description: Change external ID of the document
+                  type: string
+                value:
+                  description: Update the value parameter of the Document
+                  type: number
+              type: object
+      summary: Update document
+  /documents/{documentId}/attachments:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachments'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/AccessDenied'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get document attachments by specifying a document id.
+      operationId: GetDocumentAttachments
+      summary: Get document attachments
+  /documents/{documentId}/attachments/{documentAttachmentId}/upload:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Document Attachment ID
+        in: path
+        name: documentAttachmentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Uploads a file for a specific attachment on a document.
+      operationId: UploadFileToDocumentAttachment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  format: binary
+                  type: string
+              type: object
+        required: true
+      summary: Upload file to document attachment
+  /documents/{documentId}/comments:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Document ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Comment'
+                type: array
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a list of chat comments for a document.
+      operationId: GetComments
+      summary: Get comments
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Creates a new comment in a document.
+      operationId: CreateComment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                position:
+                  description: 'A json-string of the page and x-y-position coordinates where the comment should be placed. Example: { page: ''a8bafd97'', top: 230, left: 19 }'
+                  type: string
+                text:
+                  description: The comment text to be added to the document
+                  type: string
+              required:
+              - text
+              type: object
+        required: true
+      summary: Create comment
+  /documents/{documentId}/download:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      - description: Return the binary file directly
+        in: query
+        name: direct
+        required: false
+        schema:
+          enum:
+          - 'true'
+          - 'false'
+          example: 'true'
+          nullable: true
+          type: string
+        x-ms-summary: Return the binary file directly
+      - description: Return the file content as base64 encoded
+        in: query
+        name: with_file_content
+        required: false
+        schema:
+          enum:
+          - 'true'
+          - 'false'
+          example: 'true'
+          nullable: true
+          type: string
+        x-ms-summary: Return file as base64
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  document_url:
+                    description: URL to download the document (accessible for 10 minutes)
+                    type: string
+                  file:
+                    description: File name
+                    type: string
+                  file_content:
+                    description: Base64 encoded file content (returned when with_file_content=true)
+                    type: string
+                type: object
+            application/pdf:
+              schema:
+                format: binary
+                type: string
+          description: OK
+          headers:
+            Content-Disposition:
+              schema:
+                description: Used only with `application/pdf` responses
+                example: attachment; filename="download.pdf"
+                type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: "Document file can always be downloaded but most likely you want to download it when it has status Signed. \n\nYou can select to receive a download-url or get the binary file.\n\nThe download URL is accessable 10 minutes after a request has been made."
+      operationId: DownloadDocument
+      summary: Download document
+      x-ms-visibility: important
+  /documents/{documentId}/events:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Event'
+                type: array
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a list of document events for a document.
+      operationId: GetEvents
+      summary: Get events
+  /documents/{documentId}/expiration:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    description: Status of update
+                    format: int32
+                    nullable: true
+                    type: integer
+                    x-ms-summary: Status
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Use this method to update the expiration date and time for a document.
+      operationId: UpdateExpiration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                expiration_date:
+                  description: Date and time when the document should expire (UTC)
+                  format: date-time
+                  type: string
+                  x-ms-summary: Expiration date
+                send_notification:
+                  default: false
+                  description: Should a notification about the update be sent to recipients
+                  enum:
+                  - true
+                  - false
+                  example: false
+                  nullable: true
+                  type: boolean
+                  x-ms-summary: Send notification
+              type: object
+        description: An optional JSON object containing seal information
+      summary: Update document expiration
+  /documents/{documentId}/fields:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      - description: Resolve editor fields to their values
+        in: query
+        name: resolveEditorFields
+        schema:
+          type: boolean
+        x-ms-summary: Resolve editor fields
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fields'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a list of fields for a document or template. Can be used both before and after a document has been signed.
+      operationId: ListDocumentFields
+      summary: Get document fields
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Creates a new field in a document.
+      operationId: CreateField
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                field_height:
+                  description: Height of field in points
+                  type: number
+                field_label:
+                  description: Label to place next to the field
+                  type: string
+                field_left:
+                  description: Left position of field relative to document (in points)
+                  type: number
+                field_top:
+                  description: Top position of field relative to document (in points)
+                  type: number
+                field_type:
+                  description: 'The type of field: text, merge, check, signature, initials, formatted'
+                  type: string
+                field_value:
+                  description: Pre-defined/Filled value
+                  type: string
+                field_width:
+                  description: Width of field in points
+                  type: number
+                is_collectable:
+                  description: If the field is to be filled out by sender/recipient
+                  type: boolean
+                is_editable:
+                  description: If the field can be edited by the sender
+                  type: boolean
+                is_required:
+                  description: If the field is required to be filled out
+                  type: boolean
+                page_id:
+                  description: Unique page id
+                  type: string
+                page_num:
+                  description: Actual page number in document (1-x)
+                  type: integer
+                recipient_id:
+                  description: Unique ID of the recipient to fill out this field
+                  type: string
+              required:
+              - field_type
+              - field_top
+              - field_left
+              - field_width
+              - field_height
+              type: object
+        required: true
+      summary: Create a field
+    put:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Document ID
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Update fields in a document.
+      operationId: UpdateDocumentFields
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                editor_fields:
+                  items:
+                    properties:
+                      id:
+                        description: Field ID
+                        type: string
+                      name:
+                        description: Field name
+                        type: string
+                      value:
+                        description: New field value
+                        type: string
+                    type: object
+                  type: array
+              type: object
+        required: true
+      summary: Update document fields
+  /documents/{documentId}/forward:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Forward a document to a new recipient.
+      operationId: ForwardDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_name:
+                  description: Name of the company
+                  type: string
+                company_number:
+                  description: Associated company number
+                  type: string
+                email:
+                  description: Email of the new recipient
+                  type: string
+                first_name:
+                  description: First name of the new recipient
+                  type: string
+                last_name:
+                  description: Last name of the new recipient
+                  type: string
+                mobile:
+                  description: Mobile number of the new recipient
+                  type: string
+                recipient_id:
+                  description: Only when transfer signature rights
+                  type: string
+                title:
+                  description: Title of the recipient
+                  type: string
+                transfer:
+                  description: Transfer signature rights to forwarded recipient
+                  type: boolean
+              required:
+              - first_name
+              - last_name
+              - email
+              type: object
+        required: true
+      summary: Forward document
+  /documents/{documentId}/log:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LogEntry'
+                type: array
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a detailed log of events for a specific document.
+      operationId: GetDetailedLog
+      summary: Get detailed log
+  /documents/{documentId}/pages:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  page_count:
+                    type: integer
+                  pages:
+                    items:
+                      $ref: '#/components/schemas/Page'
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a list of pages for a document.
+      operationId: GetPages
+      summary: Get pages
+  /documents/{documentId}/preview:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PreviewResponse'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Generates a preview of an existing document or template.
+      operationId: GetDocumentPreview
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                custom_fields:
+                  items:
+                    type: object
+                  type: array
+                external_id:
+                  type: string
+                name:
+                  type: string
+                recipients:
+                  items:
+                    type: object
+                  type: array
+                template_id:
+                  type: string
+                type:
+                  type: string
+                value:
+                  type: number
+              type: object
+      summary: Get document preview
+  /documents/{documentId}/pricing-tables:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingTables'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get all pricing tables for a document.
+      operationId: GetDocumentPricingTables
+      summary: Get document pricing tables
+    put:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Update pricing tables in a document.
+      operationId: UpdateDocumentPricingTables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                pricing_tables:
+                  items:
+                    $ref: '#/components/schemas/PricingTable'
+                  type: array
+              type: object
+        required: true
+      summary: Update document pricing tables
+  /documents/{documentId}/recipients:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipients'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get a list of recipients for a specific document.
+      operationId: ListRecipients
+      summary: Get document recipients
+  /documents/{documentId}/recipients/{recipientId}:
+    delete:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      - description: Recipient ID
+        in: path
+        name: recipientId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Recall a signer for a document.
+      operationId: RecallSigner
+      summary: Recall signer
+  /documents/{documentId}/reminders:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Send a manual reminder for a document.
+      operationId: SendReminder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                not_opened:
+                  description: Send if recipients haven't opened the document
+                  type: boolean
+                not_signed:
+                  description: Send if recipients haven't signed the document
+                  type: boolean
+                text:
+                  description: The text content of the reminder
+                  type: string
+                type:
+                  description: 'Type of reminder to send: email, sms, video'
+                  enum:
+                  - email
+                  - sms
+                  - video
+                  type: string
+                video_id:
+                  description: Only when using video reminders
+                  type: string
+              required:
+              - type
+              - text
+              type: object
+        required: true
+      summary: Send reminder
+  /documents/{documentId}/revisions:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Create a new document revision.
+      operationId: CreateRevision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                message:
+                  default: ''
+                  description: Revision message
+                  type: string
+                send_document:
+                  default: false
+                  description: Determine if the document should be sent to recipients
+                  type: boolean
+              type: object
+      summary: Create revision
+  /documents/{documentId}/seal:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Recipients'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: 'If you prefer to send the document manually you can use this method to seal the document. Do not use this method if you send the document automatically or if you use the send document method above.
+
+
+        This API call triggers the document seal action and can only be performed on documents with document_status = draft. The method will return individual access/signing links for each recipient.
+
+
+        If document was created using self-sign option it will also be self-signed by the authenticated or specified user before sealing.'
+      operationId: SealDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                sender_email:
+                  description: Use this to specify the sender user/owner by email address to be used for self-signing the document.
+                  type: string
+                sender_id:
+                  description: Use this to specify the sender user/owner by id to be used for self-signing the document.
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListUsers
+                    value-collection: users
+                    value-path: user_id
+                    value-title: name
+              type: object
+        description: An optional JSON object containing seal information
+      summary: Seal document
+      x-ms-visibility: internal
+  /documents/{documentId}/send:
+    post:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListDocuments
+          value-path: id
+          value-title: name
+        x-ms-summary: Document ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: 'When you send a document via GetAccept, we deliver an email to all recipients, each containing a unique, secured link. This API call triggers the document send action and can only be performed on documents with document_status = draft. The document will be sent to recipients you provided when it was created.
+
+
+        If document was created using self-sign option it will also be self-signed by the authenticated or specified user before sending.'
+      operationId: SendDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                sender_email:
+                  description: Use this to specify the sender user/owner by email address to be used for self-signing the document.
+                  format: email
+                  type: string
+                sender_id:
+                  description: Use this to specify the sender user/owner by id to be used for self-signing the document.
+                  type: string
+                  x-ms-dynamic-values:
+                    operationId: ListUsers
+                    value-collection: users
+                    value-path: user_id
+                    value-title: name
+              type: object
+        description: An optional JSON object containing sending information
+      summary: Send existing document
+      x-ms-visibility: advanced
+  /documents/{documentId}/status:
+    get:
+      parameters:
+      - description: Document ID
+        in: path
+        name: documentId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Document ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Documents
+      description: Get the current status of a document.
+      operationId: GetDocumentStatus
+      summary: Get document status
+  /upload:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  file_id:
+                    description: ID of the uploaded file to be used in file_ids when creating a document
+                    type: string
+                  file_status:
+                    description: Status of the uploaded file
+                    type: string
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Documents
+      description: 'You can upload one file at a time and get a file id. The file id is used to connect a file with a GetAccept document which is sent to recipients. If you want to upload mutliple files you run multiple POST. We only accept files up to 10 MB as default. Uploaded file need to be imported/added to a document within 48 hours after uploading.
+
+
+        We recommended you to upload PDF files in order to guarantee the same look when sent. Other file types can be converted, such as:
+
+
+        Mirosoft Office: doc, docx, xl, xls, xlsx, ppt, pptx
+
+        Mac: numbers, key
+
+        Images: jpg, jpeg, png
+
+        Other: html, tex, csv'
+      operationId: UploadDocument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                file_content:
+                  description: Send the file as base64 encoded. Note that base64 encoding files will increase the file size with about 30%
+                  type: string
+                  x-ms-summary: File content
+                file_name:
+                  description: Filename of the document, with the extension. This will be helpful for converting different file-types.
+                  type: string
+                  x-ms-summary: File name
+                file_url:
+                  description: Url to document file. File must be available for download without any authorization
+                  type: string
+                  x-ms-summary: File URL
+              type: object
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: Binary File
+                  format: binary
+                  type: string
+                  x-ms-summary: Binary File
+              type: object
+              x-ms-visibility: internal
+        description: A JSON object containing the uploaded document information
+        required: true
+      summary: Upload a document file
+      x-ms-visibility: important
+components:
+  schemas:
+    Fields:
+      description: Field list
+      properties:
+        editor_fields:
+          items:
+            $ref: '#/components/schemas/EditorField'
+          type: array
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+      title: Fields
+      type: object
+      x-ms-summary: Fields
+    StatusResponse:
+      description: Document status response
+      properties:
+        status:
+          description: Current document status
+          type: string
+      title: Status Response
+      type: object
+    Document:
+      description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
+      properties:
+        tags:
+          description: Document tags
+          type: string
+          x-ms-summary: Tags
+        auto_comment_email:
+          type: string
+          x-ms-visibility: internal
+        auto_comment_text:
+          description: Automatic chat text
+          type: string
+          x-ms-summary: Automatic chat text
+          x-ms-visibility: advanced
+        company_id:
+          description: Company ID
+          type: string
+          x-ms-summary: Company ID
+          x-ms-visibility: internal
+        company_logo_url:
+          type: string
+          x-ms-summary: Company Logo URL
+          x-ms-visibility: internal
+        company_name:
+          description: Company Name
+          type: string
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          type: string
+          x-ms-visibility: internal
+        created_at:
+          description: When document was created
+          type: string
+          x-ms-summary: Created at
+          x-ms-visibility: advanced
+        download_url:
+          description: URL to download signed document
+          type: string
+          x-ms-summary: Download URL
+        email_send_message:
+          description: Sending email message
+          type: string
+          x-ms-summary: Email message
+          x-ms-visibility: advanced
+        email_send_subject:
+          description: Email subject text
+          type: string
+          x-ms-summary: Email Subject
+          x-ms-visibility: advanced
+        email_send_template_id:
+          type: string
+          x-ms-summary: Email send template ID
+          x-ms-visibility: internal
+        entity_auto_comment_text:
+          type: string
+          x-ms-visibility: internal
+        expiration_date:
+          description: Document expiration date
+          type: string
+          x-ms-summary: Expiration date
+        external_client_id:
+          type: string
+          x-ms-summary: External Client ID
+          x-ms-visibility: advanced
+        external_editor_id:
+          description: ID in external editor
+          type: string
+          x-ms-summary: External Editor ID
+          x-ms-visibility: advanced
+        external_editor_type:
+          type: string
+          x-ms-summary: External Editor Type
+          x-ms-visibility: advanced
+        external_id:
+          type: string
+          x-ms-summary: External ID
+        field_count:
+          description: Number of fields in document
+          format: int32
+          type: integer
+          x-ms-summary: Field count
+          x-ms-visibility: advanced
+        id:
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: important
+        is_auto_comment:
+          description: If automatic chat comment is enabled
+          type: boolean
+          x-ms-summary: Auto comment
+          x-ms-visibility: advanced
+        is_auto_comment_email:
+          description: If automatic chat email is enabled
+          type: boolean
+          x-ms-summary: Auto Comment Email
+          x-ms-visibility: advanced
+        is_identify_recipient:
+          description: If document has identify recipient enabled
+          type: boolean
+          x-ms-summary: Identify Recipient
+          x-ms-visibility: advanced
+        is_private:
+          description: If the document is private
+          type: boolean
+          x-ms-summary: Is private
+          x-ms-visibility: advanced
+        is_reminder_sending:
+          description: If automatic reminders are enabled
+          type: boolean
+          x-ms-summary: Send reminders
+          x-ms-visibility: advanced
+        is_scheduled_sending:
+          description: If the document has scheduled sending
+          type: boolean
+          x-ms-summary: Scheduled sending
+          x-ms-visibility: advanced
+        is_selfsign:
+          description: If document has been self-signed by sender
+          type: boolean
+          x-ms-summary: Self-signing
+          x-ms-visibility: advanced
+        is_signed:
+          description: If the document has been signed
+          type: boolean
+          x-ms-summary: Is signed
+          x-ms-visibility: advanced
+        is_signing:
+          description: If document is signable
+          type: boolean
+          x-ms-summary: Signable document
+          x-ms-visibility: advanced
+        is_signing_biometric:
+          description: If handwritten signature is enabled
+          type: boolean
+          x-ms-summary: Handwritten signature
+          x-ms-visibility: advanced
+        is_signing_forward:
+          description: If transfer of signing rights is enabled
+          type: boolean
+          x-ms-summary: Allow signature transfer
+          x-ms-visibility: advanced
+        is_signing_initials:
+          type: boolean
+          x-ms-summary: Signing Initials
+          x-ms-visibility: internal
+        is_signing_order:
+          description: If recipient signing order is enabled
+          type: boolean
+          x-ms-summary: Signature order
+          x-ms-visibility: advanced
+        is_video:
+          description: If the document has a introduction video
+          type: boolean
+          x-ms-summary: Has Video
+          x-ms-visibility: advanced
+        name:
+          description: Name of document
+          type: string
+          x-ms-summary: Name
+          x-ms-visibility: important
+        parent_id:
+          description: ID of previous document version
+          type: string
+          x-ms-summary: Parent ID
+        preview_url:
+          description: Link to internal preview of document
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+        scheduled_sending_time:
+          description: When the document was scheduled for sending
+          type: string
+          x-ms-summary: Scheduled sending time
+          x-ms-visibility: advanced
+        send_date:
+          description: Document send date
+          type: string
+          x-ms-summary: Send date
+        sender_email:
+          description: Email address of sender user
+          type: string
+          x-ms-summary: Sender email
+        sender_name:
+          description: Name of sender user
+          type: string
+          x-ms-summary: Sender name
+        sender_thumb_url:
+          description: Thumb image of sender user
+          type: string
+          x-ms-summary: Sender thumb URL
+          x-ms-visibility: advanced
+        sign_date:
+          description: Document sign date
+          type: string
+          x-ms-summary: Sign date
+        status:
+          description: Current status of document
+          type: string
+          x-ms-summary: Status
+          x-ms-visibility: important
+        thumb_url:
+          description: Thumb image of document
+          type: string
+          x-ms-summary: Thumb URL
+          x-ms-visibility: advanced
+        type:
+          description: Document type
+          type: string
+          x-ms-summary: Type
+        unique_id:
+          description: Unique ID for document
+          format: int32
+          type: integer
+          x-ms-summary: Unique ID
+        user_id:
+          description: ID of the sender user
+          type: string
+          x-ms-summary: User ID
+          x-ms-visibility: advanced
+        value:
+          description: Value of document
+          format: float
+          type: number
+          x-ms-summary: Value
+      title: Document
+      type: object
+      x-ms-summary: Document
+    Field:
+      description: Field details
+      properties:
+        company_name:
+          description: Company Name
+          type: string
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          description: Company Number
+          type: string
+          x-ms-summary: Company Number
+          x-ms-visibility: advanced
+        field_id:
+          description: Field ID
+          type: string
+          x-ms-summary: Field ID
+          x-ms-visibility: advanced
+        field_label:
+          description: Label
+          type: string
+          x-ms-summary: Label
+        field_options:
+          description: Options
+          items:
+            properties:
+              value:
+                type: string
+                x-ms-summary: Value
+            type: object
+          type: array
+          x-ms-summary: Options
+          x-ms-visibility: advanced
+        field_type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        field_value:
+          description: Value
+          type: string
+          x-ms-summary: Value
+        is_collectable:
+          description: Collecting field
+          type: boolean
+          x-ms-visibility: advanced
+        is_editable:
+          description: Editable field
+          type: boolean
+          x-ms-visibility: advanced
+        is_required:
+          description: Required field
+          type: boolean
+        page_id:
+          description: Page ID
+          type: string
+          x-ms-summary: Page ID
+          x-ms-visibility: advanced
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+          x-ms-visibility: advanced
+        recipient_name:
+          description: Recipient Name
+          type: string
+          x-ms-summary: Recipient Name
+          x-ms-visibility: advanced
+        role_name:
+          description: Role Name
+          type: string
+          x-ms-summary: Role Name
+          x-ms-visibility: advanced
+      title: Field
+      type: object
+      x-ms-summary: Field
+    PricingTables:
+      description: Pricing Tables
+      properties:
+        pricing_tables:
+          items:
+            $ref: '#/components/schemas/PricingTable'
+          type: array
+      title: Pricing
+      type: object
+      x-ms-summary: Pricing
+    PricingTable:
+      description: Pricing Table
+      properties:
+        currency_settings:
+          description: Currency Settings
+          properties:
+            currency:
+              description: Currency
+              type: string
+              x-ms-summary: Currency
+            locale:
+              description: Locale
+              type: string
+              x-ms-summary: Locale
+          title: Currency Settings
+          type: object
+          x-ms-summary: Currency Settings
+        pre_calculated:
+          description: Pre calculated totals
+          type: boolean
+          x-ms-summary: Pre calculated totals
+        sections:
+          items:
+            $ref: '#/components/schemas/PricingSection'
+          type: array
+        table_id:
+          description: Table ID
+          type: string
+          x-ms-summary: ID
+      title: Table
+      type: object
+      x-ms-summary: Table
+    Attachment:
+      description: Document attachment
+      properties:
+        access_recipient_names:
+          description: Recipients with access to the attachment
+          items:
+            type: string
+          type: array
+          x-ms-summary: Access Recipients
+          x-ms-visibility: advanced
+        attachment_description:
+          description: Description of the attachment
+          type: string
+          x-ms-summary: Description
+        attachment_download_url:
+          description: URL to download the attachment
+          type: string
+          x-ms-summary: Download URL
+        attachment_extension:
+          description: File extension of the attachment
+          type: string
+          x-ms-summary: File Extension
+          x-ms-visibility: advanced
+        attachment_filename:
+          description: Filename of the attachment
+          type: string
+          x-ms-summary: Filename
+          x-ms-visibility: advanced
+        attachment_id:
+          description: ID of the attachment
+          type: string
+          x-ms-summary: ID
+        attachment_preview_url:
+          description: Internal URL to preview the attachment
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        attachment_title:
+          description: Title of the attachment
+          type: string
+          x-ms-summary: Title
+        attachment_type:
+          description: Type of the attachment
+          type: string
+          x-ms-summary: Type
+        attachment_url:
+          description: Url of the attachment
+          type: string
+          x-ms-summary: URL
+        last_attachment_view:
+          description: Date and time when the attachment was last viewed
+          type: string
+          x-ms-summary: Last View
+          x-ms-visibility: advanced
+        restrict_access:
+          description: Attachment has restricted access
+          type: boolean
+          x-ms-summary: Restricted access
+          x-ms-visibility: advanced
+      title: Attachment
+      type: object
+      x-ms-summary: Attachment
+    Recipient:
+      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
+      properties:
+        company_name:
+          description: Company name of the recipient
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the recipient
+          type: string
+          x-ms-summary: Company number
+        document_url:
+          description: Unique URL for the recipient to view/sign
+          type: string
+          x-ms-summary: Document URL
+          x-ms-visibility: important
+        email:
+          description: Email of the recipient
+          type: string
+          x-ms-summary: Recipient email
+        first_name:
+          description: First name of the recipient
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the recipient
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        id:
+          description: ID of the recipient
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the recipient
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the recipient
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the recipient
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        order_num:
+          description: Signing order of the recipient
+          type: string
+          x-ms-summary: Signing order num
+          x-ms-visibility: advanced
+        role:
+          type: string
+          x-ms-visibility: internal
+        settings:
+          description: Per-recipient signature settings.
+          properties:
+            exclude_verified_eid_signature:
+              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+              type: boolean
+              x-ms-summary: Exclude verified EID signature
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Recipient settings
+          x-ms-visibility: advanced
+        signing_methods:
+          description: Signing methods used by the recipient
+          items:
+            $ref: '#/components/schemas/SigningMethod'
+          type: array
+          x-ms-summary: Signing methods
+          x-ms-visibility: advanced
+        status:
+          description: Status of the recipient
+          type: string
+          x-ms-summary: Status
+        thumb_url:
+          description: Thumb URL of the recipient
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the recipient
+          type: string
+          x-ms-summary: Title
+      title: Recipient
+      type: object
+      x-ms-summary: Recipient
+    PricingSection:
+      description: Pricing Table Section
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
+      type: object
+      x-ms-summary: Section
+    Event:
+      description: Document event details
+      properties:
+        company_name:
+          type: string
+        created_at:
+          type: string
+        document_id:
+          type: string
+        document_name:
+          type: string
+        document_status:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        gender:
+          type: string
+        last_name:
+          type: string
+        thumb_url:
+          type: string
+      title: Event
+      type: object
+    CommentResponse:
+      description: Comment creation response
+      properties:
+        comment_id:
+          description: ID of the created comment
+          type: string
+      title: Comment Response
+      type: object
+    PreviewResponse:
+      description: Document preview response
+      properties:
+        preview_url:
+          description: URL to preview PDF
+          type: string
+      title: Preview Response
+      type: object
+    PricingColumn:
+      description: Pricing Table Column
+      properties:
+        column_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        enabled:
+          description: Enabled
+          enum:
+          - true
+          - false
+          example: false
+          type: boolean
+          x-ms-summary: Enabled
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+      title: Column
+      type: object
+      x-ms-summary: Column
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
+    Attachments:
+      description: Attachment list
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
+      title: Attachments
+      type: object
+      x-ms-summary: Attachments
+    Documents:
+      description: Document list
+      items:
+        properties:
+          tags:
+            type: string
+          company_name:
+            type: string
+          created_at:
+            type: string
+          expiration_date:
+            type: string
+          id:
+            type: string
+          is_private:
+            type: boolean
+          is_signing:
+            type: boolean
+          name:
+            type: string
+          sender_name:
+            type: string
+          sender_thumb:
+            type: string
+          status:
+            type: string
+          type:
+            type: string
+          value:
+            format: int32
+            type: integer
+        type: object
+      title: Documents
+      type: array
+      x-ms-summary: Documents
+    LogEntry:
+      description: Detailed log entry
+      properties:
+        created_at:
+          type: string
+        document_id:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        geo_city:
+          type: string
+        geo_country_name:
+          type: string
+        geo_ip:
+          type: string
+        last_name:
+          type: string
+      title: Log Entry
+      type: object
+    EditorField:
+      description: Editor Field details
+      properties:
+        id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        input_settings:
+          description: Settings
+          properties:
+            label:
+              description: Label
+              type: string
+              x-ms-summary: Label
+            options:
+              description: Options
+              items:
+                type: string
+              type: array
+              x-ms-summary: Options
+            required:
+              description: Required
+              type: boolean
+              x-ms-summary: Required
+            type:
+              description: Type
+              type: string
+              x-ms-summary: Type
+          type: object
+          x-ms-summary: Settings
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+        type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        user_id:
+          description: User ID
+          type: string
+          x-ms-summary: User ID
+      title: Editor Field
+      type: object
+      x-ms-summary: Editor Field
+    Recipients:
+      description: Recipient list
+      properties:
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+      title: Recipients
+      type: object
+      x-ms-summary: Recipients
+    Page:
+      description: Document page details
+      properties:
+        clicks:
+          type: integer
+        description:
+          type: string
+        order_num:
+          type: integer
+        page_height:
+          type: number
+        page_id:
+          type: string
+        page_num:
+          type: integer
+        page_time:
+          type: number
+        page_type:
+          type: integer
+        page_type_name:
+          type: string
+        page_width:
+          type: number
+        thumb_url:
+          type: string
+        title:
+          type: string
+        video_hash:
+          type: string
+        view_duration_seconds:
+          type: number
+      title: Page
+      type: object
+    FieldResponse:
+      description: Field creation response
+      properties:
+        field_id:
+          description: ID of the created field
+          type: string
+      title: Field Response
+      type: object
+    Comment:
+      description: Document comment
+      properties:
+        created_at:
+          description: The timestamp when the comment was created
+          type: string
+        email:
+          description: Email of the person creating the comment
+          type: string
+        full_name:
+          description: Name of the person creating the comment
+          type: string
+        id:
+          description: Unique ID of the comment
+          type: string
+        self:
+          description: If this comment is created by the current authenticated user
+          type: integer
+        text:
+          description: The commented text
+          type: string
+        thumb_url:
+          description: Thumbnail of the person creating the comment
+          type: string
+      title: Comment
+      type: object
+  responses:
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    AccessDenied:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Access denied
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

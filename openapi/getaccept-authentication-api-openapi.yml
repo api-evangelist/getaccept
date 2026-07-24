@@ -1,0 +1,228 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Authentication API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#authentication
+  description: Authentication with the GetAccept API can be made using JWT tokens (JSON Web Tokens) or OAuth 2.0 Authorization Framework http://oauth.net/2/  All requests must be made via HTTPS. All configuration URLs (webhooks, etc) should begin with https:// as well.
+  name: Authentication
+paths:
+  /auth:
+    post:
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  access_token:
+                    description: Token to be used in consequtive requests using bearer header
+                    type: string
+                  expires_in:
+                    description: Seconds until the access token expires
+                    format: int64
+                    minimum: 0
+                    type: integer
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+      security: []
+      tags:
+      - Authentication
+      description: 'Token based authentication is recommended for server-based access or access from clients where OAuth is not suitable. Access tokens has to be requested using an administrators login credentials.
+
+        Requests should include the header Content-Type with value application/json'
+      operationId: Authenticate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              description: Authentication model
+              properties:
+                client_id:
+                  default: ''
+                  description: The client id of your app if you received one from our API team
+                  type: string
+                email:
+                  description: This is the email of the user in GetAccept
+                  format: email
+                  type: string
+                entity_id:
+                  default: ''
+                  description: This specifies what entity to select if multiple entities are available for a user. If no value is specified the default entity will be selected.
+                  type: string
+                password:
+                  description: This is the password of the user in GetAccept
+                  format: password
+                  type: string
+              required:
+              - email
+              - password
+              type: object
+              x-examples:
+                Example:
+                  email: user@example.com
+                  password: mysecret
+        description: A JSON object containing authentication credentials
+        required: true
+      summary: Authentication by token
+      x-ms-visibility: internal
+  /refresh:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  access_token:
+                    type: string
+                  expires_in:
+                    format: int64
+                    type: integer
+                type: object
+          description: OK
+      tags:
+      - Authentication
+      description: You can request a refreshed of the access token before the original token has expired.
+      operationId: RefreshToken
+      summary: Refresh an access token
+      x-ms-visibility: internal
+  /refresh/{entityId}:
+    get:
+      parameters:
+      - description: Entity ID to switch to
+        in: path
+        name: entityId
+        required: true
+        schema:
+          type: string
+        x-ms-summary: Entity ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  access_token:
+                    description: New access token for the entity
+                    type: string
+                  expires_in:
+                    format: int64
+                    type: integer
+                type: object
+          description: OK
+      tags:
+      - Authentication
+      description: Change entity using the same refresh method with additional parameter for the entity. The response will include a new access token that should be used when accessing the new entity.
+      operationId: SwitchEntity
+      summary: Switch entity
+      x-ms-visibility: internal
+  /revoke:
+    get:
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Authentication
+      description: Revoke an access token before it has expired.
+      operationId: RevokeToken
+      summary: Revoke access token
+      x-ms-visibility: internal
+  /test:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResponse'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Authentication
+      description: Test authentication and get current entity and user ID.
+      operationId: TestAuthentication
+      summary: Test authentication
+components:
+  responses:
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+  schemas:
+    TestResponse:
+      description: Authentication test response
+      properties:
+        entity_id:
+          description: Current entity ID
+          type: string
+        user_id:
+          description: Current user ID
+          type: string
+      title: Test Response
+      type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

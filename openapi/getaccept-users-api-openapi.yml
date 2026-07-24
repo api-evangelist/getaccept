@@ -1,0 +1,459 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Users API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#users
+  description: General user methods for creating, listing of users, single user details and statistics and managing existing users.
+  name: Users
+paths:
+  /teams:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  teams:
+                    items:
+                      $ref: '#/components/schemas/Team'
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Users
+      description: List of current teams for the entity.
+      operationId: ListTeams
+      summary: List teams
+  /users:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Users
+      description: Fetch a list of active users for the current authenticated entity
+      operationId: ListUsers
+      summary: List users
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Users
+      description: This will create a new contact in the database for the current entity
+      operationId: CreateUser
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Example:
+                value:
+                  company_name: Doe Inc.
+                  company_number: '5678901'
+                  email: jane@doe.com
+                  first_name: Jane
+                  last_name: Doe
+                  mobile: '+12345678901'
+                  note: Just a random contact
+                  phone: '+46401234567'
+                  title: CEO
+            schema:
+              properties:
+                company_name:
+                  description: Associated company name
+                  type: string
+                company_number:
+                  description: Associated company number
+                  type: string
+                email:
+                  description: Email address of the contact
+                  type: string
+                first_name:
+                  description: First name of the contact
+                  type: string
+                fullname:
+                  description: Use to specify full name instead of first/last name
+                  type: string
+                last_name:
+                  description: Last name of the contact
+                  type: string
+                mobile:
+                  description: Mobile number in international format
+                  type: string
+                note:
+                  description: Optional internal note for contact
+                  type: string
+                phone:
+                  description: Phone number in international format
+                  type: string
+                title:
+                  description: The title of the contact, ex. CEO, Sales manager
+                  type: string
+              type: object
+        description: A JSON object containing user information
+        required: true
+      summary: Create user
+      x-ms-visibility: important
+  /users/{userId}:
+    delete:
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Users
+      description: Delete a user.
+      operationId: DeleteUser
+      summary: Delete user
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListUsers
+          value-collection: users
+          value-path: user_id
+          value-title: name
+        x-ms-summary: User ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Example:
+                  value:
+                    user:
+                      app_mode: sales
+                      disallow_create: false
+                      email: john.doe@company.com
+                      entity_id: def345ab
+                      entity_name: Demo Company Inc
+                      first_name: John
+                      id: abc456de
+                      language: en
+                      last_name: Doe
+                      mobile: ''
+                      note: ''
+                      phone: ''
+                      role: user
+                      status: active
+                      team_id: ''
+                      thumb_url: ''
+                      timezone: +01:00
+                      title: ''
+              schema:
+                $ref: '#/components/schemas/User'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Users
+      description: 'This call will return details of a single user.
+
+        Receive details and available entities of the current authenticated user using user-id *me*'
+      operationId: GetUserDetails
+      summary: Get user details
+  /users/{userId}/statistics:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: userId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  daterange:
+                    type: object
+                  statistics:
+                    type: object
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Users
+      description: Get statistics for a single user.
+      operationId: GetUserStatistics
+      summary: Get user statistics
+components:
+  schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Team:
+      description: Team details
+      properties:
+        name:
+          description: Team name
+          type: string
+        status:
+          description: Team status
+          type: string
+        team_id:
+          description: Team ID
+          type: string
+        team_user_count:
+          description: Number of users in team
+          type: integer
+      title: Team
+      type: object
+    User:
+      description: 'A user is defined by it´s e-mail address and is connected to one or many entities.
+
+
+        ### User Roles
+
+
+        #### Administrator:
+
+        - View all documents
+
+        - Edit all documents
+
+        - Change entity settings, info and billing
+
+        - Add new users to the entity
+
+        - Assign entity roles
+
+
+        #### Manager:
+
+        - View team documents
+
+        - Edit all documents
+
+        - Add new users to the entity
+
+
+        ## Entity
+
+        An entity is the top node and all users and corresponding documents are connected to an entity. An entity is often the same as a company, a country or a department in a large organization.
+
+        '
+      properties:
+        app_mode:
+          type: string
+          x-ms-summary: App Mode
+        disallow_create:
+          type: boolean
+        email:
+          description: Email address of the user
+          type: string
+          x-ms-summary: Email
+        entity_id:
+          type: string
+          x-ms-summary: Entity ID
+        entity_name:
+          type: string
+          x-ms-summary: Entity Name
+        first_name:
+          description: First name of the user
+          type: string
+          x-ms-summary: First name
+        id:
+          description: ID of the user
+          type: string
+          x-ms-summary: ID
+        language:
+          type: string
+          x-ms-summary: Language
+        last_name:
+          description: Last name of the user
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number in international format
+          type: string
+          x-ms-summary: mobile
+        note:
+          description: Optional internal note for user
+          type: string
+          x-ms-summary: Note
+        phone:
+          description: Phone number in international format
+          type: string
+          x-ms-summary: Phone
+        role:
+          enum:
+          - user
+          - manager
+          - admin
+          example: user
+          type: string
+          x-ms-summary: Role
+        skip_invitation:
+          enum:
+          - true
+          - false
+          example: false
+          nullable: true
+          type: boolean
+          x-ms-summary: Skip sending invitation
+        status:
+          type: string
+          x-ms-summary: Status
+        team_id:
+          type: string
+          x-ms-summary: Team ID
+        thumb_url:
+          type: string
+          x-ms-summary: Thumb URL
+        timezone:
+          type: string
+          x-ms-summary: Timezone
+        title:
+          description: The title of the user, ex. CEO, Sales manager
+          type: string
+          x-ms-summary: Title
+      title: User
+      type: object
+      x-ms-summary: User
+    Users:
+      description: User list
+      properties:
+        users:
+          items:
+            properties:
+              email:
+                type: string
+                x-ms-summary: Email
+              first_name:
+                type: string
+                x-ms-summary: First Name
+              last_login:
+                type: string
+                x-ms-summary: Last Login
+              last_name:
+                type: string
+                x-ms-summary: Last Name
+              name:
+                type: string
+                x-ms-summary: User Name
+              role:
+                type: string
+                x-ms-summary: Role
+              status:
+                type: string
+                x-ms-summary: Status
+              team_name:
+                type: string
+                x-ms-summary: Team Name
+              user_id:
+                type: string
+                x-ms-summary: User ID
+            type: object
+          type: array
+      title: Users
+      type: object
+      x-ms-summary: Users
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

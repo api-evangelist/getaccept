@@ -1,0 +1,230 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Attachments API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#attachments
+  description: You can upload an attachment and reuse it in many documents.
+  name: Attachments
+paths:
+  /attachments:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attachments'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Attachments
+      description: Receive a list of available attachments. You can add new attachments in GetAccept using a new document.
+      operationId: ListAttachments
+      summary: List attachments
+  /upload/attachment:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  filename:
+                    description: File name of the attachment
+                    type: string
+                    x-ms-summary: File name
+                  id:
+                    description: ID of the uploaded attachment to be used in attachment_id when creating a document
+                    type: string
+                    x-ms-summary: Attachment ID
+                  title:
+                    description: Title of the attachment
+                    type: string
+                    x-ms-summary: Attachment title
+                  type:
+                    description: Type of the attachment
+                    type: string
+                    x-ms-summary: Attachment type
+                type: object
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Attachments
+      description: 'You can upload attachment files to include with documents you send.
+
+        Successful request will return the attachment_id. Use attachment_id to assign an attachment to a document.'
+      operationId: UploadAttachment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                file_content:
+                  description: Send the file as base64 encoded. Note that base64 encoding files will increase the file size with about 30%
+                  type: string
+                  x-ms-summary: File content
+                file_name:
+                  description: Filename of the document, with the extension. This will be helpful for converting different file-types.
+                  type: string
+                  x-ms-summary: File name
+                file_url:
+                  description: Url to document file. File must be available for download without any authorization
+                  type: string
+                  x-ms-summary: File URL
+              type: object
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  description: Binary File
+                  format: binary
+                  type: string
+                  x-ms-summary: Binary File
+              type: object
+              x-ms-visibility: internal
+        description: A JSON object containing the uploaded attachment information
+        required: true
+      summary: Upload an attachment
+components:
+  schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    Attachment:
+      description: Document attachment
+      properties:
+        access_recipient_names:
+          description: Recipients with access to the attachment
+          items:
+            type: string
+          type: array
+          x-ms-summary: Access Recipients
+          x-ms-visibility: advanced
+        attachment_description:
+          description: Description of the attachment
+          type: string
+          x-ms-summary: Description
+        attachment_download_url:
+          description: URL to download the attachment
+          type: string
+          x-ms-summary: Download URL
+        attachment_extension:
+          description: File extension of the attachment
+          type: string
+          x-ms-summary: File Extension
+          x-ms-visibility: advanced
+        attachment_filename:
+          description: Filename of the attachment
+          type: string
+          x-ms-summary: Filename
+          x-ms-visibility: advanced
+        attachment_id:
+          description: ID of the attachment
+          type: string
+          x-ms-summary: ID
+        attachment_preview_url:
+          description: Internal URL to preview the attachment
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        attachment_title:
+          description: Title of the attachment
+          type: string
+          x-ms-summary: Title
+        attachment_type:
+          description: Type of the attachment
+          type: string
+          x-ms-summary: Type
+        attachment_url:
+          description: Url of the attachment
+          type: string
+          x-ms-summary: URL
+        last_attachment_view:
+          description: Date and time when the attachment was last viewed
+          type: string
+          x-ms-summary: Last View
+          x-ms-visibility: advanced
+        restrict_access:
+          description: Attachment has restricted access
+          type: boolean
+          x-ms-summary: Restricted access
+          x-ms-visibility: advanced
+      title: Attachment
+      type: object
+      x-ms-summary: Attachment
+    Attachments:
+      description: Attachment list
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
+      title: Attachments
+      type: object
+      x-ms-summary: Attachments
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity

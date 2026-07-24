@@ -1,0 +1,705 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: integrations@getaccept.com
+    name: GetAccept API Team
+    url: https://app.getaccept.com/api
+  description: GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://www.getaccept.com/terms.html
+  title: GetAccept Archive Templates API
+  version: '1.6'
+servers:
+- description: Production endpoint
+  url: https://api.getaccept.com/v1
+security:
+- Oauth2:
+  - basic
+- Token: []
+tags:
+- externalDocs:
+    url: https://app.getaccept.com/api/#templates
+  description: GetAccept has extensive support for creating templates in different formats. You can use form fields to receive input data from a recipient or word files to merge custom data into a document.
+  name: Templates
+paths:
+  /email/templates:
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties:
+                  items:
+                    properties:
+                      id:
+                        type: string
+                      name:
+                        type: string
+                      type:
+                        type: string
+                    type: object
+                  type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Templates
+      description: Get a list of email templates on the entity.
+      operationId: ListEmailTemplates
+      summary: List email templates
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplate'
+          description: OK
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Templates
+      description: Create a new email template.
+      operationId: CreateEmailTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  description: Template HTML code
+                  type: string
+                name:
+                  description: Template name
+                  type: string
+              required:
+              - name
+              - code
+              type: object
+        required: true
+      summary: Create email template
+  /email/templates/{emailTemplateId}:
+    get:
+      parameters:
+      - description: Email Template ID
+        in: path
+        name: emailTemplateId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplate'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Get detailed information about an email template.
+      operationId: GetEmailTemplateDetails
+      summary: Get email template details
+    put:
+      parameters:
+      - description: Email Template ID
+        in: path
+        name: emailTemplateId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/Invalid'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Update an existing email template.
+      operationId: UpdateEmailTemplate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                code:
+                  description: Template HTML code
+                  type: string
+                name:
+                  description: Template name
+                  type: string
+              type: object
+        required: true
+      summary: Update email template
+  /templates:
+    get:
+      parameters:
+      - description: Show all templates for entity
+        in: query
+        name: showall
+        schema:
+          default: 'true'
+          type: string
+        x-ms-summary: Show all
+      - description: Show templates in a specific folder
+        in: query
+        name: folder_id
+        schema:
+          type: string
+        x-ms-summary: Folder ID
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  templates:
+                    items:
+                      properties:
+                        tags:
+                          type: string
+                        created_at:
+                          type: string
+                        external_editor_type:
+                          type: string
+                        field_count:
+                          format: int32
+                          type: integer
+                        id:
+                          type: string
+                        is_editable:
+                          type: boolean
+                        is_private:
+                          type: boolean
+                        name:
+                          type: string
+                        page_count:
+                          format: int32
+                          type: integer
+                        role_count:
+                          format: int32
+                          type: integer
+                        sender_name:
+                          type: string
+                        sender_thumb_url:
+                          type: string
+                        thumb_url:
+                          type: string
+                        type:
+                          type: string
+                        user_id:
+                          type: string
+                        video_id:
+                          type: string
+                        video_thumb_url:
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      tags:
+      - Templates
+      description: Receive a list of available document templates. You can add new templates under the Templates-section in GetAccept.
+      operationId: ListTemplates
+      summary: List templates
+      x-ms-visibility: important
+  /templates/{templateId}/custom-images:
+    get:
+      parameters:
+      - description: Template ID
+        in: path
+        name: templateId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  custom_images:
+                    items:
+                      properties:
+                        id:
+                          description: ID of the custom image
+                          type: string
+                        name:
+                          description: Name of the custom image
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Get a list of custom images on a template.
+      operationId: GetTemplateCustomImages
+      summary: Get template custom images
+  /templates/{templateId}/fields:
+    get:
+      parameters:
+      - description: Template ID
+        in: path
+        name: templateId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListTemplates
+          value-collection: templates
+          value-path: id
+          value-title: name
+        x-ms-summary: Template ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fields'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Receive a list of fields for a specific template.
+      operationId: ListFields
+      summary: Get template fields
+  /templates/{templateId}/fields_roles:
+    get:
+      parameters:
+      - description: Template ID
+        in: path
+        name: templateId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  fields:
+                    items:
+                      properties:
+                        field_id:
+                          type: string
+                        role_name:
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Receive a list of fields and associated role for a specific template.
+      operationId: ListTemplateFieldRoles
+      summary: Get template field roles
+  /templates/{templateId}/pricing-tables:
+    get:
+      parameters:
+      - description: Template ID
+        in: path
+        name: templateId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListTemplates
+          value-collection: templates
+          value-path: id
+          value-title: name
+        x-ms-summary: Template ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PricingTables'
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Receive a list of pricing-table items for a specific template.
+      operationId: GetPricingTables
+      summary: Get template pricing tables
+  /templates/{templateId}/roles:
+    get:
+      parameters:
+      - description: Template ID
+        in: path
+        name: templateId
+        required: true
+        schema:
+          type: string
+        x-ms-dynamic-values:
+          operationId: ListTemplates
+          value-collection: templates
+          value-path: id
+          value-title: name
+        x-ms-summary: Template ID
+        x-ms-url-encoding: single
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  roles:
+                    items:
+                      properties:
+                        email:
+                          type: string
+                        first_name:
+                          type: string
+                        last_name:
+                          type: string
+                        mobile:
+                          type: string
+                        role:
+                          type: string
+                        role_id:
+                          type: string
+                        role_name:
+                          type: string
+                      type: object
+                    type: array
+                type: object
+          description: OK
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      tags:
+      - Templates
+      description: Receive a list of roles for a specific template.
+      operationId: ListRoles
+      summary: Get template roles
+components:
+  schemas:
+    PricingColumn:
+      description: Pricing Table Column
+      properties:
+        column_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        enabled:
+          description: Enabled
+          enum:
+          - true
+          - false
+          example: false
+          type: boolean
+          x-ms-summary: Enabled
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+      title: Column
+      type: object
+      x-ms-summary: Column
+    EditorField:
+      description: Editor Field details
+      properties:
+        id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        input_settings:
+          description: Settings
+          properties:
+            label:
+              description: Label
+              type: string
+              x-ms-summary: Label
+            options:
+              description: Options
+              items:
+                type: string
+              type: array
+              x-ms-summary: Options
+            required:
+              description: Required
+              type: boolean
+              x-ms-summary: Required
+            type:
+              description: Type
+              type: string
+              x-ms-summary: Type
+          type: object
+          x-ms-summary: Settings
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+        type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        user_id:
+          description: User ID
+          type: string
+          x-ms-summary: User ID
+      title: Editor Field
+      type: object
+      x-ms-summary: Editor Field
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    PricingSection:
+      description: Pricing Table Section
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
+      type: object
+      x-ms-summary: Section
+    EmailTemplate:
+      description: Email template details
+      properties:
+        code:
+          description: Template HTML code
+          type: string
+        entity_id:
+          description: Entity ID
+          type: string
+        id:
+          description: Template ID
+          type: string
+        name:
+          description: Template name
+          type: string
+      title: Email Template
+      type: object
+    Fields:
+      description: Field list
+      properties:
+        editor_fields:
+          items:
+            $ref: '#/components/schemas/EditorField'
+          type: array
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+      title: Fields
+      type: object
+      x-ms-summary: Fields
+    Field:
+      description: Field details
+      properties:
+        company_name:
+          description: Company Name
+          type: string
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          description: Company Number
+          type: string
+          x-ms-summary: Company Number
+          x-ms-visibility: advanced
+        field_id:
+          description: Field ID
+          type: string
+          x-ms-summary: Field ID
+          x-ms-visibility: advanced
+        field_label:
+          description: Label
+          type: string
+          x-ms-summary: Label
+        field_options:
+          description: Options
+          items:
+            properties:
+              value:
+                type: string
+                x-ms-summary: Value
+            type: object
+          type: array
+          x-ms-summary: Options
+          x-ms-visibility: advanced
+        field_type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        field_value:
+          description: Value
+          type: string
+          x-ms-summary: Value
+        is_collectable:
+          description: Collecting field
+          type: boolean
+          x-ms-visibility: advanced
+        is_editable:
+          description: Editable field
+          type: boolean
+          x-ms-visibility: advanced
+        is_required:
+          description: Required field
+          type: boolean
+        page_id:
+          description: Page ID
+          type: string
+          x-ms-summary: Page ID
+          x-ms-visibility: advanced
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+          x-ms-visibility: advanced
+        recipient_name:
+          description: Recipient Name
+          type: string
+          x-ms-summary: Recipient Name
+          x-ms-visibility: advanced
+        role_name:
+          description: Role Name
+          type: string
+          x-ms-summary: Role Name
+          x-ms-visibility: advanced
+      title: Field
+      type: object
+      x-ms-summary: Field
+    PricingTables:
+      description: Pricing Tables
+      properties:
+        pricing_tables:
+          items:
+            $ref: '#/components/schemas/PricingTable'
+          type: array
+      title: Pricing
+      type: object
+      x-ms-summary: Pricing
+    PricingTable:
+      description: Pricing Table
+      properties:
+        currency_settings:
+          description: Currency Settings
+          properties:
+            currency:
+              description: Currency
+              type: string
+              x-ms-summary: Currency
+            locale:
+              description: Locale
+              type: string
+              x-ms-summary: Locale
+          title: Currency Settings
+          type: object
+          x-ms-summary: Currency Settings
+        pre_calculated:
+          description: Pre calculated totals
+          type: boolean
+          x-ms-summary: Pre calculated totals
+        sections:
+          items:
+            $ref: '#/components/schemas/PricingSection'
+          type: array
+        table_id:
+          description: Table ID
+          type: string
+          x-ms-summary: ID
+      title: Table
+      type: object
+      x-ms-summary: Table
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+  securitySchemes:
+    Oauth2:
+      description: For testing purpose, use client_id **api** and client_secret **app**
+      flows:
+        authorizationCode:
+          authorizationUrl: https://app.getaccept.com/oauth2/authorize
+          refreshUrl: https://app.getaccept.com/oauth2/token
+          scopes:
+            basic: Grants basic access to operations
+          tokenUrl: https://app.getaccept.com/oauth2/token
+      type: oauth2
+    Token:
+      bearerFormat: JWT
+      description: Enter your bearer token
+      scheme: bearer
+      type: http
+x-ms-connector-metadata:
+- propertyName: Website
+  propertyValue: https://www.getaccept.com
+- propertyName: Privacy policy
+  propertyValue: https://www.getaccept.com/privacy-policy
+- propertyName: Categories
+  propertyValue: Sales and CRM;Productivity
