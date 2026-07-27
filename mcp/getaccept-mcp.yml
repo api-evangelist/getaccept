@@ -1,0 +1,441 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/getaccept-openapi-original.json
+note: No official hosted GetAccept MCP server found. Candidate tool list derived one-per-operation from
+  the OpenAPI (86 operations).
+server:
+  name: getaccept
+  transport: http
+  auth: oauth2 (authorizationCode) or bearer token
+tools:
+- name: ListAttachments
+  description: List attachments
+  method: GET
+  path: /attachments
+  source_operation: openapi/getaccept-openapi-original.json#ListAttachments
+- name: Authenticate
+  description: Authentication by token
+  method: POST
+  path: /auth
+  source_operation: openapi/getaccept-openapi-original.json#Authenticate
+- name: GetCommunicationTemplates
+  description: Get communication templates
+  method: GET
+  path: /communication-templates
+  source_operation: openapi/getaccept-openapi-original.json#GetCommunicationTemplates
+- name: CreateCommunicationTemplate
+  description: Create communication template
+  method: POST
+  path: /communication-templates
+  source_operation: openapi/getaccept-openapi-original.json#CreateCommunicationTemplate
+- name: GetCommunicationTemplate
+  description: Get communication template
+  method: GET
+  path: /communication-templates/{communicationTemplateId}
+  source_operation: openapi/getaccept-openapi-original.json#GetCommunicationTemplate
+- name: UpdateCommunicationTemplate
+  description: Update communication template
+  method: PUT
+  path: /communication-templates/{communicationTemplateId}
+  source_operation: openapi/getaccept-openapi-original.json#UpdateCommunicationTemplate
+- name: ListContacts
+  description: List contacts
+  method: GET
+  path: /contacts
+  source_operation: openapi/getaccept-openapi-original.json#ListContacts
+- name: CreateContact
+  description: Create contact
+  method: POST
+  path: /contacts
+  source_operation: openapi/getaccept-openapi-original.json#CreateContact
+- name: DeleteContact
+  description: Delete contact
+  method: DELETE
+  path: /contacts/{contactId}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteContact
+- name: GetEntityCustomData
+  description: Get entity custom data properties
+  method: GET
+  path: /custom-data/entity
+  source_operation: openapi/getaccept-openapi-original.json#GetEntityCustomData
+- name: AddEntityCustomDataProperty
+  description: Add entity custom data property
+  method: POST
+  path: /custom-data/entity
+  source_operation: openapi/getaccept-openapi-original.json#AddEntityCustomDataProperty
+- name: DeleteEntityCustomDataProperty
+  description: Delete entity custom data property
+  method: DELETE
+  path: /custom-data/entity/{propertyKey}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteEntityCustomDataProperty
+- name: ListDocuments
+  description: List documents
+  method: GET
+  path: /documents
+  source_operation: openapi/getaccept-openapi-original.json#ListDocuments
+- name: CreateDocument
+  description: Create and send document or template
+  method: POST
+  path: /documents
+  source_operation: openapi/getaccept-openapi-original.json#CreateDocument
+- name: GetDocumentByExternalId
+  description: Get document by external ID
+  method: GET
+  path: /documents/external/{externalId}
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentByExternalId
+- name: DeleteDocument
+  description: Delete document
+  method: DELETE
+  path: /documents/{documentId}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteDocument
+- name: GetDocumentDetails
+  description: Get document details
+  method: GET
+  path: /documents/{documentId}
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentDetails
+- name: UpdateDocument
+  description: Update document
+  method: PUT
+  path: /documents/{documentId}
+  source_operation: openapi/getaccept-openapi-original.json#UpdateDocument
+- name: GetDocumentAttachments
+  description: Get document attachments
+  method: GET
+  path: /documents/{documentId}/attachments
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentAttachments
+- name: UploadFileToDocumentAttachment
+  description: Upload file to document attachment
+  method: POST
+  path: /documents/{documentId}/attachments/{documentAttachmentId}/upload
+  source_operation: openapi/getaccept-openapi-original.json#UploadFileToDocumentAttachment
+- name: GetComments
+  description: Get comments
+  method: GET
+  path: /documents/{documentId}/comments
+  source_operation: openapi/getaccept-openapi-original.json#GetComments
+- name: CreateComment
+  description: Create comment
+  method: POST
+  path: /documents/{documentId}/comments
+  source_operation: openapi/getaccept-openapi-original.json#CreateComment
+- name: GetDocumentCustomData
+  description: Get document custom data properties
+  method: GET
+  path: /documents/{documentId}/custom-data
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentCustomData
+- name: AddDocumentCustomDataProperty
+  description: Add document custom data property
+  method: POST
+  path: /documents/{documentId}/custom-data
+  source_operation: openapi/getaccept-openapi-original.json#AddDocumentCustomDataProperty
+- name: DeleteDocumentCustomDataProperty
+  description: Delete document custom data property
+  method: DELETE
+  path: /documents/{documentId}/custom-data/{customDataId}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteDocumentCustomDataProperty
+- name: GetDocumentCustomDataProperty
+  description: Get document custom data property
+  method: GET
+  path: /documents/{documentId}/custom-data/{customDataId}
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentCustomDataProperty
+- name: UpdateDocumentCustomDataProperty
+  description: Update document custom data property
+  method: PUT
+  path: /documents/{documentId}/custom-data/{customDataId}
+  source_operation: openapi/getaccept-openapi-original.json#UpdateDocumentCustomDataProperty
+- name: DownloadDocument
+  description: Download document
+  method: GET
+  path: /documents/{documentId}/download
+  source_operation: openapi/getaccept-openapi-original.json#DownloadDocument
+- name: GetEvents
+  description: Get events
+  method: GET
+  path: /documents/{documentId}/events
+  source_operation: openapi/getaccept-openapi-original.json#GetEvents
+- name: UpdateExpiration
+  description: Update document expiration
+  method: POST
+  path: /documents/{documentId}/expiration
+  source_operation: openapi/getaccept-openapi-original.json#UpdateExpiration
+- name: ListDocumentFields
+  description: Get document fields
+  method: GET
+  path: /documents/{documentId}/fields
+  source_operation: openapi/getaccept-openapi-original.json#ListDocumentFields
+- name: CreateField
+  description: Create a field
+  method: POST
+  path: /documents/{documentId}/fields
+  source_operation: openapi/getaccept-openapi-original.json#CreateField
+- name: UpdateDocumentFields
+  description: Update document fields
+  method: PUT
+  path: /documents/{documentId}/fields
+  source_operation: openapi/getaccept-openapi-original.json#UpdateDocumentFields
+- name: ForwardDocument
+  description: Forward document
+  method: POST
+  path: /documents/{documentId}/forward
+  source_operation: openapi/getaccept-openapi-original.json#ForwardDocument
+- name: GetDetailedLog
+  description: Get detailed log
+  method: GET
+  path: /documents/{documentId}/log
+  source_operation: openapi/getaccept-openapi-original.json#GetDetailedLog
+- name: GetPages
+  description: Get pages
+  method: GET
+  path: /documents/{documentId}/pages
+  source_operation: openapi/getaccept-openapi-original.json#GetPages
+- name: GetDocumentPreview
+  description: Get document preview
+  method: POST
+  path: /documents/{documentId}/preview
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentPreview
+- name: GetDocumentPricingTables
+  description: Get document pricing tables
+  method: GET
+  path: /documents/{documentId}/pricing-tables
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentPricingTables
+- name: UpdateDocumentPricingTables
+  description: Update document pricing tables
+  method: PUT
+  path: /documents/{documentId}/pricing-tables
+  source_operation: openapi/getaccept-openapi-original.json#UpdateDocumentPricingTables
+- name: ListRecipients
+  description: Get document recipients
+  method: GET
+  path: /documents/{documentId}/recipients
+  source_operation: openapi/getaccept-openapi-original.json#ListRecipients
+- name: RecallSigner
+  description: Recall signer
+  method: DELETE
+  path: /documents/{documentId}/recipients/{recipientId}
+  source_operation: openapi/getaccept-openapi-original.json#RecallSigner
+- name: SendReminder
+  description: Send reminder
+  method: POST
+  path: /documents/{documentId}/reminders
+  source_operation: openapi/getaccept-openapi-original.json#SendReminder
+- name: CreateRevision
+  description: Create revision
+  method: POST
+  path: /documents/{documentId}/revisions
+  source_operation: openapi/getaccept-openapi-original.json#CreateRevision
+- name: SealDocument
+  description: Seal document
+  method: POST
+  path: /documents/{documentId}/seal
+  source_operation: openapi/getaccept-openapi-original.json#SealDocument
+- name: SendDocument
+  description: Send existing document
+  method: POST
+  path: /documents/{documentId}/send
+  source_operation: openapi/getaccept-openapi-original.json#SendDocument
+- name: GetDocumentStatus
+  description: Get document status
+  method: GET
+  path: /documents/{documentId}/status
+  source_operation: openapi/getaccept-openapi-original.json#GetDocumentStatus
+- name: ListEmailTemplates
+  description: List email templates
+  method: GET
+  path: /email/templates
+  source_operation: openapi/getaccept-openapi-original.json#ListEmailTemplates
+- name: CreateEmailTemplate
+  description: Create email template
+  method: POST
+  path: /email/templates
+  source_operation: openapi/getaccept-openapi-original.json#CreateEmailTemplate
+- name: GetEmailTemplateDetails
+  description: Get email template details
+  method: GET
+  path: /email/templates/{emailTemplateId}
+  source_operation: openapi/getaccept-openapi-original.json#GetEmailTemplateDetails
+- name: UpdateEmailTemplate
+  description: Update email template
+  method: PUT
+  path: /email/templates/{emailTemplateId}
+  source_operation: openapi/getaccept-openapi-original.json#UpdateEmailTemplate
+- name: ListFolders
+  description: List folders
+  method: GET
+  path: /folders
+  source_operation: openapi/getaccept-openapi-original.json#ListFolders
+- name: GetFolderDetails
+  description: Get folder details
+  method: GET
+  path: /folders/{folderId}
+  source_operation: openapi/getaccept-openapi-original.json#GetFolderDetails
+- name: ListNotifications
+  description: List notifications
+  method: GET
+  path: /notifications
+  source_operation: openapi/getaccept-openapi-original.json#ListNotifications
+- name: RefreshToken
+  description: Refresh an access token
+  method: GET
+  path: /refresh
+  source_operation: openapi/getaccept-openapi-original.json#RefreshToken
+- name: SwitchEntity
+  description: Switch entity
+  method: GET
+  path: /refresh/{entityId}
+  source_operation: openapi/getaccept-openapi-original.json#SwitchEntity
+- name: RevokeToken
+  description: Revoke access token
+  method: GET
+  path: /revoke
+  source_operation: openapi/getaccept-openapi-original.json#RevokeToken
+- name: ListSubscriptions
+  description: List subscriptions
+  method: GET
+  path: /subscriptions
+  source_operation: openapi/getaccept-openapi-original.json#ListSubscriptions
+- name: CreateSubscription
+  description: Subscribe to document events
+  method: POST
+  path: /subscriptions
+  source_operation: openapi/getaccept-openapi-original.json#CreateSubscription
+- name: GetSubscriptionErrors
+  description: Get subscription errors
+  method: GET
+  path: /subscriptions/errors
+  source_operation: openapi/getaccept-openapi-original.json#GetSubscriptionErrors
+- name: ListSubscriptionEvents
+  description: List available subscription events
+  method: GET
+  path: /subscriptions/events
+  source_operation: openapi/getaccept-openapi-original.json#ListSubscriptionEvents
+- name: CreateRejectedSubscription
+  description: When a document has been rejected
+  method: POST
+  path: /subscriptions/events/rejected
+  source_operation: openapi/getaccept-openapi-original.json#CreateRejectedSubscription
+- name: CreateReviewedSubscription
+  description: When a document has been reviewed
+  method: POST
+  path: /subscriptions/events/reviewed
+  source_operation: openapi/getaccept-openapi-original.json#CreateReviewedSubscription
+- name: CreateSignedSubscription
+  description: When a document has been signed
+  method: POST
+  path: /subscriptions/events/signed
+  source_operation: openapi/getaccept-openapi-original.json#CreateSignedSubscription
+- name: TestSubscription
+  description: Test subscription
+  method: POST
+  path: /subscriptions/test
+  source_operation: openapi/getaccept-openapi-original.json#TestSubscription
+- name: DeleteSubscription
+  description: Delete subscription
+  method: DELETE
+  path: /subscriptions/{subscriptionId}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteSubscription
+- name: GetSubscriptionDetails
+  description: Get subscription details
+  method: GET
+  path: /subscriptions/{subscriptionId}
+  source_operation: openapi/getaccept-openapi-original.json#GetSubscriptionDetails
+- name: ListTeams
+  description: List teams
+  method: GET
+  path: /teams
+  source_operation: openapi/getaccept-openapi-original.json#ListTeams
+- name: ListTemplates
+  description: List templates
+  method: GET
+  path: /templates
+  source_operation: openapi/getaccept-openapi-original.json#ListTemplates
+- name: GetTemplateCustomImages
+  description: Get template custom images
+  method: GET
+  path: /templates/{templateId}/custom-images
+  source_operation: openapi/getaccept-openapi-original.json#GetTemplateCustomImages
+- name: ListFields
+  description: Get template fields
+  method: GET
+  path: /templates/{templateId}/fields
+  source_operation: openapi/getaccept-openapi-original.json#ListFields
+- name: ListTemplateFieldRoles
+  description: Get template field roles
+  method: GET
+  path: /templates/{templateId}/fields_roles
+  source_operation: openapi/getaccept-openapi-original.json#ListTemplateFieldRoles
+- name: GetPricingTables
+  description: Get template pricing tables
+  method: GET
+  path: /templates/{templateId}/pricing-tables
+  source_operation: openapi/getaccept-openapi-original.json#GetPricingTables
+- name: ListRoles
+  description: Get template roles
+  method: GET
+  path: /templates/{templateId}/roles
+  source_operation: openapi/getaccept-openapi-original.json#ListRoles
+- name: TestAuthentication
+  description: Test authentication
+  method: GET
+  path: /test
+  source_operation: openapi/getaccept-openapi-original.json#TestAuthentication
+- name: UploadDocument
+  description: Upload a document file
+  method: POST
+  path: /upload
+  source_operation: openapi/getaccept-openapi-original.json#UploadDocument
+- name: UploadToArchive
+  description: Upload to archive
+  method: POST
+  path: /upload/archive
+  source_operation: openapi/getaccept-openapi-original.json#UploadToArchive
+- name: UploadAttachment
+  description: Upload an attachment
+  method: POST
+  path: /upload/attachment
+  source_operation: openapi/getaccept-openapi-original.json#UploadAttachment
+- name: UploadVideo
+  description: Upload a video
+  method: POST
+  path: /upload/video
+  source_operation: openapi/getaccept-openapi-original.json#UploadVideo
+- name: ListUsers
+  description: List users
+  method: GET
+  path: /users
+  source_operation: openapi/getaccept-openapi-original.json#ListUsers
+- name: CreateUser
+  description: Create user
+  method: POST
+  path: /users
+  source_operation: openapi/getaccept-openapi-original.json#CreateUser
+- name: DeleteUser
+  description: Delete user
+  method: DELETE
+  path: /users/{userId}
+  source_operation: openapi/getaccept-openapi-original.json#DeleteUser
+- name: GetUserDetails
+  description: Get user details
+  method: GET
+  path: /users/{userId}
+  source_operation: openapi/getaccept-openapi-original.json#GetUserDetails
+- name: GetUserStatistics
+  description: Get user statistics
+  method: GET
+  path: /users/{userId}/statistics
+  source_operation: openapi/getaccept-openapi-original.json#GetUserStatistics
+- name: GetVideoJobStatus
+  description: Get video job status
+  method: GET
+  path: /video/job/{videoId}
+  source_operation: openapi/getaccept-openapi-original.json#GetVideoJobStatus
+- name: ListVideos
+  description: List videos
+  method: GET
+  path: /videos
+  source_operation: openapi/getaccept-openapi-original.json#ListVideos
+- name: GetVideo
+  description: Get video
+  method: GET
+  path: /videos/{videoId}
+  source_operation: openapi/getaccept-openapi-original.json#GetVideo

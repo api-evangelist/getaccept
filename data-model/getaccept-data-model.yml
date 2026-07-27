@@ -1,0 +1,184 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+entities:
+- Attachment
+- Attachments
+- Comment
+- CommentResponse
+- CommunicationTemplate
+- Contact
+- Contacts
+- CustomDataProperty
+- Document
+- Documents
+- EditorField
+- EmailTemplate
+- EntityCustomData
+- Error
+- Event
+- Field
+- FieldResponse
+- Fields
+- Folder
+- LogEntry
+- Page
+- PreviewResponse
+- PricingColumn
+- PricingSection
+- PricingTable
+- PricingTables
+- Recipient
+- Recipients
+- SigningMethod
+- StatusResponse
+- Subscription
+- Subscriptions
+- Team
+- TestResponse
+- User
+- Users
+- Video
+- VideoJobStatus
+- Webhook
+relationships:
+- from: Attachment
+  type: belongs_to
+  to: Attachment
+  via: attachment_id
+- from: Attachments
+  type: has_many
+  to: Attachment
+  via: attachments
+- from: CommentResponse
+  type: belongs_to
+  to: Comment
+  via: comment_id
+- from: Contact
+  type: belongs_to
+  to: Contact
+  via: contact_id
+- from: Contacts
+  type: has_many
+  to: Contact
+  via: contacts
+- from: CustomDataProperty
+  type: belongs_to
+  to: Document
+  via: document_id
+- from: Document
+  type: has_many
+  to: Recipient
+  via: recipients
+- from: Document
+  type: belongs_to
+  to: User
+  via: user_id
+- from: EditorField
+  type: belongs_to
+  to: Recipient
+  via: recipient_id
+- from: EditorField
+  type: belongs_to
+  to: User
+  via: user_id
+- from: Event
+  type: belongs_to
+  to: Document
+  via: document_id
+- from: Field
+  type: belongs_to
+  to: Field
+  via: field_id
+- from: Field
+  type: belongs_to
+  to: Page
+  via: page_id
+- from: Field
+  type: belongs_to
+  to: Recipient
+  via: recipient_id
+- from: FieldResponse
+  type: belongs_to
+  to: Field
+  via: field_id
+- from: Fields
+  type: has_many
+  to: EditorField
+  via: editor_fields
+- from: Fields
+  type: has_many
+  to: Field
+  via: fields
+- from: LogEntry
+  type: belongs_to
+  to: Document
+  via: document_id
+- from: Page
+  type: belongs_to
+  to: Page
+  via: page_id
+- from: PricingColumn
+  type: belongs_to
+  to: PricingColumn
+  via: column_id
+- from: PricingSection
+  type: has_many
+  to: PricingColumn
+  via: columns
+- from: PricingSection
+  type: belongs_to
+  to: PricingSection
+  via: section_id
+- from: PricingTable
+  type: has_many
+  to: PricingSection
+  via: sections
+- from: PricingTable
+  type: belongs_to
+  to: PricingTable
+  via: table_id
+- from: PricingTables
+  type: has_many
+  to: PricingTable
+  via: pricing_tables
+- from: Recipient
+  type: has_many
+  to: SigningMethod
+  via: signing_methods
+- from: Recipients
+  type: has_many
+  to: Recipient
+  via: recipients
+- from: Subscription
+  type: belongs_to
+  to: Subscription
+  via: subscription_id
+- from: Team
+  type: belongs_to
+  to: Team
+  via: team_id
+- from: TestResponse
+  type: belongs_to
+  to: User
+  via: user_id
+- from: User
+  type: belongs_to
+  to: Team
+  via: team_id
+- from: Video
+  type: belongs_to
+  to: Video
+  via: video_id
+- from: Webhook
+  type: has_one
+  to: Document
+  via: document
+- from: Webhook
+  type: has_one
+  to: Recipient
+  via: recipient
+- from: Webhook
+  type: belongs_to
+  to: Subscription
+  via: subscription_id

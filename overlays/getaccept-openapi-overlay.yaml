@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for GetAccept
+  version: 1.0.0
+extends: openapi/getaccept-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-19'
+    x-apievangelist-artifacts:
+    - authentication
+    - scopes
+    - conventions
+    - errors
+    - data-model
+    - lifecycle
+    - conformance
+    - mcp
+    - webhooks
+    - agentic-access
+- target: $.info
+  update:
+    x-webhooks: See asyncapi/getaccept-webhooks.yml — event surface via subscriptions (signed/reviewed/rejected)

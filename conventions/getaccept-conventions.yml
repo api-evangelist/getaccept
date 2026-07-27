@@ -1,0 +1,38 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+authentication:
+  schemes:
+  - oauth2 authorizationCode
+  - http bearer token
+  ref: authentication/getaccept-authentication.yml
+  authorize_url: https://app.getaccept.com/oauth2/authorize
+  token_url: https://app.getaccept.com/oauth2/token
+base_url: https://api.getaccept.com/v1
+protocol: REST over HTTPS, JSON request/response bodies
+idempotency:
+  supported: false
+  note: No idempotency-key header or parameter is documented in the OpenAPI.
+pagination:
+  style: limit-offset
+  params:
+  - limit
+  - offset
+  note: List endpoints accept limit and offset query parameters.
+versioning:
+  style: uri-path
+  current: v1
+  ref: lifecycle/getaccept-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  fields:
+  - error
+  - description
+  - status
+  ref: errors/getaccept-problem-types.yml
+events:
+  model: webhook subscriptions
+  ref: asyncapi/getaccept-webhooks.yml
+rate_limiting:
+  documented: false
+  note: Commercial API usage requires a paid API package; no rate-limit headers documented in the spec.

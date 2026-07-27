@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+format: json
+note: 'GetAccept returns a plain JSON error envelope (not RFC 9457). Fields: error, description, status
+  (numeric HTTP status).'
+envelope:
+  media_type: application/json
+  fields:
+  - error
+  - description
+  - status
+problems:
+- status: 400
+  title: Bad Request
+  occurrences: 34
+  example_operations:
+  - Authenticate
+  - CreateCommunicationTemplate
+  - UpdateCommunicationTemplate
+  - CreateContact
+  - AddEntityCustomDataProperty
+- status: 401
+  title: Unauthorized
+  occurrences: 82
+  example_operations:
+  - ListAttachments
+  - GetCommunicationTemplates
+  - CreateCommunicationTemplate
+  - GetCommunicationTemplate
+  - UpdateCommunicationTemplate
+- status: 403
+  title: Forbidden
+  occurrences: 2
+  example_operations:
+  - GetDocumentDetails
+  - GetDocumentAttachments
+- status: 404
+  title: Not Found
+  occurrences: 50
+  example_operations:
+  - GetCommunicationTemplate
+  - UpdateCommunicationTemplate
+  - DeleteContact
+  - DeleteEntityCustomDataProperty
+  - GetDocumentByExternalId

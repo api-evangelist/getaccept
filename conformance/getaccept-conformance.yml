@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+standards:
+- id: oauth2
+  conforms: true
+  evidence: openapi securitySchemes type oauth2 (authorizationCode flow)
+- id: oauth2-authorization-code
+  conforms: true
+  evidence: authorizationUrl + tokenUrl at app.getaccept.com/oauth2
+- id: bearer-token
+  conforms: true
+  evidence: http bearer Token security scheme
+- id: rest
+  conforms: true
+  evidence: resource-oriented paths, JSON bodies over HTTPS
+- id: pagination-limit-offset
+  conforms: true
+  evidence: limit/offset query params on list operations
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use a plain JSON {error,description,status} envelope, not application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency-key mechanism documented
+- id: openidconnect
+  conforms: false
+- id: soc2
+  conforms: true
+  evidence: SOC 2 attested per https://www.getaccept.com/security
+- id: gdpr
+  conforms: true
+  evidence: GDPR compliance per https://www.getaccept.com/security

@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/getaccept-openapi-original.json
+skills:
+  - file: getaccept-send-document-for-signature.md
+    name: Send a document for e-signature
+    api: openapi/getaccept-openapi-original.json
+    operations: [Authenticate, ListTemplates, UploadDocument, CreateDocument, SendDocument, ListRecipients, GetDocumentStatus, SendReminder]
+  - file: getaccept-subscribe-to-document-events.md
+    name: Subscribe to document events (webhooks)
+    api: openapi/getaccept-openapi-original.json
+    operations: [Authenticate, ListSubscriptionEvents, CreateSubscription, CreateSignedSubscription, TestSubscription, ListSubscriptions, GetSubscriptionErrors, DeleteSubscription]

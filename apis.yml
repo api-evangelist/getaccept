@@ -1,28 +1,254 @@
 aid: getaccept
 name: GetAccept
-description: 'GetAccept is a company surfaced as a portfolio company of bessemer-venture-partners, y-combinator
-  and added to the API Evangelist network as a stub for enrichment. Sector: cloud. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: >-
+  GetAccept is a digital sales room and sales enablement platform that helps revenue teams
+  design, send, promote, track, and e-sign sales documents in one place — combining sales
+  collateral, proposals, contract management, document tracking, and legally binding electronic
+  signatures. The GetAccept REST API (v1, base https://api.getaccept.com/v1) exposes 86 operations
+  across documents, e-signature, recipients, contacts, templates, users, videos, custom data,
+  communication templates, and webhook subscriptions, secured with OAuth2 (authorization code) or
+  bearer tokens. GetAccept is backed by Bessemer Venture Partners and Y Combinator.
 url: https://raw.githubusercontent.com/api-evangelist/getaccept/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.getaccept.com/hubfs/logotype.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - bessemer-venture-partners
 - y-combinator
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - Cloud
-apis: []
+- Sales Enablement
+- Electronic Signature
+- E-Signature
+- Digital Sales Room
+- Document Management
+- Contract Management
+- Proposals
+- SaaS
+apis:
+- aid: getaccept:getaccept-archive-api
+  name: GetAccept Archive API
+  description: >-
+    You can upload already signed documents to the document archive to make them searchable and use in
+    your contract management process.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Archive
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-archive-api-openapi.yml
+- aid: getaccept:getaccept-attachments-api
+  name: GetAccept Attachments API
+  description: You can upload an attachment and reuse it in many documents.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Attachments
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-attachments-api-openapi.yml
+- aid: getaccept:getaccept-authentication-api
+  name: GetAccept Authentication API
+  description: >-
+    Authentication with the GetAccept API can be made using JWT tokens (JSON Web Tokens) or OAuth 2.0
+    Authorization Framework http://oauth.net/2/  All requests must be made via HTTPS. All configuration
+    URLs (webhooks, etc) should begin with https:// as well.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-authentication-api-openapi.yml
+- aid: getaccept:getaccept-communication-templates-api
+  name: GetAccept Communication Templates API
+  description: >-
+    Communication templates allow you to customize email and SMS messages sent to recipients.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Communication Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-communication-templates-api-openapi.yml
+- aid: getaccept:getaccept-contacts-api
+  name: GetAccept Contacts API
+  description: Everything related to contacts
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Contacts
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-contacts-api-openapi.yml
+- aid: getaccept:getaccept-custom-data-api
+  name: GetAccept Custom Data API
+  description: >-
+    Custom Data enables you to define and use your own document properties as a complement to the default
+    properties.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Custom Data
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-custom-data-api-openapi.yml
+- aid: getaccept:getaccept-documents-api
+  name: GetAccept Documents API
+  description: Everything related to documents
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-documents-api-openapi.yml
+- aid: getaccept:getaccept-others-api
+  name: GetAccept Others API
+  description: Additional endpoints used in various integrations.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Others
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-others-api-openapi.yml
+- aid: getaccept:getaccept-subscriptions-api
+  name: GetAccept Subscriptions API
+  description: >-
+    To simplify the process of checking a documents status and make it more efficient in an integrated
+    application, you can enable API Webhooks. Enable webhooks as a user with administrator privileges
+    in the Settings | Integration | Webhooks. We support multiple webhooks for one application. Events
+    will be POSTed to your webhook URLs and should be handled by you. A POST must be answered and your
+    endpoint will need to return a 2xx HTTP. Otherwise, the callback will be considered a failure and
+    will be retried later. Retries will be made after 1, 12, 24, and 48 hours. The sender (or notification_email)
+    will receive an email notification after a failed attempt.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-subscriptions-api-openapi.yml
+- aid: getaccept:getaccept-templates-api
+  name: GetAccept Templates API
+  description: >-
+    GetAccept has extensive support for creating templates in different formats. You can use form fields
+    to receive input data from a recipient or word files to merge custom data into a document.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-templates-api-openapi.yml
+- aid: getaccept:getaccept-users-api
+  name: GetAccept Users API
+  description: >-
+    General user methods for creating, listing of users, single user details and statistics and managing
+    existing users.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-users-api-openapi.yml
+- aid: getaccept:getaccept-videos-api
+  name: GetAccept Videos API
+  description: You can upload videos and reuse it in many documents.
+  humanURL: https://developers.getaccept.com/
+  baseURL: https://api.getaccept.com/v1
+  tags:
+  - Videos
+  properties:
+  - type: OpenAPI
+    url: openapi/getaccept-videos-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://developers.getaccept.com/
+- type: Documentation
+  url: https://developers.getaccept.com/docs
+- type: APIReference
+  url: https://developers.getaccept.com/reference
+- type: GettingStarted
+  url: https://developers.getaccept.com/docs
+- type: GitHubOrganization
+  url: https://github.com/GetAccept
+- type: Blog
+  url: https://www.getaccept.com/blog
+- type: Pricing
+  url: https://www.getaccept.com/pricing
+- type: SignUp
+  url: https://app.getaccept.com/signup
+- type: Login
+  url: https://login.getaccept.com
+- type: TermsOfService
+  url: https://www.getaccept.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.getaccept.com/privacy-policy
+- type: Support
+  url: mailto:support@getaccept.com
+- type: StatusPage
+  url: https://status.getaccept.com
+- type: Compliance
+  url: https://www.getaccept.com/security
+- type: Authentication
+  url: authentication/getaccept-authentication.yml
+- type: OAuthScopes
+  url: scopes/getaccept-scopes.yml
+- type: Conventions
+  url: conventions/getaccept-conventions.yml
+- type: ErrorCatalog
+  url: errors/getaccept-problem-types.yml
+- type: DataModel
+  url: data-model/getaccept-data-model.yml
+- type: Lifecycle
+  url: lifecycle/getaccept-lifecycle.yml
+- type: Conformance
+  url: conformance/getaccept-conformance.yml
+- type: Webhooks
+  url: asyncapi/getaccept-webhooks.yml
+- type: MCPServer
+  url: mcp/getaccept-mcp.yml
+- type: AgenticAccess
+  url: agentic-access/getaccept-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/getaccept-llms.txt
+- type: TrustCenter
+  url: security/getaccept-trust-center.yml
+- type: DomainSecurity
+  url: security/getaccept-domain-security.yml
 - type: Website
   url: https://www.getaccept.com/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

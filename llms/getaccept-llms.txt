@@ -1,0 +1,42 @@
+# GetAccept
+
+> GetAccept is a digital sales room and sales enablement platform for designing, sending, promoting, tracking, and e-signing sales documents — combining sales collateral, contract management, proposals, and electronic signatures in one place. The REST API (v1) exposes documents, e-signature, contacts, templates, users, videos, custom data, and webhook subscriptions.
+
+- Base URL: https://api.getaccept.com/v1
+- Authentication: OAuth2 (authorization code) or bearer token. Authorize at https://app.getaccept.com/oauth2/authorize, token at https://app.getaccept.com/oauth2/token. A valid GetAccept account is required; commercial usage requires a paid API package.
+- Errors: plain JSON envelope `{ error, description, status }`.
+- Events: webhook subscriptions on document lifecycle events (signed, reviewed, rejected).
+
+## APIs
+
+- [GetAccept API v1](https://developers.getaccept.com/): 86 operations across 12 tags — Documents, Contacts, Templates, Users, Subscriptions, Attachments, Videos, Archive, Custom Data, Communication Templates, Authentication.
+
+## Specs
+
+- [OpenAPI 3.0 (JSON)](https://raw.githubusercontent.com/GetAccept/openapi/master/openapi.json): official GetAccept OpenAPI definition.
+- [OpenAPI 3.0 (YAML)](https://raw.githubusercontent.com/GetAccept/openapi/master/swagger.yaml)
+- Local copy: openapi/getaccept-openapi-original.json
+
+## Docs
+
+- [Developer portal](https://developers.getaccept.com/)
+- [API reference](https://developers.getaccept.com/reference)
+- [Getting started](https://developers.getaccept.com/docs)
+- [OpenAPI GitHub repo](https://github.com/GetAccept/openapi)
+- [Pricing](https://www.getaccept.com/pricing)
+- [Security](https://www.getaccept.com/security)
+- [Status](https://status.getaccept.com)
+
+## Artifacts (API Evangelist enrichment)
+
+- authentication/getaccept-authentication.yml — OAuth2 + bearer token profile
+- scopes/getaccept-scopes.yml — OAuth2 scopes (basic)
+- conventions/getaccept-conventions.yml — pagination, error envelope, versioning
+- errors/getaccept-problem-types.yml — 4xx error classes + envelope
+- data-model/getaccept-data-model.yml — entity/relationship graph
+- lifecycle/getaccept-lifecycle.yml — versioning + status page
+- conformance/getaccept-conformance.yml — standards conformance
+- asyncapi/getaccept-webhooks.yml — webhook/event surface
+- mcp/getaccept-mcp.yml — candidate MCP tool list
+- agentic-access/getaccept-agentic-access.yml — recommended agent access contracts
+- skills/ — packaged agent skills

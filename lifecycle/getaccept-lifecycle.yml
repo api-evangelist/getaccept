@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: searched
+source: https://developers.getaccept.com/ ; https://status.getaccept.com
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://developers.getaccept.com/
+status_page: https://status.getaccept.com
+deprecation:
+  policy_url: null
+  sunset_header: null
+  note: No public deprecation policy or Sunset/Deprecation header support found.
+sla:
+  url: null
+  note: API access is a paid commercial package; no public SLA doc found.
+deprecated_operations: []

@@ -1,0 +1,36 @@
+{
+  "provider": "getaccept",
+  "sources": [
+    "getaccept-archive-api-openapi.yml",
+    "getaccept-attachments-api-openapi.yml",
+    "getaccept-authentication-api-openapi.yml",
+    "getaccept-communication-templates-api-openapi.yml",
+    "getaccept-contacts-api-openapi.yml",
+    "getaccept-custom-data-api-openapi.yml",
+    "getaccept-documents-api-openapi.yml",
+    "getaccept-others-api-openapi.yml",
+    "getaccept-subscriptions-api-openapi.yml",
+    "getaccept-templates-api-openapi.yml",
+    "getaccept-users-api-openapi.yml",
+    "getaccept-videos-api-openapi.yml"
+  ],
+  "outputs": [
+    "getaccept-archive-api-openapi.yml",
+    "getaccept-attachments-api-openapi.yml",
+    "getaccept-authentication-api-openapi.yml",
+    "getaccept-communication-templates-api-openapi.yml",
+    "getaccept-contacts-api-openapi.yml",
+    "getaccept-custom-data-api-openapi.yml",
+    "getaccept-documents-api-openapi.yml",
+    "getaccept-others-api-openapi.yml",
+    "getaccept-subscriptions-api-openapi.yml",
+    "getaccept-templates-api-openapi.yml",
+    "getaccept-users-api-openapi.yml",
+    "getaccept-videos-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

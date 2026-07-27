@@ -1,0 +1,18 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/getaccept-openapi-original.json
+schemes:
+- name: Oauth2
+  source: openapi/getaccept-openapi-original.json
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://app.getaccept.com/oauth2/authorize
+    tokenUrl: https://app.getaccept.com/oauth2/token
+  description: For testing purpose, use client_id **api** and client_secret **app**
+scopes:
+- scope: basic
+  description: Grants basic access to operations
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/getaccept-openapi-original.json

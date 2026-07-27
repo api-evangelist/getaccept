@@ -1,0 +1,42 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/getaccept-openapi-original.json
+spec_type: Webhooks
+model: GetAccept delivers events via webhook subscriptions. Register a subscription (host URL + event)
+  and GetAccept POSTs a Webhook payload on each matching document lifecycle event.
+subscription_operations:
+- CreateSubscription
+- ListSubscriptions
+- GetSubscriptionDetails
+- DeleteSubscription
+- TestSubscription
+- GetSubscriptionErrors
+- ListSubscriptionEvents
+- CreateSignedSubscription
+- CreateReviewedSubscription
+- CreateRejectedSubscription
+events:
+- name: signed
+  description: A document has been signed
+  operation: CreateSignedSubscription
+- name: reviewed
+  description: A document has been reviewed
+  operation: CreateReviewedSubscription
+- name: rejected
+  description: A document has been rejected
+  operation: CreateRejectedSubscription
+events_note: The full available event list is returned live by GET /subscriptions/events (ListSubscriptionEvents);
+  signed/reviewed/rejected have dedicated convenience endpoints.
+payload:
+  schema: Webhook
+  media_type: application/json
+  fields:
+  - document
+  - recipient
+  - entity
+  - custom_fields
+  - subscription_id
+delivery:
+  transport: HTTP POST to subscriber host
+  test: POST /subscriptions/test
+  errors: GET /subscriptions/errors

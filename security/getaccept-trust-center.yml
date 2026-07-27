@@ -1,0 +1,14 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+source: https://www.getaccept.com/security
+url: https://www.getaccept.com/security
+certifications:
+- SOC 2
+- GDPR
+evidence:
+- source: https://www.getaccept.com/security
+  keywords:
+  - soc 2
+  - soc2
+  - gdpr
