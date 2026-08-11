@@ -189,6 +189,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/getaccept-openapi-overlay.yaml
 - type: DeveloperPortal
   url: https://developers.getaccept.com/
 - type: Documentation
