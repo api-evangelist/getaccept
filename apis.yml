@@ -31,7 +31,7 @@ x-tier: enriched
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-08-14'
 tags:
 - Company
 - Cloud
@@ -49,7 +49,7 @@ apis:
   description: >-
     You can upload already signed documents to the document archive to make them searchable and use in
     your contract management process.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Archive
@@ -59,7 +59,7 @@ apis:
 - aid: getaccept:getaccept-attachments-api
   name: GetAccept Attachments API
   description: You can upload an attachment and reuse it in many documents.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Attachments
@@ -72,7 +72,7 @@ apis:
     Authentication with the GetAccept API can be made using JWT tokens (JSON Web Tokens) or OAuth 2.0
     Authorization Framework http://oauth.net/2/  All requests must be made via HTTPS. All configuration
     URLs (webhooks, etc) should begin with https:// as well.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Authentication
@@ -83,7 +83,7 @@ apis:
   name: GetAccept Communication Templates API
   description: >-
     Communication templates allow you to customize email and SMS messages sent to recipients.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Communication Templates
@@ -93,7 +93,7 @@ apis:
 - aid: getaccept:getaccept-contacts-api
   name: GetAccept Contacts API
   description: Everything related to contacts
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Contacts
@@ -105,7 +105,7 @@ apis:
   description: >-
     Custom Data enables you to define and use your own document properties as a complement to the default
     properties.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Custom Data
@@ -115,7 +115,7 @@ apis:
 - aid: getaccept:getaccept-documents-api
   name: GetAccept Documents API
   description: Everything related to documents
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Documents
@@ -125,7 +125,7 @@ apis:
 - aid: getaccept:getaccept-others-api
   name: GetAccept Others API
   description: Additional endpoints used in various integrations.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Others
@@ -142,7 +142,7 @@ apis:
     endpoint will need to return a 2xx HTTP. Otherwise, the callback will be considered a failure and
     will be retried later. Retries will be made after 1, 12, 24, and 48 hours. The sender (or notification_email)
     will receive an email notification after a failed attempt.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Subscriptions
@@ -154,7 +154,7 @@ apis:
   description: >-
     GetAccept has extensive support for creating templates in different formats. You can use form fields
     to receive input data from a recipient or word files to merge custom data into a document.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Templates
@@ -166,7 +166,7 @@ apis:
   description: >-
     General user methods for creating, listing of users, single user details and statistics and managing
     existing users.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Users
@@ -176,7 +176,7 @@ apis:
 - aid: getaccept:getaccept-videos-api
   name: GetAccept Videos API
   description: You can upload videos and reuse it in many documents.
-  humanURL: https://developers.getaccept.com/
+  humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
   - Videos
@@ -192,13 +192,13 @@ common:
 - type: Overlay
   url: overlays/getaccept-openapi-overlay.yaml
 - type: DeveloperPortal
-  url: https://developers.getaccept.com/
+  url: https://www.getaccept.com/api
 - type: Documentation
-  url: https://developers.getaccept.com/docs
+  url: https://help.getaccept.com/en/collections/9436688-api
 - type: APIReference
-  url: https://developers.getaccept.com/reference
+  url: https://app.getaccept.com/api/
 - type: GettingStarted
-  url: https://developers.getaccept.com/docs
+  url: https://help.getaccept.com/en/articles/2393314-how-to-use-the-getaccept-public-api
 - type: GitHubOrganization
   url: https://github.com/GetAccept
 - type: Blog
@@ -249,8 +249,22 @@ common:
   url: security/getaccept-domain-security.yml
 - type: Website
   url: https://www.getaccept.com/
+- type: HelpCenter
+  url: https://help.getaccept.com/
+- type: SourceCode
+  url: https://github.com/GetAccept/openapi
+- type: ChangeLog
+  url: https://www.getaccept.com/whats-new
+- type: ChangeLog
+  url: changelog/getaccept-changelog.yml
+- type: Plans
+  url: plans/getaccept-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/getaccept-rate-limits.yml
+- type: Packages
+  url: packages/getaccept-packages.yml
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-14'
+  status: enriched
+  artifacts_added: 5
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
