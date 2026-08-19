@@ -1,7 +1,15 @@
-generated: '2026-07-19'
+generated: '2026-08-14'
 method: searched
-source: openapi/getaccept-openapi-original.json
+source: >-
+  openapi/getaccept-openapi-original.json ;
+  https://help.getaccept.com/en/articles/8570402-webhook-ip-whitelisting ;
+  https://help.getaccept.com/en/articles/8094998-webhook-settings
 spec_type: Webhooks
+asyncapi_published: false
+asyncapi_note: >-
+  GetAccept publishes no AsyncAPI document. The event surface is documented as REST webhook-subscription
+  endpoints inside the OpenAPI plus two help-center articles; this file is the captured webhook catalog,
+  not a fabricated AsyncAPI.
 model: GetAccept delivers events via webhook subscriptions. Register a subscription (host URL + event)
   and GetAccept POSTs a Webhook payload on each matching document lifecycle event.
 subscription_operations:
@@ -36,7 +44,70 @@ payload:
   - entity
   - custom_fields
   - subscription_id
+event_families:
+  source: https://help.getaccept.com/en/articles/8094998-webhook-settings
+  note: >-
+    The help center describes the available events as "document activity (such as created, sent, opened,
+    signed, expired, recalled), recipient activity, and Deal Room activity", and states that the exact
+    set available depends on entity configuration. Only the individual event names GetAccept itself
+    enumerates are listed here; the authoritative list is returned live by GET /subscriptions/events.
+  families:
+  - document activity
+  - recipient activity
+  - Deal Room activity
+  named_in_help_center:
+  - created
+  - sent
+  - opened
+  - signed
+  - expired
+  - recalled
 delivery:
   transport: HTTP POST to subscriber host
   test: POST /subscriptions/test
   errors: GET /subscriptions/errors
+  response_contract: >-
+    The subscriber endpoint must answer 2xx. A non-2xx is treated as a failed callback.
+  retry_policy:
+    retries_after_hours:
+    - 1
+    - 12
+    - 24
+    - 48
+    failure_notification: >-
+      The sender (or notification_email) receives an email notification after a failed attempt.
+    source: openapi/_original/getaccept-openapi-original.json (Subscriptions tag description)
+  egress_ips:
+    source: https://help.getaccept.com/en/articles/8570402-webhook-ip-whitelisting
+    note: >-
+      Allowlist these source addresses or webhook delivery will fail behind a firewall. Regional split
+      confirms GetAccept runs EU, US and APAC delivery infrastructure.
+    eu:
+    - 3.127.46.199
+    - 35.157.43.138
+    - 52.58.99.121
+    - 52.59.99.121
+    us:
+    - 44.232.34.102
+    - 44.233.210.197
+    - 44.233.237.84
+    apac:
+    - 18.139.16.85
+    - 3.0.71.130
+    - 52.76.113.194
+  signing:
+    documented: false
+    note: >-
+      No payload signing, HMAC secret or verification header is documented publicly. The help center says
+      the subscriber may supply "any required authentication headers" at setup, i.e. verification is
+      caller-supplied rather than provider-signed. Source IP allowlisting is the published verification
+      mechanism.
+configuration:
+  self_serve_api: >-
+    The OpenAPI exposes full CRUD over subscriptions (CreateSubscription / ListSubscriptions /
+    DeleteSubscription), and the Subscriptions tag description says webhooks are enabled by an
+    administrator under Settings | Integration | Webhooks.
+  help_center_caveat: >-
+    https://help.getaccept.com/en/articles/8094998-webhook-settings states webhooks "cannot be created,
+    edited, or deleted from the core GetAccept app" and that setup is handled by GetAccept Tech Support.
+    Recorded as published — the two provider sources disagree, and the discrepancy itself is the finding.

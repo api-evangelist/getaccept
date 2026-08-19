@@ -1,9 +1,24 @@
-generated: '2026-07-19'
+generated: '2026-08-14'
 method: derived
 status: candidate
 source: openapi/getaccept-openapi-original.json
-note: No official hosted GetAccept MCP server found. Candidate tool list derived one-per-operation from
-  the OpenAPI (86 operations).
+note: >-
+  No official hosted GetAccept MCP server found. Re-searched 2026-08-14 (web search, the github.com/
+  GetAccept org repo listing, npm scope @getaccept, the API marketing page and the help-center API
+  collection) — GetAccept ships no MCP server, remote or stdio. The tool list below is a CANDIDATE
+  derived one-per-operation from the OpenAPI (86 operations); it is not something a client can connect
+  to today.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  note: >-
+    mode is none because nobody ships a server — this is our derived candidate. No endpoint URL is
+    guessed. If GetAccept ever publishes one it would authenticate the same way the REST API does
+    (OAuth2 authorizationCode at app.getaccept.com/oauth2, or a bearer JWT).
 server:
   name: getaccept
   transport: http
@@ -439,3 +454,9 @@ tools:
   method: GET
   path: /videos/{videoId}
   source_operation: openapi/getaccept-openapi-original.json#GetVideo
+deployment:
+  mode: none
+  verified: derived
+  tools: 86
+  checked: '2026-08-12'
+  source: catalog MCP census

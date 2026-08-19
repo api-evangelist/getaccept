@@ -1,0 +1,65 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.getaccept.com/whats-new
+url: https://www.getaccept.com/whats-new
+scheme:
+  type: product-release-notes
+  dated: true
+  api_specific: false
+  note: >-
+    GetAccept publishes a dated "What's New" product feed covering the whole platform. There is no
+    API-specific changelog and no release notes in the OpenAPI repo — API change is only visible as the
+    info.version field of https://github.com/GetAccept/openapi (currently 1.6) and the repo's commit
+    history (last pushed 2026-06-23). The developer portal that would normally carry API release notes,
+    developers.getaccept.com, now serves the login application.
+api_version:
+  current: '1.6'
+  path_version: v1
+  source: openapi/_original/getaccept-openapi-original.json (info.version), verified identical to the
+    live first-party spec at https://raw.githubusercontent.com/GetAccept/openapi/master/openapi.json on
+    2026-08-14
+entries:
+- date: '2026-08-03'
+  title: Turn your Trale.ai meetings into sales content
+  type: integration
+  breaking: false
+  highlights: >-
+    Trale.ai meeting videos, transcripts and summaries can be imported into Deal Rooms by connecting a
+    Trale.ai account.
+- date: '2026-07-28'
+  title: More control over how your tables look
+  type: addition
+  breaking: false
+  highlights: Cell background colors, border customization and cell merging in proposals and contracts.
+- date: '2026-07-17'
+  title: Automate GetAccept workflows based on your CRM data
+  type: integration
+  breaking: false
+  highlights: >-
+    Conditional setup for HubSpot, Microsoft Dynamics, Salesforce and other integrations — template
+    selection, file attachments, contact mapping and expiry driven dynamically by CRM data.
+- date: '2026-07-14'
+  title: Keep conditional content up to date after send
+  type: addition
+  breaking: false
+  api_relevant: true
+  highlights: >-
+    Conditional logic is re-evaluated after a contract is sent, including against custom data passed via
+    the API and pricing-table updates.
+- date: '2026-07-10'
+  title: Keep the deal moving in Slack
+  type: integration
+  breaking: false
+  highlights: >-
+    Link a Slack channel during Deal Room / contract sendout; available from GetAccept, Microsoft
+    Dynamics 365, HubSpot, and the Pipedrive/Upsales Chrome extensions.
+- date: '2026-07-09'
+  title: Make text over your images look exactly right
+  type: addition
+  breaking: false
+  highlights: Six text style options for image overlays in proposals and Deal Rooms.
+breaking_changes_recent: []
+window:
+  from: '2026-07-09'
+  to: '2026-08-03'
+  note: Recent window only; the feed carries older entries not captured here.

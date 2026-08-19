@@ -1,0 +1,118 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Communication Templates API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Communication Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get communication templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/communication-templates",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Start list from record x"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to list"
+              },
+              {
+                "name": "statuses",
+                "value": "",
+                "type": "query",
+                "description": "Filter list on status"
+              }
+            ]
+          },
+          "docs": "Receive a list of available communication templates."
+        },
+        {
+          "info": {
+            "name": "Create communication template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/communication-templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a communication template."
+        },
+        {
+          "info": {
+            "name": "Get communication template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/communication-templates/:communicationTemplateId",
+            "params": [
+              {
+                "name": "communicationTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "Communication Template ID"
+              }
+            ]
+          },
+          "docs": "Receive a specific communication template."
+        },
+        {
+          "info": {
+            "name": "Update communication template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/communication-templates/:communicationTemplateId",
+            "params": [
+              {
+                "name": "communicationTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "Communication Template ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates a specific communication template."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

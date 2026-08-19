@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Archive",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload to archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/upload/archive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Upload already signed files to the document archive / contract management."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

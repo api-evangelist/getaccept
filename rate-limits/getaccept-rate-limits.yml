@@ -1,0 +1,41 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  https://www.getaccept.com/api ; https://help.getaccept.com/en/collections/9436688-api ;
+  https://help.getaccept.com/en/articles/2393292-getaccept-rest-api-overview ;
+  https://github.com/GetAccept/openapi (openapi.json + README) ; https://app.getaccept.com/api/ (probed,
+  login-gated)
+limit_count: 0
+documented: false
+note: >-
+  GetAccept publishes NO rate limits. Searched the public API marketing page, the six-article help-center
+  API collection, the README of the first-party OpenAPI repo, and the OpenAPI document itself. The
+  OpenAPI declares no 429 response on any of its 86 operations and defines no rate-limit response
+  headers. The canonical API reference at https://app.getaccept.com/api/ is login-gated ("You must be
+  logged in to access API documentation"), so any limits stated there are not publicly readable and were
+  NOT assumed. Access is commercially provisioned — "commercial usage is subject to the purchase of a
+  GetAccept API package" (OpenAPI repo README) and the API page sells "custom pricing, tailored to your
+  usage" — so quotas are likely contractual per account rather than published.
+limits: []
+response_headers:
+  documented: []
+  note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After header is documented in the OpenAPI or in any public
+    GetAccept page. Not probed live: api.getaccept.com returns 401 with a zero-byte body to
+    unauthenticated requests, so no runtime rate-limit signal is observable anonymously.
+exhaustion_status_code: null
+evidence:
+- url: https://api.getaccept.com/v1
+  status: 401
+  note: empty body, no rate-limit headers observable anonymously
+- url: https://app.getaccept.com/api/
+  status: 200
+  note: renders "You must be logged in to access API documentation"
+- url: https://github.com/GetAccept/openapi
+  status: 200
+  note: first-party OpenAPI 3.0, 86 operations, zero 429 responses declared
+related:
+  quota_surface: >-
+    The only published usage-shaped limits are commercial plan limits, not request limits — see
+    plans/getaccept-plans-pricing.yml (seat caps, 3-product library on Professional, API read access
+    gated to Enterprise).

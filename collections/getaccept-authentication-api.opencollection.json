@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Authentication API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authentication by token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/auth",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Token based authentication is recommended for server-based access or access from clients where OAuth is not suitable. Access tokens has to be requested using an administrators login credentials.\nRequests should include the header Content-Type with value application/json"
+        },
+        {
+          "info": {
+            "name": "Refresh an access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/refresh"
+          },
+          "docs": "You can request a refreshed of the access token before the original token has expired."
+        },
+        {
+          "info": {
+            "name": "Switch entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/refresh/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "",
+                "type": "path",
+                "description": "Entity ID to switch to"
+              }
+            ]
+          },
+          "docs": "Change entity using the same refresh method with additional parameter for the entity. The response will include a new access token that should be used when accessing the new entity."
+        },
+        {
+          "info": {
+            "name": "Revoke access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/revoke"
+          },
+          "docs": "Revoke an access token before it has expired."
+        },
+        {
+          "info": {
+            "name": "Test authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/test"
+          },
+          "docs": "Test authentication and get current entity and user ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

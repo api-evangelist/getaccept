@@ -1,0 +1,115 @@
+generated: '2026-08-14'
+method: searched
+source: https://www.getaccept.com/pricing
+plan_count: 3
+currency: USD
+currencies_offered:
+- USD
+- GBP
+- EUR
+billing_period: month
+unit: per user
+api_access_note: >-
+  API access is NOT part of the published per-seat pricing. The plan comparison table lists "API read
+  access" as an Enterprise-tier feature and "API write access" ("Create and send GetAccept documents from
+  external apps and forms using our API") separately. GetAccept's own API page states the API is sold on
+  "custom pricing, tailored to your usage" via sales, and the OpenAPI repo README says "commercial usage
+  is subject to the purchase of a GetAccept API package." So there is no self-serve, published price for
+  API consumption — only the seat plans below plus a quoted API package.
+plans:
+- name: eSign
+  price: 25
+  currency: USD
+  period: month
+  unit: per user
+  minimum_seats: null
+  seat_cap: 5
+  cta: Get Started
+  api_access: false
+  summary: >-
+    For smaller sales teams looking for an e-signature solution to streamline document workflows and get
+    up and running quickly.
+  included:
+  - Unlimited electronic signatures
+  - In-app editor (text and images)
+  - Simple branding options
+  - Contract management (store and manage signed documents, automated renewal reminders)
+  - Engagement video
+  - Automated reminders
+  - Chat functionality
+  - Templates & content library
+  - GetAccept mobile app (iOS and Android)
+  limits:
+  - Max. 5 users
+  - No Deal Rooms
+  - No Teams
+  - No Entities
+- name: Professional
+  price: 49
+  currency: USD
+  period: month
+  unit: per user
+  minimum_seats: 5
+  cta: Book a demo
+  api_access: false
+  summary: >-
+    The complete AI Digital Sales Room experience for teams ready to streamline their process from
+    opportunity to closed deal. Marketed as "AI-native".
+  included:
+  - Everything in eSign
+  - GetAccept AI (AI Editor, smart content, meeting summarizer, AI knowledge base)
+  - Advanced branding options (custom in-app color schemes + backgrounds)
+  - Full in-app editing experience
+  - Mutual action plans
+  - Edit after send
+  - Meetings
+  - Teams
+  - eID verification (Sweden, Denmark, Norway, Finland — additional charges may apply)
+  - Pricing table & product library (up to 3 products)
+  - Advanced stakeholder engagement
+  - CRM integrations
+  - Sales intelligence integrations
+  - Unlimited active Deal Rooms
+  add_ons:
+  - Unlimited AI content
+  - AI contract management
+  - Entities
+  - Premium CRM integrations (also available as add-ons)
+  limits:
+  - Minimum 5 users
+  - Product library capped at 3 products
+- name: Enterprise
+  price: null
+  price_model: contact-sales
+  currency: USD
+  period: month
+  unit: per user
+  cta: Contact sales
+  api_access: true
+  summary: >-
+    For larger sales teams looking to scale and streamline complex sales processes. This is the only
+    published tier that names API access.
+  included:
+  - Everything in Professional
+  - API read access
+  - CPQ (products + error-free quotes)
+  - Unlimited product library
+  - Single sign-on (SSO)
+  - Entities (sub-accounts)
+  - Recipient upload
+  - Advanced attachment workflows
+  - Conditional content
+  - Unlimited custom data fields
+  - Unlimited communication templates
+  - Premium CRM integrations
+  - Payment integrations
+  - HR integrations
+trial:
+  offered: true
+  note: >-
+    A "Start free trial" CTA is present site-wide; the pricing page does not publish trial length or
+    whether the trial includes API access.
+compliance_marketing_claims:
+- GDPR
+- SOC 2
+- eIDAS

@@ -1,0 +1,399 @@
+{
+  "item": [
+    {
+      "id": "7f743198-628a-48ce-b0b3-6332689d86d8",
+      "name": "Attachments",
+      "description": {
+        "content": "You can upload an attachment and reuse it in many documents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c51a497-3528-4f2e-b089-2a5fc46ebad8",
+          "name": "List attachments",
+          "request": {
+            "name": "List attachments",
+            "description": {
+              "content": "Receive a list of available attachments. You can add new attachments in GetAccept using a new document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "attachments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "324635bc-a091-41e8-88c4-061bf0a63b7b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"attachments\": [\n    {\n      \"access_recipient_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attachment_description\": \"string\",\n      \"attachment_download_url\": \"string\",\n      \"attachment_extension\": \"string\",\n      \"attachment_filename\": \"string\",\n      \"attachment_id\": \"string\",\n      \"attachment_preview_url\": \"string\",\n      \"attachment_title\": \"string\",\n      \"attachment_type\": \"string\",\n      \"attachment_url\": \"string\",\n      \"last_attachment_view\": \"string\",\n      \"restrict_access\": false\n    },\n    {\n      \"access_recipient_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"attachment_description\": \"string\",\n      \"attachment_download_url\": \"string\",\n      \"attachment_extension\": \"string\",\n      \"attachment_filename\": \"string\",\n      \"attachment_id\": \"string\",\n      \"attachment_preview_url\": \"string\",\n      \"attachment_title\": \"string\",\n      \"attachment_type\": \"string\",\n      \"attachment_url\": \"string\",\n      \"last_attachment_view\": \"string\",\n      \"restrict_access\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "629a798f-0b54-454c-9fc8-47108033b0a8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "attachments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 8286.533032670948\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "131a3198-133a-44b9-b2aa-ff0818cef889",
+          "name": "Upload an attachment",
+          "request": {
+            "name": "Upload an attachment",
+            "description": {
+              "content": "You can upload attachment files to include with documents you send.\nSuccessful request will return the attachment_id. Use attachment_id to assign an attachment to a document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload",
+                "attachment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "Binary File"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8058533d-a219-43f4-bd57-6d8482e1e573",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "attachment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Binary File",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"filename\": \"string\",\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"type\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fbff0434-e1f5-4012-aeae-c1b68da8ee74",
+              "name": "Invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "attachment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Binary File",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 8286.533032670948\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1791f412-d56c-4185-86a5-2d8427ad13ef",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "attachment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "Binary File",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 8286.533032670948\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getaccept.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "basic"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://app.getaccept.com/oauth2/token"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://app.getaccept.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://app.getaccept.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a3c5027-3272-4e53-b389-459c349236bb",
+    "name": "GetAccept Archive Attachments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
+      "type": "text/plain"
+    }
+  }
+}

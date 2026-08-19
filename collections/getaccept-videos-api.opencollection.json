@@ -1,0 +1,120 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Videos API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Videos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Upload a video",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/upload/video",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can upload attachment files to include with documents you send.\nSuccessful request will return the attachment_id. Use attachment_id to assign an attachment to a document."
+        },
+        {
+          "info": {
+            "name": "Get video job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/video/job/:videoId",
+            "params": [
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "path",
+                "description": "Video ID"
+              }
+            ]
+          },
+          "docs": "Get current processing status of an uploaded video."
+        },
+        {
+          "info": {
+            "name": "List videos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/videos",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Start list from record x"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to list"
+              },
+              {
+                "name": "include_video_url",
+                "value": "",
+                "type": "query",
+                "description": "Include presigned url for video"
+              },
+              {
+                "name": "include_thumb_url",
+                "value": "",
+                "type": "query",
+                "description": "Include url for thumbnail"
+              }
+            ]
+          },
+          "docs": "Receive a list of available videos on the entity. You can add new videos in the mobile app or inside GetAccept."
+        },
+        {
+          "info": {
+            "name": "Get video",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/videos/:videoId",
+            "params": [
+              {
+                "name": "videoId",
+                "value": "",
+                "type": "path",
+                "description": "Video ID"
+              }
+            ]
+          },
+          "docs": "Get a specific video based on video id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

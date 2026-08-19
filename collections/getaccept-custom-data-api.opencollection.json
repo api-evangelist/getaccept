@@ -1,0 +1,208 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Custom Data API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get entity custom data properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/custom-data/entity"
+          },
+          "docs": "Get the custom data settings for the current entity."
+        },
+        {
+          "info": {
+            "name": "Add entity custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/custom-data/entity",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a new custom data property to the current entity."
+        },
+        {
+          "info": {
+            "name": "Delete entity custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getaccept.com/v1/custom-data/entity/:propertyKey",
+            "params": [
+              {
+                "name": "propertyKey",
+                "value": "",
+                "type": "path",
+                "description": "Property Key"
+              }
+            ]
+          },
+          "docs": "Delete a custom data property from the current entity."
+        },
+        {
+          "info": {
+            "name": "Get document custom data properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/custom-data",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to list"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Start list from record x"
+              }
+            ]
+          },
+          "docs": "Get all custom data properties for a document."
+        },
+        {
+          "info": {
+            "name": "Add document custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/custom-data",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a custom data property to a document."
+        },
+        {
+          "info": {
+            "name": "Get document custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/custom-data/:customDataId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "customDataId",
+                "value": "",
+                "type": "path",
+                "description": "Custom Data ID"
+              }
+            ]
+          },
+          "docs": "Get a specific custom data property for a document."
+        },
+        {
+          "info": {
+            "name": "Update document custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/custom-data/:customDataId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "customDataId",
+                "value": "",
+                "type": "path",
+                "description": "Custom Data ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a custom data property for a document."
+        },
+        {
+          "info": {
+            "name": "Delete document custom data property",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/custom-data/:customDataId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "customDataId",
+                "value": "",
+                "type": "path",
+                "description": "Custom Data ID"
+              }
+            ]
+          },
+          "docs": "Delete a custom data property from a document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

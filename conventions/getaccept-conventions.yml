@@ -1,6 +1,9 @@
-generated: '2026-07-19'
+generated: '2026-08-14'
 method: derived
-source: openapi/getaccept-openapi-original.json
+source: >-
+  openapi/getaccept-openapi-original.json ;
+  https://help.getaccept.com/en/articles/2393292-getaccept-rest-api-overview ;
+  https://github.com/GetAccept/openapi (README)
 authentication:
   schemes:
   - oauth2 authorizationCode
@@ -33,6 +36,33 @@ error_envelope:
 events:
   model: webhook subscriptions
   ref: asyncapi/getaccept-webhooks.yml
+  delivery_retries_hours: [1, 12, 24, 48]
+  subscriber_contract: endpoint must return 2xx or the callback is treated as failed
+  egress_ip_allowlist: true
 rate_limiting:
   documented: false
-  note: Commercial API usage requires a paid API package; no rate-limit headers documented in the spec.
+  ref: rate-limits/getaccept-rate-limits.yml
+  note: >-
+    No published limits, no 429 declared on any of the 86 operations, and no rate-limit response headers
+    documented. Commercial API usage requires a purchased GetAccept API package, so quotas are contractual
+    per account.
+request_tracing:
+  documented: false
+  note: No request-id or correlation header is declared in the OpenAPI or in any public GetAccept doc.
+field_expansion:
+  supported: false
+  note: No expand / fields / sparse-fieldset parameter appears in the spec.
+credentials:
+  api_keys: false
+  note: >-
+    GetAccept's help center states plainly "GetAccept does not use API keys" — access is a bearer JWT or
+    OAuth 2.0, and credentials are provisioned by a GetAccept representative or Tech Support rather than
+    self-issued in the app.
+  source: https://help.getaccept.com/en/articles/2393292-getaccept-rest-api-overview
+documentation_access:
+  machine_readable_spec: public
+  human_reference: login-gated
+  note: >-
+    The OpenAPI is public at https://github.com/GetAccept/openapi, but the human API reference at
+    https://app.getaccept.com/api/ requires a login and the former developer portal
+    (developers.getaccept.com) now serves the login application. See lifecycle/getaccept-lifecycle.yml.

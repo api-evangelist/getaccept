@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Subscriptions API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subscriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/subscriptions"
+          },
+          "docs": "Receive a list of available subscriptions for the current entity."
+        },
+        {
+          "info": {
+            "name": "Subscribe to document events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/subscriptions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This call will create a new subscription.\nThe response will be wrapped in an array even for single object according to REST hook standards.\n\n>Events\n  * `document.created` - Document is created\n  * `document.sent` - Document is sent\n  * `document.viewed` - Document is sent\n  * `document.signed` - Document is signed\n  * `document.approved` - Document is approved\n  * `document.expired` - Document has expired\n  * `document.rejected` - Document is rejected\n  * `document.downloaded` - Document is dow"
+        },
+        {
+          "info": {
+            "name": "Get subscription errors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/subscriptions/errors"
+          },
+          "docs": "Get the last errors for active subscriptions."
+        },
+        {
+          "info": {
+            "name": "List available subscription events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/subscriptions/events"
+          },
+          "docs": "This call will return a list of available subscription events"
+        },
+        {
+          "info": {
+            "name": "Test subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/subscriptions/test",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Simulate or test a subscription / webhook event."
+        },
+        {
+          "info": {
+            "name": "Get subscription details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ]
+          },
+          "docs": "This call will return details of a single subscription"
+        },
+        {
+          "info": {
+            "name": "Delete subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getaccept.com/v1/subscriptions/:subscriptionId",
+            "params": [
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Subscription ID"
+              }
+            ]
+          },
+          "docs": "Delete a single subscription."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,278 @@
+{
+  "item": [
+    {
+      "id": "16ec205f-8426-48b0-9564-718a8076e7b6",
+      "name": "Archive",
+      "description": {
+        "content": "You can upload already signed documents to the document archive to make them searchable and use in your contract management process.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "93bfa3c1-9716-4e1b-b2de-860c94a3a1ad",
+          "name": "Upload to archive",
+          "request": {
+            "name": "Upload to archive",
+            "description": {
+              "content": "Upload already signed files to the document archive / contract management.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "upload",
+                "archive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "92a4ca90-f63b-4827-9b0e-dc2580b29dbb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tags\": \"string\",\n  \"auto_comment_email\": \"string\",\n  \"auto_comment_text\": \"string\",\n  \"company_id\": \"string\",\n  \"company_logo_url\": \"string\",\n  \"company_name\": \"string\",\n  \"company_number\": \"string\",\n  \"created_at\": \"string\",\n  \"download_url\": \"string\",\n  \"email_send_message\": \"string\",\n  \"email_send_subject\": \"string\",\n  \"email_send_template_id\": \"string\",\n  \"entity_auto_comment_text\": \"string\",\n  \"expiration_date\": \"string\",\n  \"external_client_id\": \"string\",\n  \"external_editor_id\": \"string\",\n  \"external_editor_type\": \"string\",\n  \"external_id\": \"string\",\n  \"field_count\": 9536,\n  \"id\": \"string\",\n  \"is_auto_comment\": true,\n  \"is_auto_comment_email\": true,\n  \"is_identify_recipient\": true,\n  \"is_private\": true,\n  \"is_reminder_sending\": false,\n  \"is_scheduled_sending\": true,\n  \"is_selfsign\": false,\n  \"is_signed\": false,\n  \"is_signing\": true,\n  \"is_signing_biometric\": true,\n  \"is_signing_forward\": false,\n  \"is_signing_initials\": false,\n  \"is_signing_order\": true,\n  \"is_video\": true,\n  \"name\": \"string\",\n  \"parent_id\": \"string\",\n  \"preview_url\": \"string\",\n  \"recipients\": [\n    {\n      \"company_name\": \"string\",\n      \"company_number\": \"string\",\n      \"document_url\": \"string\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"fullname\": \"string\",\n      \"gender\": \"string\",\n      \"id\": \"string\",\n      \"last_name\": \"string\",\n      \"mobile\": \"string\",\n      \"note\": \"string\",\n      \"order_num\": \"string\",\n      \"role\": \"string\",\n      \"settings\": {\n        \"exclude_verified_eid_signature\": true\n      },\n      \"signing_methods\": [\n        {\n          \"signed_at\": \"string\",\n          \"type\": \"initials\",\n          \"verified_name\": \"string\",\n          \"verified_phone\": \"string\"\n        },\n        {\n          \"signed_at\": \"string\",\n          \"type\": \"signature\",\n          \"verified_name\": \"string\",\n          \"verified_phone\": \"string\"\n        }\n      ],\n      \"status\": \"string\",\n      \"thumb_url\": \"string\",\n      \"title\": \"string\"\n    },\n    {\n      \"company_name\": \"string\",\n      \"company_number\": \"string\",\n      \"document_url\": \"string\",\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"fullname\": \"string\",\n      \"gender\": \"string\",\n      \"id\": \"string\",\n      \"last_name\": \"string\",\n      \"mobile\": \"string\",\n      \"note\": \"string\",\n      \"order_num\": \"string\",\n      \"role\": \"string\",\n      \"settings\": {\n        \"exclude_verified_eid_signature\": true\n      },\n      \"signing_methods\": [\n        {\n          \"signed_at\": \"string\",\n          \"type\": \"biometric\",\n          \"verified_name\": \"string\",\n          \"verified_phone\": \"string\"\n        },\n        {\n          \"signed_at\": \"string\",\n          \"type\": \"sms\",\n          \"verified_name\": \"string\",\n          \"verified_phone\": \"string\"\n        }\n      ],\n      \"status\": \"string\",\n      \"thumb_url\": \"string\",\n      \"title\": \"string\"\n    }\n  ],\n  \"scheduled_sending_time\": \"string\",\n  \"send_date\": \"string\",\n  \"sender_email\": \"string\",\n  \"sender_name\": \"string\",\n  \"sender_thumb_url\": \"string\",\n  \"sign_date\": \"string\",\n  \"status\": \"string\",\n  \"thumb_url\": \"string\",\n  \"type\": \"string\",\n  \"unique_id\": 1776,\n  \"user_id\": \"string\",\n  \"value\": 9568.14001598919\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f42c4ec5-2ae2-490b-96e1-569b624d49cd",
+              "name": "Invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 4580.126653226492\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a987b23-d350-43e4-befe-4c6d48105b96",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "upload",
+                    "archive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 4580.126653226492\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.getaccept.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "basic"
+      },
+      {
+        "key": "redirect_uri",
+        "value": "https://app.getaccept.com/oauth2/token"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://app.getaccept.com/oauth2/token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://app.getaccept.com/oauth2/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1938e1a0-c4ac-4dcc-b85e-9c4fd65f5642",
+    "name": "GetAccept Archive API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
+      "type": "text/plain"
+    }
+  }
+}

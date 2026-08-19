@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Templates API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Templates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List email templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/email/templates"
+          },
+          "docs": "Get a list of email templates on the entity."
+        },
+        {
+          "info": {
+            "name": "Create email template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/email/templates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new email template."
+        },
+        {
+          "info": {
+            "name": "Get email template details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/email/templates/:emailTemplateId",
+            "params": [
+              {
+                "name": "emailTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "Email Template ID"
+              }
+            ]
+          },
+          "docs": "Get detailed information about an email template."
+        },
+        {
+          "info": {
+            "name": "Update email template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/email/templates/:emailTemplateId",
+            "params": [
+              {
+                "name": "emailTemplateId",
+                "value": "",
+                "type": "path",
+                "description": "Email Template ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing email template."
+        },
+        {
+          "info": {
+            "name": "List templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates",
+            "params": [
+              {
+                "name": "showall",
+                "value": "",
+                "type": "query",
+                "description": "Show all templates for entity"
+              },
+              {
+                "name": "folder_id",
+                "value": "",
+                "type": "query",
+                "description": "Show templates in a specific folder"
+              }
+            ]
+          },
+          "docs": "Receive a list of available document templates. You can add new templates under the Templates-section in GetAccept."
+        },
+        {
+          "info": {
+            "name": "Get template custom images",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates/:templateId/custom-images",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "Template ID"
+              }
+            ]
+          },
+          "docs": "Get a list of custom images on a template."
+        },
+        {
+          "info": {
+            "name": "Get template fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates/:templateId/fields",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "Template ID"
+              }
+            ]
+          },
+          "docs": "Receive a list of fields for a specific template."
+        },
+        {
+          "info": {
+            "name": "Get template field roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates/:templateId/fields_roles",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "Template ID"
+              }
+            ]
+          },
+          "docs": "Receive a list of fields and associated role for a specific template."
+        },
+        {
+          "info": {
+            "name": "Get template pricing tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates/:templateId/pricing-tables",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "Template ID"
+              }
+            ]
+          },
+          "docs": "Receive a list of pricing-table items for a specific template."
+        },
+        {
+          "info": {
+            "name": "Get template roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/templates/:templateId/roles",
+            "params": [
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "path",
+                "description": "Template ID"
+              }
+            ]
+          },
+          "docs": "Receive a list of roles for a specific template."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Attachments API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Attachments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/attachments"
+          },
+          "docs": "Receive a list of available attachments. You can add new attachments in GetAccept using a new document."
+        },
+        {
+          "info": {
+            "name": "Upload an attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/upload/attachment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can upload attachment files to include with documents you send.\nSuccessful request will return the attachment_id. Use attachment_id to assign an attachment to a document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,134 @@
+generated: '2026-08-14'
+method: probed
+source: live HTTPS probes of every GetAccept host named in apis.yml and openapi servers[]
+result: no-hit
+note: >-
+  Every /.well-known/ path was probed on all four GetAccept hosts and NONE returned a real document.
+  www.getaccept.com returns a genuine 404 for all paths. api.getaccept.com (the OpenAPI servers[] host)
+  returns 401 with an empty body for everything, including /.well-known/* — the whole host is behind
+  auth. developers.getaccept.com and app.getaccept.com answer HTTP 200 to every /.well-known/* path with
+  the SAME 3,967-byte GetAccept login SPA shell — an SPA catch-all, not a document. Those 200s are
+  recorded as MISSES. No WellKnown or SecurityTxt pointer is emitted in apis.yml.
+hosts:
+- host: www.getaccept.com
+  paths:
+  - path: /.well-known/security.txt
+    status: 404
+    hit: false
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    hit: false
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    hit: false
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    hit: false
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    hit: false
+    file: null
+- host: api.getaccept.com
+  note: OpenAPI servers[] host; returns 401 with a zero-byte body for every path
+  paths:
+  - path: /.well-known/security.txt
+    status: 401
+    hit: false
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 401
+    hit: false
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+    hit: false
+    file: null
+  - path: /.well-known/api-catalog
+    status: 401
+    hit: false
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 401
+    hit: false
+    file: null
+- host: developers.getaccept.com
+  note: >-
+    SPA catch-all — 200 + 3,967 bytes of the login application HTML for every path. Body is byte-identical
+    (md5 0e41cb4b761aa8fb3d24382d4cbac2f4) to https://login.getaccept.com/, confirming the former developer
+    portal now resolves to the login app.
+  paths:
+  - path: /.well-known/security.txt
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/api-catalog
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+- host: app.getaccept.com
+  note: >-
+    SPA catch-all — same 3,967-byte login shell on every path. This host also serves the OAuth2
+    authorize/token endpoints declared in the OpenAPI, but publishes no authorization-server metadata
+    document.
+  paths:
+  - path: /.well-known/security.txt
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/api-catalog
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    hit: false
+    content_type: text/html
+    file: null
+agent_card_probe:
+  note: >-
+    A2A agent card probed as part of the same sweep and recorded here rather than in a2a/, because there
+    was no hit and an agent card must never be authored on a provider's behalf.
+  results:
+  - url: https://www.getaccept.com/.well-known/agent-card.json
+    status: 404
+  - url: https://www.getaccept.com/.well-known/agent.json
+    status: 404
+  - url: https://api.getaccept.com/.well-known/agent-card.json
+    status: 401
+  - url: https://developers.getaccept.com/.well-known/agent-card.json
+    status: 200
+    hit: false
+    reason: SPA login shell HTML, not an AgentCard JSON object

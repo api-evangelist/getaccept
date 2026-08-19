@@ -1,16 +1,50 @@
-generated: '2026-07-19'
+generated: '2026-08-14'
 method: searched
-source: https://developers.getaccept.com/ ; https://status.getaccept.com
+source: >-
+  https://github.com/GetAccept/openapi ; https://www.getaccept.com/whats-new ;
+  https://status.getaccept.com ; https://app.getaccept.com/api/ (probed) ;
+  https://help.getaccept.com/en/collections/9436688-api
 versioning:
   scheme: uri-path
   current: v1
-  docs: https://developers.getaccept.com/
+  spec_version: '1.6'
+  docs: https://app.getaccept.com/api/
+  note: >-
+    One published major version since launch. The spec's info.version (1.6) is the only fine-grained
+    version signal; it is not surfaced in the URL or in any header.
 status_page: https://status.getaccept.com
+status_page_note: >-
+  Live at https://status.getaccept.com but rendered entirely client-side ("app.site doesn't work properly
+  without JavaScript enabled"), and there is no Statuspage-style JSON API — /api/v2/status.json and
+  /api/v2/summary.json both 404. Machine consumption of GetAccept availability is not possible.
+changelog:
+  url: https://www.getaccept.com/whats-new
+  api_specific: false
+  ref: changelog/getaccept-changelog.yml
 deprecation:
   policy_url: null
   sunset_header: null
-  note: No public deprecation policy or Sunset/Deprecation header support found.
+  deprecation_header: null
+  rfc8594: false
+  note: >-
+    No public deprecation policy and no Sunset/Deprecation header support. No operation in the 86-operation
+    OpenAPI carries `deprecated: true`.
 sla:
   url: null
-  note: API access is a paid commercial package; no public SLA doc found.
+  note: >-
+    No public SLA. API access is commercially provisioned — "commercial usage is subject to the purchase
+    of a GetAccept API package" (OpenAPI repo README) — so availability terms are contractual.
 deprecated_operations: []
+observations:
+- date: '2026-08-14'
+  finding: >-
+    The developer portal at https://developers.getaccept.com/ has been retired. It returns HTTP 200 for
+    every path with content byte-identical (md5 0e41cb4b761aa8fb3d24382d4cbac2f4) to
+    https://login.getaccept.com/ — the GetAccept login application. Any link to developers.getaccept.com/
+    docs or /reference is a soft 404.
+- date: '2026-08-14'
+  finding: >-
+    The surviving canonical API reference, https://app.getaccept.com/api/, is login-gated: "You must be
+    logged in to access API documentation." The machine-readable contract remains fully public at
+    https://github.com/GetAccept/openapi, last pushed 2026-06-23 and verified byte-equivalent in operation
+    set to our captured copy (86 operations, info.version 1.6).

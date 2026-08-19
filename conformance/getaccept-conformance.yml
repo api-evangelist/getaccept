@@ -1,6 +1,8 @@
-generated: '2026-07-19'
-method: derived
-source: openapi/getaccept-openapi-original.json
+generated: '2026-08-14'
+method: searched
+source: >-
+  openapi/getaccept-openapi-original.json ; https://www.getaccept.com/security ;
+  https://help.getaccept.com/en/collections/9436688-api
 standards:
 - id: oauth2
   conforms: true
@@ -31,3 +33,35 @@ standards:
 - id: gdpr
   conforms: true
   evidence: GDPR compliance per https://www.getaccept.com/security
+- id: ccpa
+  conforms: true
+  evidence: named on https://www.getaccept.com/security
+- id: eidas
+  conforms: true
+  evidence: >-
+    "GetAccept's eSignatures are compliant with eIDAS" (EU Regulation No 910/2014) per
+    https://www.getaccept.com/security
+- id: esign-act
+  conforms: true
+  evidence: US ESIGN Act named on https://www.getaccept.com/security
+- id: ueta
+  conforms: true
+  evidence: US UETA named on https://www.getaccept.com/security
+- id: uk-electronic-communications-act-2000
+  conforms: true
+  evidence: named on https://www.getaccept.com/security
+- id: iso-27001
+  conforms: false
+  evidence: not claimed anywhere on the GetAccept security page
+- id: rate-limit-headers
+  conforms: false
+  evidence: >-
+    no RateLimit-*/X-RateLimit-* headers and no 429 response declared on any of the 86 operations; see
+    rate-limits/getaccept-rate-limits.yml
+- id: rfc8594-sunset
+  conforms: false
+  evidence: no Sunset/Deprecation header or deprecation policy published
+- id: security-txt
+  conforms: false
+  evidence: >-
+    RFC 9116 security.txt absent on every host; see well-known/getaccept-well-known.yml

@@ -1,0 +1,90 @@
+generated: '2026-08-14'
+method: searched
+source: >-
+  registry.npmjs.org, rubygems.org, pypi.org, packagist.org, api.nuget.org, crates.io searched for
+  "getaccept" / "get_accept" / scope "@getaccept"; github.com/GetAccept org repo listing; the GetAccept
+  API marketing page https://www.getaccept.com/api
+summary:
+  official_package_count: 0
+  community_package_count: 3
+  note: >-
+    GetAccept publishes NO first-party client SDK to any public package registry. The github.com/GetAccept
+    org ships an OpenAPI collection repo (openapi.json / swagger.yaml / swagger2.*) plus a Microsoft Power
+    Platform custom-connector definition, but no client library. https://www.getaccept.com/api shows raw
+    JavaScript / Python / PHP code samples (plain HTTP calls), not an SDK. Everything listed below is
+    third-party.
+registries_checked:
+- registry: npm
+  query: getaccept, get_accept, scope:getaccept
+  first_party_hits: 0
+- registry: pypi
+  query: getaccept, get-accept, getaccept-api
+  first_party_hits: 0
+  note: all three 404
+- registry: rubygems
+  query: getaccept
+  first_party_hits: 0
+- registry: packagist
+  query: getaccept
+  first_party_hits: 0
+  note: no GetAccept package; search returned unrelated "paymob"/"weaccept" results
+- registry: nuget
+  query: getaccept
+  first_party_hits: 0
+  note: totalHits 0
+- registry: crates.io
+  query: getaccept
+  first_party_hits: 0
+  note: total 0
+- registry: maven-central
+  query: getaccept
+  first_party_hits: 0
+packages:
+- name: get_accept
+  registry: npm
+  url: https://www.npmjs.com/package/get_accept
+  language: javascript
+  official: false
+  version: 1.6.1
+  published: '2022-08-18'
+  note: >-
+    Auto-generated swagger-codegen client (its description is the OpenAPI info.description with
+    underscores for spaces, and its version tracks the spec version 1.6). npm metadata carries no
+    repository, homepage or author; sole maintainer is the individual account "bragedtooth". Not
+    published under a GetAccept-controlled npm scope, so treated as community, not first-party.
+    Unmaintained for ~4 years while the spec repo was last pushed 2026-06-23.
+- name: get_accept
+  registry: rubygems
+  url: https://rubygems.org/gems/get_accept
+  language: ruby
+  official: false
+  version: 0.1.2
+  published: '2017-03-16'
+  source_code: https://github.com/CrowdEngine/get_accept
+  author: Dave Nelson
+  note: >-
+    Third-party Ruby client published by CrowdEngine, not GetAccept. Abandoned — last release 2017,
+    nine years before the current spec revision.
+- name: '@pipedream/getaccept'
+  registry: npm
+  url: https://www.npmjs.com/package/@pipedream/getaccept
+  language: javascript
+  official: false
+  version: 0.3.0
+  published: '2026-05-19'
+  homepage: https://pipedream.com/apps/getaccept
+  note: >-
+    Pipedream integration components for GetAccept, published by Pipedream (the integration platform),
+    not by GetAccept. Included because it is the only currently-maintained package wrapping this API.
+distribution_without_a_registry:
+- name: GetAccept Power Platform custom connector
+  registry: github
+  url: https://github.com/GetAccept/openapi/tree/master/connector
+  official: true
+  version: null
+  published: null
+  note: >-
+    First-party, but not a client SDK and not published to a package registry — it is a Microsoft Power
+    Platform / Power Automate / Logic Apps custom-connector definition installed with `npm run ms-create`
+    (paconn) straight from the repo. Unversioned and unpinned: consumers get whatever is on master, so
+    there is no version or release date to record.

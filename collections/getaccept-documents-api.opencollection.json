@@ -1,0 +1,740 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "GetAccept Archive Documents API",
+    "version": "1.6"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://app.getaccept.com/oauth2/authorize",
+      "accessTokenUrl": "https://app.getaccept.com/oauth2/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents",
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "Filter list on status"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "How to sort results"
+              },
+              {
+                "name": "sort_order",
+                "value": "",
+                "type": "query",
+                "description": "Sort order of results"
+              },
+              {
+                "name": "showteam",
+                "value": "",
+                "type": "query",
+                "description": "Include documents from team members"
+              },
+              {
+                "name": "showall",
+                "value": "",
+                "type": "query",
+                "description": "Include all documents from entity"
+              },
+              {
+                "name": "external_id",
+                "value": "",
+                "type": "query",
+                "description": "An external ID is a custom field which can contain a unique record identifier from a system outside of GetAccept"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Start list from record x until limit"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to list"
+              }
+            ]
+          },
+          "docs": "Get a list of available documents"
+        },
+        {
+          "info": {
+            "name": "Create and send document or template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You must create a document to be able to send it to a recipient. When creating a document you can refer to previously uploaded files with file_id or you can choose to create a document and upload the files in on API post. You can only upload ONE file when including a file in the create document POST.\n\nUse either file_ids parameter to use existing uploaded file(s), file_content to send the document as base64 encoded string or do a multipart post with file parameter.\n\nAll recipients must have eith"
+        },
+        {
+          "info": {
+            "name": "Get document by external ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/external/:externalId",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path",
+                "description": "External ID"
+              }
+            ]
+          },
+          "docs": "Get a document by the external id specified when document was created."
+        },
+        {
+          "info": {
+            "name": "Get document details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "with_attachments",
+                "value": "",
+                "type": "query",
+                "description": "Include document attachments"
+              },
+              {
+                "name": "with_pages",
+                "value": "",
+                "type": "query",
+                "description": "Include document pages"
+              },
+              {
+                "name": "with_stats",
+                "value": "",
+                "type": "query",
+                "description": "Include document statistics"
+              }
+            ]
+          },
+          "docs": "Get document details by specifying a document id."
+        },
+        {
+          "info": {
+            "name": "Update document",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update different document properties during the lifecycle of the document."
+        },
+        {
+          "info": {
+            "name": "Delete document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getaccept.com/v1/documents/:documentId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Delete a single document."
+        },
+        {
+          "info": {
+            "name": "Get document attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/attachments",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get document attachments by specifying a document id."
+        },
+        {
+          "info": {
+            "name": "Upload file to document attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/attachments/:documentAttachmentId/upload",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "documentAttachmentId",
+                "value": "",
+                "type": "path",
+                "description": "Document Attachment ID"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a file for a specific attachment on a document."
+        },
+        {
+          "info": {
+            "name": "Get comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/comments",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get a list of chat comments for a document."
+        },
+        {
+          "info": {
+            "name": "Create comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/comments",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new comment in a document."
+        },
+        {
+          "info": {
+            "name": "Download document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/download",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "direct",
+                "value": "",
+                "type": "query",
+                "description": "Return the binary file directly"
+              },
+              {
+                "name": "with_file_content",
+                "value": "",
+                "type": "query",
+                "description": "Return the file content as base64 encoded"
+              }
+            ]
+          },
+          "docs": "Document file can always be downloaded but most likely you want to download it when it has status Signed. \n\nYou can select to receive a download-url or get the binary file.\n\nThe download URL is accessable 10 minutes after a request has been made."
+        },
+        {
+          "info": {
+            "name": "Get events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/events",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get a list of document events for a document."
+        },
+        {
+          "info": {
+            "name": "Update document expiration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/expiration",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use this method to update the expiration date and time for a document."
+        },
+        {
+          "info": {
+            "name": "Get document fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/fields",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "resolveEditorFields",
+                "value": "",
+                "type": "query",
+                "description": "Resolve editor fields to their values"
+              }
+            ]
+          },
+          "docs": "Get a list of fields for a document or template. Can be used both before and after a document has been signed."
+        },
+        {
+          "info": {
+            "name": "Create a field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/fields",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new field in a document."
+        },
+        {
+          "info": {
+            "name": "Update document fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/fields",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update fields in a document."
+        },
+        {
+          "info": {
+            "name": "Forward document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/forward",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forward a document to a new recipient."
+        },
+        {
+          "info": {
+            "name": "Get detailed log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/log",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get a detailed log of events for a specific document."
+        },
+        {
+          "info": {
+            "name": "Get pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/pages",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get a list of pages for a document."
+        },
+        {
+          "info": {
+            "name": "Get document preview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/preview",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a preview of an existing document or template."
+        },
+        {
+          "info": {
+            "name": "Get document pricing tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/pricing-tables",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get all pricing tables for a document."
+        },
+        {
+          "info": {
+            "name": "Update document pricing tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/pricing-tables",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update pricing tables in a document."
+        },
+        {
+          "info": {
+            "name": "Get document recipients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/recipients",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get a list of recipients for a specific document."
+        },
+        {
+          "info": {
+            "name": "Recall signer",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/recipients/:recipientId",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              },
+              {
+                "name": "recipientId",
+                "value": "",
+                "type": "path",
+                "description": "Recipient ID"
+              }
+            ]
+          },
+          "docs": "Recall a signer for a document."
+        },
+        {
+          "info": {
+            "name": "Send reminder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/reminders",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send a manual reminder for a document."
+        },
+        {
+          "info": {
+            "name": "Create revision",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/revisions",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new document revision."
+        },
+        {
+          "info": {
+            "name": "Seal document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/seal",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "If you prefer to send the document manually you can use this method to seal the document. Do not use this method if you send the document automatically or if you use the send document method above.\n\nThis API call triggers the document seal action and can only be performed on documents with document_status = draft. The method will return individual access/signing links for each recipient.\n\nIf document was created using self-sign option it will also be self-signed by the authenticated or specified"
+        },
+        {
+          "info": {
+            "name": "Send existing document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/send",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "When you send a document via GetAccept, we deliver an email to all recipients, each containing a unique, secured link. This API call triggers the document send action and can only be performed on documents with document_status = draft. The document will be sent to recipients you provided when it was created.\n\nIf document was created using self-sign option it will also be self-signed by the authenticated or specified user before sending."
+        },
+        {
+          "info": {
+            "name": "Get document status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.getaccept.com/v1/documents/:documentId/status",
+            "params": [
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document ID"
+              }
+            ]
+          },
+          "docs": "Get the current status of a document."
+        },
+        {
+          "info": {
+            "name": "Upload a document file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.getaccept.com/v1/upload",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "You can upload one file at a time and get a file id. The file id is used to connect a file with a GetAccept document which is sent to recipients. If you want to upload mutliple files you run multiple POST. We only accept files up to 10 MB as default. Uploaded file need to be imported/added to a document within 48 hours after uploading.\n\nWe recommended you to upload PDF files in order to guarantee the same look when sent. Other file types can be converted, such as:\n\nMirosoft Office: doc, docx, xl"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
