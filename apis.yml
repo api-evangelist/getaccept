@@ -39,6 +39,17 @@ tags:
 - Electronic Signature
 - E-Signature
 - Digital Sales Room
+- Document-Management
+- Contract Management
+- Proposals
+- Software-as-a-Service
+tags_raw:
+- Company
+- Cloud
+- Sales Enablement
+- Electronic Signature
+- E-Signature
+- Digital Sales Room
 - Document Management
 - Contract Management
 - Proposals
@@ -127,7 +138,8 @@ apis:
   description: Additional endpoints used in various integrations.
   humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
-  tags:
+  tags: []
+  tags_raw:
   - Others
   properties:
   - type: OpenAPI
@@ -145,6 +157,8 @@ apis:
   humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
+  - Subscription
+  tags_raw:
   - Subscriptions
   properties:
   - type: OpenAPI
@@ -169,6 +183,8 @@ apis:
   humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
