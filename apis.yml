@@ -9,6 +9,19 @@ description: >-
   communication templates, and webhook subscriptions, secured with OAuth2 (authorization code) or
   bearer tokens. GetAccept is backed by Bessemer Venture Partners and Y Combinator.
 url: https://raw.githubusercontent.com/api-evangelist/getaccept/refs/heads/main/apis.yml
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
