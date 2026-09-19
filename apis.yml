@@ -76,6 +76,8 @@ apis:
   humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
+  - Archives
+  tags_raw:
   - Archive
   properties:
   - type: OpenAPI
@@ -208,6 +210,8 @@ apis:
   humanURL: https://www.getaccept.com/api
   baseURL: https://api.getaccept.com/v1
   tags:
+  - Video
+  tags_raw:
   - Videos
   properties:
   - type: OpenAPI
