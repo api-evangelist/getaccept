@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Attachments API
+  title: GetAccept Attachments API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -120,6 +120,16 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
+    Attachments:
+      description: Attachment list
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
+      title: Attachments
+      type: object
+      x-ms-summary: Attachments
     Attachment:
       description: Document attachment
       properties:
@@ -182,16 +192,6 @@ components:
       title: Attachment
       type: object
       x-ms-summary: Attachment
-    Attachments:
-      description: Attachment list
-      properties:
-        attachments:
-          items:
-            $ref: '#/components/schemas/Attachment'
-          type: array
-      title: Attachments
-      type: object
-      x-ms-summary: Attachments
   responses:
     Unauthorized:
       content:

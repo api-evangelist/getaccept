@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Authentication API
+  title: GetAccept Authentication API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -21,7 +21,7 @@ security:
 tags:
 - externalDocs:
     url: https://app.getaccept.com/api/#authentication
-  description: Authentication with the GetAccept API can be made using JWT tokens (JSON Web Tokens) or OAuth 2.0 Authorization Framework http://oauth.net/2/  All requests must be made via HTTPS. All configuration URLs (webhooks, etc) should begin with https:// as well.
+  description: Authentication with the GetAccept API can be made using JWT tokens (JSON Web Tokens) or OAuth 2.0 Authorization Framework http://oauth.net/2/ All requests must be made via HTTPS. All configuration URLs (webhooks, etc) should begin with https:// as well.
   name: Authentication
 paths:
   /auth:
@@ -181,17 +181,6 @@ components:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
   schemas:
-    TestResponse:
-      description: Authentication test response
-      properties:
-        entity_id:
-          description: Current entity ID
-          type: string
-        user_id:
-          description: Current user ID
-          type: string
-      title: Test Response
-      type: object
     Error:
       properties:
         description:
@@ -203,6 +192,17 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
+    TestResponse:
+      description: Authentication test response
+      properties:
+        entity_id:
+          description: Current entity ID
+          type: string
+        user_id:
+          description: Current user ID
+          type: string
+      title: Test Response
+      type: object
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

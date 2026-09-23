@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Videos API
+  title: GetAccept Videos API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -205,20 +205,6 @@ paths:
       summary: Get video
 components:
   schemas:
-    VideoJobStatus:
-      description: Video processing job status
-      properties:
-        Status:
-          description: Current processing status
-          type: string
-        thumb_url:
-          description: URL to video thumbnail
-          type: string
-        video_url:
-          description: URL to processed video
-          type: string
-      title: Video Job Status
-      type: object
     Error:
       properties:
         description:
@@ -262,6 +248,20 @@ components:
           type: string
       title: Video
       type: object
+    VideoJobStatus:
+      description: Video processing job status
+      properties:
+        Status:
+          description: Current processing status
+          type: string
+        thumb_url:
+          description: URL to video thumbnail
+          type: string
+        video_url:
+          description: URL to processed video
+          type: string
+      title: Video Job Status
+      type: object
   responses:
     Unauthorized:
       content:
@@ -269,18 +269,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: The specified resource was not found
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

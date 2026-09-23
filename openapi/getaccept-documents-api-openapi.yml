@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Documents API
+  title: GetAccept Documents API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -170,8 +170,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Require view
                       type:
                         description: file or external where file is an uploaded file and external is a link to an external file
@@ -313,8 +314,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Enabled
                                     flat_fee:
                                       description: If section should use using flat fee discounts
@@ -322,8 +324,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Flat fee
                                     value:
                                       description: The value for section discount
@@ -339,8 +342,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Enabled
                                     flat_fee:
                                       description: If section should use using flat fee pricing
@@ -348,8 +352,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Flat fee
                                     value:
                                       description: The value for section price
@@ -365,8 +370,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Enabled
                                     flat_fee:
                                       description: If section should use using flat fee taxes
@@ -374,8 +380,9 @@ paths:
                                       - true
                                       - false
                                       example: true
-                                      nullable: true
-                                      type: boolean
+                                      type:
+                                      - boolean
+                                      - 'null'
                                       x-ms-summary: Flat fee
                                     value:
                                       description: The value for section tax
@@ -399,8 +406,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Enabled
                                 x-ms-visibility: advanced
                               flat_fee:
@@ -409,8 +417,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Flat fee
                                 x-ms-visibility: advanced
                               value:
@@ -427,8 +436,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Enabled
                                 x-ms-visibility: advanced
                               flat_fee:
@@ -437,8 +447,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Flat fee
                                 x-ms-visibility: advanced
                               value:
@@ -455,8 +466,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Enabled
                                 x-ms-visibility: advanced
                               flat_fee:
@@ -465,8 +477,9 @@ paths:
                                 - true
                                 - false
                                 example: true
-                                nullable: true
-                                type: boolean
+                                type:
+                                - boolean
+                                - 'null'
                                 x-ms-summary: Flat fee
                                 x-ms-visibility: advanced
                               value:
@@ -499,8 +512,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: External EID signature
                   x-ms-visibility: advanced
                 external_id:
@@ -542,8 +556,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Send automatically
                   x-ms-visibility: important
                 is_reminder_sending:
@@ -552,8 +567,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Send reminders
                   x-ms-visibility: advanced
                 is_scheduled_sending:
@@ -562,8 +578,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Schedule sending
                   x-ms-visibility: advanced
                 is_signing:
@@ -572,8 +589,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Sign document
                   x-ms-visibility: advanced
                 is_signing_biometric:
@@ -582,8 +600,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Handwritten signature
                   x-ms-visibility: advanced
                 is_signing_forward:
@@ -592,8 +611,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Allow signature transfer
                   x-ms-visibility: advanced
                 is_signing_initials:
@@ -602,8 +622,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Sign with initials
                   x-ms-visibility: advanced
                 is_sms_sending:
@@ -612,8 +633,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Send SMS
                 name:
                   description: Enter a name of the document
@@ -666,8 +688,9 @@ paths:
                         description: If signing order is enabled
                         example: 1
                         format: int32
-                        nullable: true
-                        type: integer
+                        type:
+                        - integer
+                        - 'null'
                         x-ms-summary: Signing order
                         x-ms-visibility: advanced
                       role:
@@ -704,8 +727,9 @@ paths:
                             - true
                             - false
                             example: true
-                            nullable: true
-                            type: boolean
+                            type:
+                            - boolean
+                            - 'null'
                             x-ms-summary: Exclude verified EID signature
                             x-ms-visibility: advanced
                         type: object
@@ -717,8 +741,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Verify EID
                         x-ms-visibility: advanced
                       verify_eid_type:
@@ -732,8 +757,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Enable question
                         x-ms-visibility: advanced
                       verify_qna_answer:
@@ -748,8 +774,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Question on open
                         x-ms-visibility: advanced
                       verify_qna_question:
@@ -764,8 +791,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Sign question
                         x-ms-visibility: advanced
                       verify_sms:
@@ -774,8 +802,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Verify SMS
                         x-ms-visibility: advanced
                       verify_sms_open:
@@ -793,8 +822,9 @@ paths:
                         - true
                         - false
                         example: true
-                        nullable: true
-                        type: boolean
+                        type:
+                        - boolean
+                        - 'null'
                         x-ms-summary: Verify by SMS
                         x-ms-visibility: advanced
                     type: object
@@ -846,8 +876,9 @@ paths:
                 value:
                   description: Value of deal or document
                   format: float
-                  nullable: true
-                  type: number
+                  type:
+                  - number
+                  - 'null'
                   x-ms-summary: Document value
                   x-ms-visibility: important
                 video_id:
@@ -1170,8 +1201,9 @@ paths:
           - 'true'
           - 'false'
           example: 'true'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         x-ms-summary: Return the binary file directly
       - description: Return the file content as base64 encoded
         in: query
@@ -1182,8 +1214,9 @@ paths:
           - 'true'
           - 'false'
           example: 'true'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         x-ms-summary: Return file as base64
       responses:
         '200':
@@ -1218,7 +1251,13 @@ paths:
           $ref: '#/components/responses/NotFound'
       tags:
       - Documents
-      description: "Document file can always be downloaded but most likely you want to download it when it has status Signed. \n\nYou can select to receive a download-url or get the binary file.\n\nThe download URL is accessable 10 minutes after a request has been made."
+      description: 'Document file can always be downloaded but most likely you want to download it when it has status Signed.
+
+
+        You can select to receive a download-url or get the binary file.
+
+
+        The download URL is accessable 10 minutes after a request has been made.'
       operationId: DownloadDocument
       summary: Download document
       x-ms-visibility: important
@@ -1273,8 +1312,9 @@ paths:
                   status:
                     description: Status of update
                     format: int32
-                    nullable: true
-                    type: integer
+                    type:
+                    - integer
+                    - 'null'
                     x-ms-summary: Status
                 type: object
           description: OK
@@ -1305,8 +1345,9 @@ paths:
                   - true
                   - false
                   example: false
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: Send notification
               type: object
         description: An optional JSON object containing seal information
@@ -2058,20 +2099,262 @@ paths:
       x-ms-visibility: important
 components:
   schemas:
-    Fields:
-      description: Field list
+    EditorField:
+      description: Editor Field details
       properties:
-        editor_fields:
-          items:
-            $ref: '#/components/schemas/EditorField'
-          type: array
-        fields:
-          items:
-            $ref: '#/components/schemas/Field'
-          type: array
-      title: Fields
+        id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        input_settings:
+          description: Settings
+          properties:
+            label:
+              description: Label
+              type: string
+              x-ms-summary: Label
+            options:
+              description: Options
+              items:
+                type: string
+              type: array
+              x-ms-summary: Options
+            required:
+              description: Required
+              type: boolean
+              x-ms-summary: Required
+            type:
+              description: Type
+              type: string
+              x-ms-summary: Type
+          type: object
+          x-ms-summary: Settings
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+        type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        user_id:
+          description: User ID
+          type: string
+          x-ms-summary: User ID
+      title: Editor Field
       type: object
-      x-ms-summary: Fields
+      x-ms-summary: Editor Field
+    PricingTable:
+      description: Pricing Table
+      properties:
+        currency_settings:
+          description: Currency Settings
+          properties:
+            currency:
+              description: Currency
+              type: string
+              x-ms-summary: Currency
+            locale:
+              description: Locale
+              type: string
+              x-ms-summary: Locale
+          title: Currency Settings
+          type: object
+          x-ms-summary: Currency Settings
+        pre_calculated:
+          description: Pre calculated totals
+          type: boolean
+          x-ms-summary: Pre calculated totals
+        sections:
+          items:
+            $ref: '#/components/schemas/PricingSection'
+          type: array
+        table_id:
+          description: Table ID
+          type: string
+          x-ms-summary: ID
+      title: Table
+      type: object
+      x-ms-summary: Table
+    Recipient:
+      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
+      properties:
+        company_name:
+          description: Company name of the recipient
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the recipient
+          type: string
+          x-ms-summary: Company number
+        document_url:
+          description: Unique URL for the recipient to view/sign
+          type: string
+          x-ms-summary: Document URL
+          x-ms-visibility: important
+        email:
+          description: Email of the recipient
+          type: string
+          x-ms-summary: Recipient email
+        first_name:
+          description: First name of the recipient
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the recipient
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        id:
+          description: ID of the recipient
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the recipient
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the recipient
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the recipient
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        order_num:
+          description: Signing order of the recipient
+          type: string
+          x-ms-summary: Signing order num
+          x-ms-visibility: advanced
+        role:
+          type: string
+          x-ms-visibility: internal
+        settings:
+          description: Per-recipient signature settings.
+          properties:
+            exclude_verified_eid_signature:
+              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+              type: boolean
+              x-ms-summary: Exclude verified EID signature
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Recipient settings
+          x-ms-visibility: advanced
+        signing_methods:
+          description: Signing methods used by the recipient
+          items:
+            $ref: '#/components/schemas/SigningMethod'
+          type: array
+          x-ms-summary: Signing methods
+          x-ms-visibility: advanced
+        status:
+          description: Status of the recipient
+          type: string
+          x-ms-summary: Status
+        thumb_url:
+          description: Thumb URL of the recipient
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the recipient
+          type: string
+          x-ms-summary: Title
+      title: Recipient
+      type: object
+      x-ms-summary: Recipient
+    LogEntry:
+      description: Detailed log entry
+      properties:
+        created_at:
+          type: string
+        document_id:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        geo_city:
+          type: string
+        geo_country_name:
+          type: string
+        geo_ip:
+          type: string
+        last_name:
+          type: string
+      title: Log Entry
+      type: object
+    PricingTables:
+      description: Pricing Tables
+      properties:
+        pricing_tables:
+          items:
+            $ref: '#/components/schemas/PricingTable'
+          type: array
+      title: Pricing
+      type: object
+      x-ms-summary: Pricing
+    CommentResponse:
+      description: Comment creation response
+      properties:
+        comment_id:
+          description: ID of the created comment
+          type: string
+      title: Comment Response
+      type: object
+    FieldResponse:
+      description: Field creation response
+      properties:
+        field_id:
+          description: ID of the created field
+          type: string
+      title: Field Response
+      type: object
+    Documents:
+      description: Document list
+      items:
+        properties:
+          tags:
+            type: string
+          company_name:
+            type: string
+          created_at:
+            type: string
+          expiration_date:
+            type: string
+          id:
+            type: string
+          is_private:
+            type: boolean
+          is_signing:
+            type: boolean
+          name:
+            type: string
+          sender_name:
+            type: string
+          sender_thumb:
+            type: string
+          status:
+            type: string
+          type:
+            type: string
+          value:
+            format: int32
+            type: integer
+        type: object
+      title: Documents
+      type: array
+      x-ms-summary: Documents
     StatusResponse:
       description: Document status response
       properties:
@@ -2080,6 +2363,54 @@ components:
           type: string
       title: Status Response
       type: object
+    PricingColumn:
+      description: Pricing Table Column
+      properties:
+        column_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        enabled:
+          description: Enabled
+          enum:
+          - true
+          - false
+          example: false
+          type: boolean
+          x-ms-summary: Enabled
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+      title: Column
+      type: object
+      x-ms-summary: Column
+    PricingSection:
+      description: Pricing Table Section
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
+      type: object
+      x-ms-summary: Section
     Document:
       description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
       properties:
@@ -2313,6 +2644,211 @@ components:
       title: Document
       type: object
       x-ms-summary: Document
+    PreviewResponse:
+      description: Document preview response
+      properties:
+        preview_url:
+          description: URL to preview PDF
+          type: string
+      title: Preview Response
+      type: object
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
+    Attachments:
+      description: Attachment list
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
+      title: Attachments
+      type: object
+      x-ms-summary: Attachments
+    Page:
+      description: Document page details
+      properties:
+        clicks:
+          type: integer
+        description:
+          type: string
+        order_num:
+          type: integer
+        page_height:
+          type: number
+        page_id:
+          type: string
+        page_num:
+          type: integer
+        page_time:
+          type: number
+        page_type:
+          type: integer
+        page_type_name:
+          type: string
+        page_width:
+          type: number
+        thumb_url:
+          type: string
+        title:
+          type: string
+        video_hash:
+          type: string
+        view_duration_seconds:
+          type: number
+      title: Page
+      type: object
+    Fields:
+      description: Field list
+      properties:
+        editor_fields:
+          items:
+            $ref: '#/components/schemas/EditorField'
+          type: array
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+      title: Fields
+      type: object
+      x-ms-summary: Fields
+    Comment:
+      description: Document comment
+      properties:
+        created_at:
+          description: The timestamp when the comment was created
+          type: string
+        email:
+          description: Email of the person creating the comment
+          type: string
+        full_name:
+          description: Name of the person creating the comment
+          type: string
+        id:
+          description: Unique ID of the comment
+          type: string
+        self:
+          description: If this comment is created by the current authenticated user
+          type: integer
+        text:
+          description: The commented text
+          type: string
+        thumb_url:
+          description: Thumbnail of the person creating the comment
+          type: string
+      title: Comment
+      type: object
+    Attachment:
+      description: Document attachment
+      properties:
+        access_recipient_names:
+          description: Recipients with access to the attachment
+          items:
+            type: string
+          type: array
+          x-ms-summary: Access Recipients
+          x-ms-visibility: advanced
+        attachment_description:
+          description: Description of the attachment
+          type: string
+          x-ms-summary: Description
+        attachment_download_url:
+          description: URL to download the attachment
+          type: string
+          x-ms-summary: Download URL
+        attachment_extension:
+          description: File extension of the attachment
+          type: string
+          x-ms-summary: File Extension
+          x-ms-visibility: advanced
+        attachment_filename:
+          description: Filename of the attachment
+          type: string
+          x-ms-summary: Filename
+          x-ms-visibility: advanced
+        attachment_id:
+          description: ID of the attachment
+          type: string
+          x-ms-summary: ID
+        attachment_preview_url:
+          description: Internal URL to preview the attachment
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        attachment_title:
+          description: Title of the attachment
+          type: string
+          x-ms-summary: Title
+        attachment_type:
+          description: Type of the attachment
+          type: string
+          x-ms-summary: Type
+        attachment_url:
+          description: Url of the attachment
+          type: string
+          x-ms-summary: URL
+        last_attachment_view:
+          description: Date and time when the attachment was last viewed
+          type: string
+          x-ms-summary: Last View
+          x-ms-visibility: advanced
+        restrict_access:
+          description: Attachment has restricted access
+          type: boolean
+          x-ms-summary: Restricted access
+          x-ms-visibility: advanced
+      title: Attachment
+      type: object
+      x-ms-summary: Attachment
+    Event:
+      description: Document event details
+      properties:
+        company_name:
+          type: string
+        created_at:
+          type: string
+        document_id:
+          type: string
+        document_name:
+          type: string
+        document_status:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        gender:
+          type: string
+        last_name:
+          type: string
+        thumb_url:
+          type: string
+      title: Event
+      type: object
     Field:
       description: Field details
       properties:
@@ -2388,295 +2924,6 @@ components:
       title: Field
       type: object
       x-ms-summary: Field
-    PricingTables:
-      description: Pricing Tables
-      properties:
-        pricing_tables:
-          items:
-            $ref: '#/components/schemas/PricingTable'
-          type: array
-      title: Pricing
-      type: object
-      x-ms-summary: Pricing
-    PricingTable:
-      description: Pricing Table
-      properties:
-        currency_settings:
-          description: Currency Settings
-          properties:
-            currency:
-              description: Currency
-              type: string
-              x-ms-summary: Currency
-            locale:
-              description: Locale
-              type: string
-              x-ms-summary: Locale
-          title: Currency Settings
-          type: object
-          x-ms-summary: Currency Settings
-        pre_calculated:
-          description: Pre calculated totals
-          type: boolean
-          x-ms-summary: Pre calculated totals
-        sections:
-          items:
-            $ref: '#/components/schemas/PricingSection'
-          type: array
-        table_id:
-          description: Table ID
-          type: string
-          x-ms-summary: ID
-      title: Table
-      type: object
-      x-ms-summary: Table
-    Attachment:
-      description: Document attachment
-      properties:
-        access_recipient_names:
-          description: Recipients with access to the attachment
-          items:
-            type: string
-          type: array
-          x-ms-summary: Access Recipients
-          x-ms-visibility: advanced
-        attachment_description:
-          description: Description of the attachment
-          type: string
-          x-ms-summary: Description
-        attachment_download_url:
-          description: URL to download the attachment
-          type: string
-          x-ms-summary: Download URL
-        attachment_extension:
-          description: File extension of the attachment
-          type: string
-          x-ms-summary: File Extension
-          x-ms-visibility: advanced
-        attachment_filename:
-          description: Filename of the attachment
-          type: string
-          x-ms-summary: Filename
-          x-ms-visibility: advanced
-        attachment_id:
-          description: ID of the attachment
-          type: string
-          x-ms-summary: ID
-        attachment_preview_url:
-          description: Internal URL to preview the attachment
-          type: string
-          x-ms-summary: Preview URL
-          x-ms-visibility: advanced
-        attachment_title:
-          description: Title of the attachment
-          type: string
-          x-ms-summary: Title
-        attachment_type:
-          description: Type of the attachment
-          type: string
-          x-ms-summary: Type
-        attachment_url:
-          description: Url of the attachment
-          type: string
-          x-ms-summary: URL
-        last_attachment_view:
-          description: Date and time when the attachment was last viewed
-          type: string
-          x-ms-summary: Last View
-          x-ms-visibility: advanced
-        restrict_access:
-          description: Attachment has restricted access
-          type: boolean
-          x-ms-summary: Restricted access
-          x-ms-visibility: advanced
-      title: Attachment
-      type: object
-      x-ms-summary: Attachment
-    Recipient:
-      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
-      properties:
-        company_name:
-          description: Company name of the recipient
-          type: string
-          x-ms-summary: Company name
-        company_number:
-          description: Company number of the recipient
-          type: string
-          x-ms-summary: Company number
-        document_url:
-          description: Unique URL for the recipient to view/sign
-          type: string
-          x-ms-summary: Document URL
-          x-ms-visibility: important
-        email:
-          description: Email of the recipient
-          type: string
-          x-ms-summary: Recipient email
-        first_name:
-          description: First name of the recipient
-          type: string
-          x-ms-summary: First name
-        fullname:
-          description: Full name of the recipient
-          type: string
-          x-ms-summary: Full name
-        gender:
-          description: Gender of the recipient
-          type: string
-          x-ms-summary: Gender
-          x-ms-visibility: advanced
-        id:
-          description: ID of the recipient
-          type: string
-          x-ms-summary: ID
-          x-ms-visibility: advanced
-        last_name:
-          description: Last name of the recipient
-          type: string
-          x-ms-summary: Last name
-        mobile:
-          description: Mobile number of the recipient
-          type: string
-          x-ms-summary: Mobile
-        note:
-          description: Note of the recipient
-          type: string
-          x-ms-summary: Note
-          x-ms-visibility: advanced
-        order_num:
-          description: Signing order of the recipient
-          type: string
-          x-ms-summary: Signing order num
-          x-ms-visibility: advanced
-        role:
-          type: string
-          x-ms-visibility: internal
-        settings:
-          description: Per-recipient signature settings.
-          properties:
-            exclude_verified_eid_signature:
-              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
-              type: boolean
-              x-ms-summary: Exclude verified EID signature
-              x-ms-visibility: advanced
-          type: object
-          x-ms-summary: Recipient settings
-          x-ms-visibility: advanced
-        signing_methods:
-          description: Signing methods used by the recipient
-          items:
-            $ref: '#/components/schemas/SigningMethod'
-          type: array
-          x-ms-summary: Signing methods
-          x-ms-visibility: advanced
-        status:
-          description: Status of the recipient
-          type: string
-          x-ms-summary: Status
-        thumb_url:
-          description: Thumb URL of the recipient
-          type: string
-          x-ms-summary: Thumb URL
-        title:
-          description: Title of the recipient
-          type: string
-          x-ms-summary: Title
-      title: Recipient
-      type: object
-      x-ms-summary: Recipient
-    PricingSection:
-      description: Pricing Table Section
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PricingColumn'
-          type: array
-        display_name:
-          description: Display Name
-          type: string
-          x-ms-summary: Display Name
-        name:
-          description: Name
-          type: string
-          x-ms-summary: Name
-        section_id:
-          description: ID
-          type: string
-          x-ms-summary: ID
-      title: Section
-      type: object
-      x-ms-summary: Section
-    Event:
-      description: Document event details
-      properties:
-        company_name:
-          type: string
-        created_at:
-          type: string
-        document_id:
-          type: string
-        document_name:
-          type: string
-        document_status:
-          type: string
-        email:
-          type: string
-        event_meta_data:
-          type: string
-        event_name:
-          type: string
-        first_name:
-          type: string
-        gender:
-          type: string
-        last_name:
-          type: string
-        thumb_url:
-          type: string
-      title: Event
-      type: object
-    CommentResponse:
-      description: Comment creation response
-      properties:
-        comment_id:
-          description: ID of the created comment
-          type: string
-      title: Comment Response
-      type: object
-    PreviewResponse:
-      description: Document preview response
-      properties:
-        preview_url:
-          description: URL to preview PDF
-          type: string
-      title: Preview Response
-      type: object
-    PricingColumn:
-      description: Pricing Table Column
-      properties:
-        column_id:
-          description: ID
-          type: string
-          x-ms-summary: ID
-        display_name:
-          description: Display Name
-          type: string
-          x-ms-summary: Display Name
-        enabled:
-          description: Enabled
-          enum:
-          - true
-          - false
-          example: false
-          type: boolean
-          x-ms-summary: Enabled
-        name:
-          description: Name
-          type: string
-          x-ms-summary: Name
-      title: Column
-      type: object
-      x-ms-summary: Column
     Error:
       properties:
         description:
@@ -2688,145 +2935,6 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
-    SigningMethod:
-      description: Details about a signing method used by the recipient
-      properties:
-        signed_at:
-          description: ISO 8601 timestamp of when the signing occurred
-          type: string
-        type:
-          description: The type of signing method used
-          enum:
-          - eid
-          - biometric
-          - sms
-          - initials
-          - signature
-          type: string
-        verified_name:
-          description: Name verified from eID transaction
-          type: string
-        verified_phone:
-          description: Phone number used for SMS verification
-          type: string
-      title: SigningMethod
-      type: object
-    Attachments:
-      description: Attachment list
-      properties:
-        attachments:
-          items:
-            $ref: '#/components/schemas/Attachment'
-          type: array
-      title: Attachments
-      type: object
-      x-ms-summary: Attachments
-    Documents:
-      description: Document list
-      items:
-        properties:
-          tags:
-            type: string
-          company_name:
-            type: string
-          created_at:
-            type: string
-          expiration_date:
-            type: string
-          id:
-            type: string
-          is_private:
-            type: boolean
-          is_signing:
-            type: boolean
-          name:
-            type: string
-          sender_name:
-            type: string
-          sender_thumb:
-            type: string
-          status:
-            type: string
-          type:
-            type: string
-          value:
-            format: int32
-            type: integer
-        type: object
-      title: Documents
-      type: array
-      x-ms-summary: Documents
-    LogEntry:
-      description: Detailed log entry
-      properties:
-        created_at:
-          type: string
-        document_id:
-          type: string
-        email:
-          type: string
-        event_meta_data:
-          type: string
-        event_name:
-          type: string
-        first_name:
-          type: string
-        geo_city:
-          type: string
-        geo_country_name:
-          type: string
-        geo_ip:
-          type: string
-        last_name:
-          type: string
-      title: Log Entry
-      type: object
-    EditorField:
-      description: Editor Field details
-      properties:
-        id:
-          description: ID
-          type: string
-          x-ms-summary: ID
-          x-ms-visibility: advanced
-        input_settings:
-          description: Settings
-          properties:
-            label:
-              description: Label
-              type: string
-              x-ms-summary: Label
-            options:
-              description: Options
-              items:
-                type: string
-              type: array
-              x-ms-summary: Options
-            required:
-              description: Required
-              type: boolean
-              x-ms-summary: Required
-            type:
-              description: Type
-              type: string
-              x-ms-summary: Type
-          type: object
-          x-ms-summary: Settings
-        recipient_id:
-          description: Recipient ID
-          type: string
-          x-ms-summary: Recipient ID
-        type:
-          description: Type
-          type: string
-          x-ms-summary: Type
-        user_id:
-          description: User ID
-          type: string
-          x-ms-summary: User ID
-      title: Editor Field
-      type: object
-      x-ms-summary: Editor Field
     Recipients:
       description: Recipient list
       properties:
@@ -2837,73 +2945,6 @@ components:
       title: Recipients
       type: object
       x-ms-summary: Recipients
-    Page:
-      description: Document page details
-      properties:
-        clicks:
-          type: integer
-        description:
-          type: string
-        order_num:
-          type: integer
-        page_height:
-          type: number
-        page_id:
-          type: string
-        page_num:
-          type: integer
-        page_time:
-          type: number
-        page_type:
-          type: integer
-        page_type_name:
-          type: string
-        page_width:
-          type: number
-        thumb_url:
-          type: string
-        title:
-          type: string
-        video_hash:
-          type: string
-        view_duration_seconds:
-          type: number
-      title: Page
-      type: object
-    FieldResponse:
-      description: Field creation response
-      properties:
-        field_id:
-          description: ID of the created field
-          type: string
-      title: Field Response
-      type: object
-    Comment:
-      description: Document comment
-      properties:
-        created_at:
-          description: The timestamp when the comment was created
-          type: string
-        email:
-          description: Email of the person creating the comment
-          type: string
-        full_name:
-          description: Name of the person creating the comment
-          type: string
-        id:
-          description: Unique ID of the comment
-          type: string
-        self:
-          description: If this comment is created by the current authenticated user
-          type: integer
-        text:
-          description: The commented text
-          type: string
-        thumb_url:
-          description: Thumbnail of the person creating the comment
-          type: string
-      title: Comment
-      type: object
   responses:
     NotFound:
       content:
@@ -2911,6 +2952,12 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: The specified resource was not found
+    AccessDenied:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Access denied
     Invalid:
       content:
         application/json:
@@ -2923,12 +2970,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
-    AccessDenied:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Access denied
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

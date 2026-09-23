@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Subscriptions API
+  title: GetAccept Subscriptions API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -21,7 +21,7 @@ security:
 tags:
 - externalDocs:
     url: https://app.getaccept.com/api/#subscriptions
-  description: To simplify the process of checking a documents status and make it more efficient in an integrated application, you can enable API Webhooks. Enable webhooks as a user with administrator privileges in the Settings | Integration | Webhooks. We support multiple webhooks for one application. Events will be POSTed to your webhook URLs and should be handled by you. A POST must be answered and your endpoint will need to return a 2xx HTTP. Otherwise, the callback will be considered a failure and will be retried later. Retries will be made after 1, 12, 24, and 48 hours. The sender (or notification_email) will receive an email notification after a failed attempt.
+  description: To simplify the process of checking a documents status and make it more efficient in an integrated application, you can enable API Webhooks.
   name: Subscriptions
 paths:
   /subscriptions:
@@ -58,7 +58,40 @@ paths:
           $ref: '#/components/responses/Unauthorized'
       tags:
       - Subscriptions
-      description: "This call will create a new subscription.\nThe response will be wrapped in an array even for single object according to REST hook standards.\n\n>Events\n  * `document.created` - Document is created\n  * `document.sent` - Document is sent\n  * `document.viewed` - Document is sent\n  * `document.signed` - Document is signed\n  * `document.approved` - Document is approved\n  * `document.expired` - Document has expired\n  * `document.rejected` - Document is rejected\n  * `document.downloaded` - Document is downloaded\n  * `document.printed` - Document is printed\n  * `document.forwarded` - Document is forwarded\n  * `document.partially_signed` - Document has been partially signed\n  * `document.commented` - Document is commented\n  * `document.hardbounced` - Document is hardbounced\n  * `document.imported` - Document is imported"
+      description: 'This call will create a new subscription.
+
+        The response will be wrapped in an array even for single object according to REST hook standards.
+
+
+        >Events
+
+        * `document.created` - Document is created
+
+        * `document.sent` - Document is sent
+
+        * `document.viewed` - Document is sent
+
+        * `document.signed` - Document is signed
+
+        * `document.approved` - Document is approved
+
+        * `document.expired` - Document has expired
+
+        * `document.rejected` - Document is rejected
+
+        * `document.downloaded` - Document is downloaded
+
+        * `document.printed` - Document is printed
+
+        * `document.forwarded` - Document is forwarded
+
+        * `document.partially_signed` - Document has been partially signed
+
+        * `document.commented` - Document is commented
+
+        * `document.hardbounced` - Document is hardbounced
+
+        * `document.imported` - Document is imported'
       operationId: CreateSubscription
       requestBody:
         content:
@@ -102,8 +135,9 @@ paths:
                   - true
                   - false
                   example: true
-                  nullable: true
-                  type: boolean
+                  type:
+                  - boolean
+                  - 'null'
                   x-ms-summary: All entity users
                 notification_email:
                   description: If the event fails, send a notification to this email instead of the sender
@@ -274,6 +308,40 @@ paths:
       x-ms-visibility: internal
 components:
   schemas:
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
     Webhook:
       description: Webhook payload
       properties:
@@ -326,24 +394,6 @@ components:
       title: Webhook
       type: object
       x-ms-summary: Webhook
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
-    Subscriptions:
-      description: Subscription list
-      items:
-        $ref: '#/components/schemas/Subscription'
-      title: Subscriptions
-      type: array
-      x-ms-summary: Subscriptions
     Recipient:
       description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
       properties:
@@ -436,29 +486,62 @@ components:
       title: Recipient
       type: object
       x-ms-summary: Recipient
-    SigningMethod:
-      description: Details about a signing method used by the recipient
+    Subscription:
+      description: Subscription details
       properties:
-        signed_at:
-          description: ISO 8601 timestamp of when the signing occurred
+        host:
+          description: Host
           type: string
-        type:
-          description: The type of signing method used
-          enum:
-          - eid
-          - biometric
-          - sms
-          - initials
-          - signature
+          x-ms-summary: Host
+        created_at:
+          description: Created
           type: string
-        verified_name:
-          description: Name verified from eID transaction
+          x-ms-summary: Created
+        event:
+          description: Event
           type: string
-        verified_phone:
-          description: Phone number used for SMS verification
+          x-ms-summary: Event
+        global:
+          description: Global
+          type: boolean
+          x-ms-summary: Global
+        id:
+          description: ID of the subscription
           type: string
-      title: SigningMethod
+          x-ms-summary: Subscription ID
+        notification_email:
+          description: Notification Email
+          type: string
+          x-ms-summary: Notification Email
+        payload:
+          description: Payload
+          type: string
+          x-ms-summary: Payload
+        status:
+          description: Status of subscription
+          format: int32
+          type:
+          - integer
+          - 'null'
+          x-ms-summary: Status
+        subscription_id:
+          description: ID of the subscription
+          type: string
+          x-ms-summary: Subscription ID
+        target_url:
+          description: Target URL
+          type: string
+          x-ms-summary: Target URL
+      title: Subscription
       type: object
+      x-ms-summary: Subscription
+    Subscriptions:
+      description: Subscription list
+      items:
+        $ref: '#/components/schemas/Subscription'
+      title: Subscriptions
+      type: array
+      x-ms-summary: Subscriptions
     Document:
       description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
       properties:
@@ -692,54 +775,6 @@ components:
       title: Document
       type: object
       x-ms-summary: Document
-    Subscription:
-      description: Subscription details
-      properties:
-        host:
-          description: Host
-          type: string
-          x-ms-summary: Host
-        created_at:
-          description: Created
-          type: string
-          x-ms-summary: Created
-        event:
-          description: Event
-          type: string
-          x-ms-summary: Event
-        global:
-          description: Global
-          type: boolean
-          x-ms-summary: Global
-        id:
-          description: ID of the subscription
-          type: string
-          x-ms-summary: Subscription ID
-        notification_email:
-          description: Notification Email
-          type: string
-          x-ms-summary: Notification Email
-        payload:
-          description: Payload
-          type: string
-          x-ms-summary: Payload
-        status:
-          description: Status of subscription
-          format: int32
-          nullable: true
-          type: integer
-          x-ms-summary: Status
-        subscription_id:
-          description: ID of the subscription
-          type: string
-          x-ms-summary: Subscription ID
-        target_url:
-          description: Target URL
-          type: string
-          x-ms-summary: Target URL
-      title: Subscription
-      type: object
-      x-ms-summary: Subscription
   responses:
     Unauthorized:
       content:
@@ -747,18 +782,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: The specified resource was not found
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

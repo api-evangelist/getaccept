@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact:
     email: integrations@getaccept.com
@@ -9,7 +9,7 @@ info:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://www.getaccept.com/terms.html
-  title: GetAccept Archive Users API
+  title: GetAccept Users API
   version: '1.6'
 servers:
 - description: Production endpoint
@@ -265,6 +265,44 @@ components:
           type: integer
       title: Team
       type: object
+    Users:
+      description: User list
+      properties:
+        users:
+          items:
+            properties:
+              email:
+                type: string
+                x-ms-summary: Email
+              first_name:
+                type: string
+                x-ms-summary: First Name
+              last_login:
+                type: string
+                x-ms-summary: Last Login
+              last_name:
+                type: string
+                x-ms-summary: Last Name
+              name:
+                type: string
+                x-ms-summary: User Name
+              role:
+                type: string
+                x-ms-summary: Role
+              status:
+                type: string
+                x-ms-summary: Status
+              team_name:
+                type: string
+                x-ms-summary: Team Name
+              user_id:
+                type: string
+                x-ms-summary: User ID
+            type: object
+          type: array
+      title: Users
+      type: object
+      x-ms-summary: Users
     User:
       description: 'A user is defined by it´s e-mail address and is connected to one or many entities.
 
@@ -355,8 +393,9 @@ components:
           - true
           - false
           example: false
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           x-ms-summary: Skip sending invitation
         status:
           type: string
@@ -377,44 +416,6 @@ components:
       title: User
       type: object
       x-ms-summary: User
-    Users:
-      description: User list
-      properties:
-        users:
-          items:
-            properties:
-              email:
-                type: string
-                x-ms-summary: Email
-              first_name:
-                type: string
-                x-ms-summary: First Name
-              last_login:
-                type: string
-                x-ms-summary: Last Login
-              last_name:
-                type: string
-                x-ms-summary: Last Name
-              name:
-                type: string
-                x-ms-summary: User Name
-              role:
-                type: string
-                x-ms-summary: Role
-              status:
-                type: string
-                x-ms-summary: Status
-              team_name:
-                type: string
-                x-ms-summary: Team Name
-              user_id:
-                type: string
-                x-ms-summary: User ID
-            type: object
-          type: array
-      title: Users
-      type: object
-      x-ms-summary: Users
   responses:
     Unauthorized:
       content:
@@ -422,18 +423,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: The specified resource was not found
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**
