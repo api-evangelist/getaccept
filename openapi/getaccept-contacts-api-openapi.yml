@@ -205,17 +205,16 @@ paths:
       summary: Delete contact
 components:
   schemas:
-    Error:
+    Contacts:
+      description: Contact list
       properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
+        contacts:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      title: Contacts
       type: object
-      x-ms-summary: Error
+      x-ms-summary: Contacts
     Contact:
       description: Every unique e-mail address (or mobile number) is defined as a contact.
       properties:
@@ -290,16 +289,17 @@ components:
       title: Contact
       type: object
       x-ms-summary: Contact
-    Contacts:
-      description: Contact list
+    Error:
       properties:
-        contacts:
-          items:
-            $ref: '#/components/schemas/Contact'
-          type: array
-      title: Contacts
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
       type: object
-      x-ms-summary: Contacts
+      x-ms-summary: Error
   responses:
     Unauthorized:
       content:

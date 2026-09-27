@@ -168,30 +168,19 @@ paths:
       summary: Test authentication
 components:
   responses:
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
     Unauthorized:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   schemas:
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
     TestResponse:
       description: Authentication test response
       properties:
@@ -203,6 +192,17 @@ components:
           type: string
       title: Test Response
       type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

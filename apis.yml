@@ -10,17 +10,20 @@ description: >-
   bearer tokens. GetAccept is backed by Bessemer Venture Partners and Y Combinator.
 url: https://raw.githubusercontent.com/api-evangelist/getaccept/refs/heads/main/apis.yml
 deliveryModel:
-  model: unknown
+  model: saas
+  license_evidence:
+    not_product:
+    - getaccept/openapi
   open_source: unknown
   commercial: true
   callable_host: true
-  label: Delivery model not determined — needs a product licence on record
+  label: Hosted service · you call their endpoint
   confidence: low
   source:
   - openapi
   - pricing
-  - repository-unlicensed
-  generated: '2026-08-28'
+  - repository-not-product
+  generated: '2026-09-25'
   method: derived
 accessModel:
   pricing: unknown
@@ -52,7 +55,7 @@ tags:
 - Electronic Signature
 - E-Signature
 - Digital Sales Room
-- Document-Management
+- Document Management
 - Contract Management
 - Proposals
 - Software-as-a-Service
@@ -67,6 +70,7 @@ tags_raw:
 - Contract Management
 - Proposals
 - SaaS
+- Document-Management
 apis:
 - aid: getaccept:getaccept-archive-api
   name: GetAccept Archive API

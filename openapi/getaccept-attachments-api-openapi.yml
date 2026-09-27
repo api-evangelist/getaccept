@@ -109,17 +109,6 @@ paths:
       summary: Upload an attachment
 components:
   schemas:
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
     Attachments:
       description: Attachment list
       properties:
@@ -192,6 +181,17 @@ components:
       title: Attachment
       type: object
       x-ms-summary: Attachment
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
   responses:
     Unauthorized:
       content:

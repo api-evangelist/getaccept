@@ -304,17 +304,31 @@ paths:
       summary: Update document custom data property
 components:
   schemas:
-    Error:
+    EntityCustomData:
+      description: Entity custom data settings
       properties:
-        description:
+        allowed_properties:
+          items:
+            properties:
+              key:
+                description: Property key
+                type: string
+              label:
+                description: Property label
+                type: string
+              property_type:
+                description: Property type
+                type: string
+              value_type:
+                description: Value type
+                type: string
+            type: object
+          type: array
+        entity_id:
+          description: Entity ID
           type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
+      title: Entity Custom Data
       type: object
-      x-ms-summary: Error
     CustomDataProperty:
       description: Custom data property details
       properties:
@@ -344,31 +358,17 @@ components:
           type: object
       title: Custom Data Property
       type: object
-    EntityCustomData:
-      description: Entity custom data settings
+    Error:
       properties:
-        allowed_properties:
-          items:
-            properties:
-              key:
-                description: Property key
-                type: string
-              label:
-                description: Property label
-                type: string
-              property_type:
-                description: Property type
-                type: string
-              value_type:
-                description: Value type
-                type: string
-            type: object
-          type: array
-        entity_id:
-          description: Entity ID
+        description:
           type: string
-      title: Entity Custom Data
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
       type: object
+      x-ms-summary: Error
   responses:
     Unauthorized:
       content:
