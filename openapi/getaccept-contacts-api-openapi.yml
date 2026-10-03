@@ -215,6 +215,17 @@ components:
       title: Contacts
       type: object
       x-ms-summary: Contacts
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
     Contact:
       description: Every unique e-mail address (or mobile number) is defined as a contact.
       properties:
@@ -289,30 +300,19 @@ components:
       title: Contact
       type: object
       x-ms-summary: Contact
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
   responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
     NotFound:
       content:
         application/json:

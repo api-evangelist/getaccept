@@ -204,40 +204,18 @@ paths:
       operationId: GetVideo
       summary: Get video
 components:
-  responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: The specified resource was not found
   schemas:
-    VideoJobStatus:
-      description: Video processing job status
+    Error:
       properties:
-        Status:
-          description: Current processing status
+        description:
           type: string
-        thumb_url:
-          description: URL to video thumbnail
+        error:
           type: string
-        video_url:
-          description: URL to processed video
-          type: string
-      title: Video Job Status
+        status:
+          type: number
+      title: Error
       type: object
+      x-ms-summary: Error
     Video:
       description: Video details
       properties:
@@ -270,17 +248,39 @@ components:
           type: string
       title: Video
       type: object
-    Error:
+    VideoJobStatus:
+      description: Video processing job status
       properties:
-        description:
+        Status:
+          description: Current processing status
           type: string
-        error:
+        thumb_url:
+          description: URL to video thumbnail
           type: string
-        status:
-          type: number
-      title: Error
+        video_url:
+          description: URL to processed video
+          type: string
+      title: Video Job Status
       type: object
-      x-ms-summary: Error
+  responses:
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

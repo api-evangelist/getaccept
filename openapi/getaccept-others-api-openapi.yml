@@ -330,58 +330,57 @@ paths:
       x-ms-visibility: important
 components:
   schemas:
-    Webhook:
-      description: Webhook payload
+    SigningMethod:
+      description: Details about a signing method used by the recipient
       properties:
-        custom_fields:
-          additionalProperties:
-            type: string
-          type: object
-          x-ms-summary: Custom Fields
-        document:
-          $ref: '#/components/schemas/Document'
-        entity:
-          description: Entity for the webhook
-          properties:
-            custom_domain:
-              description: Custom domain setting for entity
-              type: string
-              x-ms-summary: Entity custom domain
-              x-ms-visibility: advanced
-            email_send_message:
-              description: Default email message
-              type: string
-              x-ms-summary: Default email message
-              x-ms-visibility: advanced
-            email_send_subject:
-              description: Default email subject
-              type: string
-              x-ms-summary: Default email subject
-              x-ms-visibility: advanced
-            sub_domain:
-              description: Sub-domain for the entity
-              type: string
-              x-ms-summary: Entity sub-domain
-              x-ms-visibility: advanced
-          type: object
-          x-ms-summary: Entity
-        event:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
           type: string
-          x-ms-summary: Event name
-        event_action:
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
           type: string
-          x-ms-summary: Event action
-        event_type:
+        verified_name:
+          description: Name verified from eID transaction
           type: string
-          x-ms-summary: Event type
-        recipient:
-          $ref: '#/components/schemas/Recipient'
-        subscription_id:
+        verified_phone:
+          description: Phone number used for SMS verification
           type: string
-          x-ms-summary: Subscription ID
-      title: Webhook
+      title: SigningMethod
       type: object
-      x-ms-summary: Webhook
+    Folder:
+      description: Folder details
+      properties:
+        id:
+          description: Folder ID
+          type: string
+        name:
+          description: Folder name
+          type: string
+        type:
+          description: 'Folder type: archive or template'
+          enum:
+          - archive
+          - template
+          type: string
+      title: Folder
+      type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
     Recipient:
       description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
       properties:
@@ -474,72 +473,6 @@ components:
       title: Recipient
       type: object
       x-ms-summary: Recipient
-    Folder:
-      description: Folder details
-      properties:
-        id:
-          description: Folder ID
-          type: string
-        name:
-          description: Folder name
-          type: string
-        type:
-          description: 'Folder type: archive or template'
-          enum:
-          - archive
-          - template
-          type: string
-      title: Folder
-      type: object
-    Subscription:
-      description: Subscription details
-      properties:
-        host:
-          description: Host
-          type: string
-          x-ms-summary: Host
-        created_at:
-          description: Created
-          type: string
-          x-ms-summary: Created
-        event:
-          description: Event
-          type: string
-          x-ms-summary: Event
-        global:
-          description: Global
-          type: boolean
-          x-ms-summary: Global
-        id:
-          description: ID of the subscription
-          type: string
-          x-ms-summary: Subscription ID
-        notification_email:
-          description: Notification Email
-          type: string
-          x-ms-summary: Notification Email
-        payload:
-          description: Payload
-          type: string
-          x-ms-summary: Payload
-        status:
-          description: Status of subscription
-          format: int32
-          type:
-          - integer
-          - 'null'
-          x-ms-summary: Status
-        subscription_id:
-          description: ID of the subscription
-          type: string
-          x-ms-summary: Subscription ID
-        target_url:
-          description: Target URL
-          type: string
-          x-ms-summary: Target URL
-      title: Subscription
-      type: object
-      x-ms-summary: Subscription
     Document:
       description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
       properties:
@@ -773,40 +706,107 @@ components:
       title: Document
       type: object
       x-ms-summary: Document
-    SigningMethod:
-      description: Details about a signing method used by the recipient
+    Subscription:
+      description: Subscription details
       properties:
-        signed_at:
-          description: ISO 8601 timestamp of when the signing occurred
+        host:
+          description: Host
           type: string
-        type:
-          description: The type of signing method used
-          enum:
-          - eid
-          - biometric
-          - sms
-          - initials
-          - signature
+          x-ms-summary: Host
+        created_at:
+          description: Created
           type: string
-        verified_name:
-          description: Name verified from eID transaction
+          x-ms-summary: Created
+        event:
+          description: Event
           type: string
-        verified_phone:
-          description: Phone number used for SMS verification
+          x-ms-summary: Event
+        global:
+          description: Global
+          type: boolean
+          x-ms-summary: Global
+        id:
+          description: ID of the subscription
           type: string
-      title: SigningMethod
-      type: object
-    Error:
-      properties:
-        description:
+          x-ms-summary: Subscription ID
+        notification_email:
+          description: Notification Email
           type: string
-        error:
+          x-ms-summary: Notification Email
+        payload:
+          description: Payload
           type: string
+          x-ms-summary: Payload
         status:
-          type: number
-      title: Error
+          description: Status of subscription
+          format: int32
+          type:
+          - integer
+          - 'null'
+          x-ms-summary: Status
+        subscription_id:
+          description: ID of the subscription
+          type: string
+          x-ms-summary: Subscription ID
+        target_url:
+          description: Target URL
+          type: string
+          x-ms-summary: Target URL
+      title: Subscription
       type: object
-      x-ms-summary: Error
+      x-ms-summary: Subscription
+    Webhook:
+      description: Webhook payload
+      properties:
+        custom_fields:
+          additionalProperties:
+            type: string
+          type: object
+          x-ms-summary: Custom Fields
+        document:
+          $ref: '#/components/schemas/Document'
+        entity:
+          description: Entity for the webhook
+          properties:
+            custom_domain:
+              description: Custom domain setting for entity
+              type: string
+              x-ms-summary: Entity custom domain
+              x-ms-visibility: advanced
+            email_send_message:
+              description: Default email message
+              type: string
+              x-ms-summary: Default email message
+              x-ms-visibility: advanced
+            email_send_subject:
+              description: Default email subject
+              type: string
+              x-ms-summary: Default email subject
+              x-ms-visibility: advanced
+            sub_domain:
+              description: Sub-domain for the entity
+              type: string
+              x-ms-summary: Entity sub-domain
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Entity
+        event:
+          type: string
+          x-ms-summary: Event name
+        event_action:
+          type: string
+          x-ms-summary: Event action
+        event_type:
+          type: string
+          x-ms-summary: Event type
+        recipient:
+          $ref: '#/components/schemas/Recipient'
+        subscription_id:
+          type: string
+          x-ms-summary: Subscription ID
+      title: Webhook
+      type: object
+      x-ms-summary: Webhook
   responses:
     Unauthorized:
       content:

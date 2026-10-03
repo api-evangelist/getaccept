@@ -119,6 +119,17 @@ components:
       title: Attachments
       type: object
       x-ms-summary: Attachments
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
     Attachment:
       description: Document attachment
       properties:
@@ -181,30 +192,19 @@ components:
       title: Attachment
       type: object
       x-ms-summary: Attachment
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
   responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

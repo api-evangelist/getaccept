@@ -408,6 +408,23 @@ paths:
       summary: Get template roles
 components:
   schemas:
+    EmailTemplate:
+      description: Email template details
+      properties:
+        code:
+          description: Template HTML code
+          type: string
+        entity_id:
+          description: Entity ID
+          type: string
+        id:
+          description: Template ID
+          type: string
+        name:
+          description: Template name
+          type: string
+      title: Email Template
+      type: object
     PricingTables:
       description: Pricing Tables
       properties:
@@ -418,6 +435,17 @@ components:
       title: Pricing
       type: object
       x-ms-summary: Pricing
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
     PricingTable:
       description: Pricing Table
       properties:
@@ -522,59 +550,6 @@ components:
       title: Editor Field
       type: object
       x-ms-summary: Editor Field
-    PricingSection:
-      description: Pricing Table Section
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/PricingColumn'
-          type: array
-        display_name:
-          description: Display Name
-          type: string
-          x-ms-summary: Display Name
-        name:
-          description: Name
-          type: string
-          x-ms-summary: Name
-        section_id:
-          description: ID
-          type: string
-          x-ms-summary: ID
-      title: Section
-      type: object
-      x-ms-summary: Section
-    Fields:
-      description: Field list
-      properties:
-        editor_fields:
-          items:
-            $ref: '#/components/schemas/EditorField'
-          type: array
-        fields:
-          items:
-            $ref: '#/components/schemas/Field'
-          type: array
-      title: Fields
-      type: object
-      x-ms-summary: Fields
-    EmailTemplate:
-      description: Email template details
-      properties:
-        code:
-          description: Template HTML code
-          type: string
-        entity_id:
-          description: Entity ID
-          type: string
-        id:
-          description: Template ID
-          type: string
-        name:
-          description: Template name
-          type: string
-      title: Email Template
-      type: object
     Field:
       description: Field details
       properties:
@@ -650,30 +625,55 @@ components:
       title: Field
       type: object
       x-ms-summary: Field
-    Error:
+    PricingSection:
+      description: Pricing Table Section
       properties:
-        description:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
           type: string
-        error:
+          x-ms-summary: Display Name
+        name:
+          description: Name
           type: string
-        status:
-          type: number
-      title: Error
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
       type: object
-      x-ms-summary: Error
+      x-ms-summary: Section
+    Fields:
+      description: Field list
+      properties:
+        editor_fields:
+          items:
+            $ref: '#/components/schemas/EditorField'
+          type: array
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+      title: Fields
+      type: object
+      x-ms-summary: Fields
   responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
     NotFound:
       content:
         application/json:

@@ -181,17 +181,6 @@ components:
             $ref: '#/components/schemas/Error'
       description: Invalid data
   schemas:
-    TestResponse:
-      description: Authentication test response
-      properties:
-        entity_id:
-          description: Current entity ID
-          type: string
-        user_id:
-          description: Current user ID
-          type: string
-      title: Test Response
-      type: object
     Error:
       properties:
         description:
@@ -203,6 +192,17 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
+    TestResponse:
+      description: Authentication test response
+      properties:
+        entity_id:
+          description: Current entity ID
+          type: string
+        user_id:
+          description: Current user ID
+          type: string
+      title: Test Response
+      type: object
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

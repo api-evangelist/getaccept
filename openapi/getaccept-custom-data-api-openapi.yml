@@ -329,6 +329,17 @@ components:
           type: string
       title: Entity Custom Data
       type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
     CustomDataProperty:
       description: Custom data property details
       properties:
@@ -358,30 +369,19 @@ components:
           type: object
       title: Custom Data Property
       type: object
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
   responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     Invalid:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: Invalid data
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
     NotFound:
       content:
         application/json:
