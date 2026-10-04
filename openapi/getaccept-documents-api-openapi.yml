@@ -2099,398 +2099,14 @@ paths:
       x-ms-visibility: important
 components:
   schemas:
-    SigningMethod:
-      description: Details about a signing method used by the recipient
+    StatusResponse:
+      description: Document status response
       properties:
-        signed_at:
-          description: ISO 8601 timestamp of when the signing occurred
-          type: string
-        type:
-          description: The type of signing method used
-          enum:
-          - eid
-          - biometric
-          - sms
-          - initials
-          - signature
-          type: string
-        verified_name:
-          description: Name verified from eID transaction
-          type: string
-        verified_phone:
-          description: Phone number used for SMS verification
-          type: string
-      title: SigningMethod
-      type: object
-    PricingTables:
-      description: Pricing Tables
-      properties:
-        pricing_tables:
-          items:
-            $ref: '#/components/schemas/PricingTable'
-          type: array
-      title: Pricing
-      type: object
-      x-ms-summary: Pricing
-    PricingTable:
-      description: Pricing Table
-      properties:
-        currency_settings:
-          description: Currency Settings
-          properties:
-            currency:
-              description: Currency
-              type: string
-              x-ms-summary: Currency
-            locale:
-              description: Locale
-              type: string
-              x-ms-summary: Locale
-          title: Currency Settings
-          type: object
-          x-ms-summary: Currency Settings
-        pre_calculated:
-          description: Pre calculated totals
-          type: boolean
-          x-ms-summary: Pre calculated totals
-        sections:
-          items:
-            $ref: '#/components/schemas/PricingSection'
-          type: array
-        table_id:
-          description: Table ID
-          type: string
-          x-ms-summary: ID
-      title: Table
-      type: object
-      x-ms-summary: Table
-    Recipient:
-      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
-      properties:
-        company_name:
-          description: Company name of the recipient
-          type: string
-          x-ms-summary: Company name
-        company_number:
-          description: Company number of the recipient
-          type: string
-          x-ms-summary: Company number
-        document_url:
-          description: Unique URL for the recipient to view/sign
-          type: string
-          x-ms-summary: Document URL
-          x-ms-visibility: important
-        email:
-          description: Email of the recipient
-          type: string
-          x-ms-summary: Recipient email
-        first_name:
-          description: First name of the recipient
-          type: string
-          x-ms-summary: First name
-        fullname:
-          description: Full name of the recipient
-          type: string
-          x-ms-summary: Full name
-        gender:
-          description: Gender of the recipient
-          type: string
-          x-ms-summary: Gender
-          x-ms-visibility: advanced
-        id:
-          description: ID of the recipient
-          type: string
-          x-ms-summary: ID
-          x-ms-visibility: advanced
-        last_name:
-          description: Last name of the recipient
-          type: string
-          x-ms-summary: Last name
-        mobile:
-          description: Mobile number of the recipient
-          type: string
-          x-ms-summary: Mobile
-        note:
-          description: Note of the recipient
-          type: string
-          x-ms-summary: Note
-          x-ms-visibility: advanced
-        order_num:
-          description: Signing order of the recipient
-          type: string
-          x-ms-summary: Signing order num
-          x-ms-visibility: advanced
-        role:
-          type: string
-          x-ms-visibility: internal
-        settings:
-          description: Per-recipient signature settings.
-          properties:
-            exclude_verified_eid_signature:
-              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
-              type: boolean
-              x-ms-summary: Exclude verified EID signature
-              x-ms-visibility: advanced
-          type: object
-          x-ms-summary: Recipient settings
-          x-ms-visibility: advanced
-        signing_methods:
-          description: Signing methods used by the recipient
-          items:
-            $ref: '#/components/schemas/SigningMethod'
-          type: array
-          x-ms-summary: Signing methods
-          x-ms-visibility: advanced
         status:
-          description: Status of the recipient
+          description: Current document status
           type: string
-          x-ms-summary: Status
-        thumb_url:
-          description: Thumb URL of the recipient
-          type: string
-          x-ms-summary: Thumb URL
-        title:
-          description: Title of the recipient
-          type: string
-          x-ms-summary: Title
-      title: Recipient
+      title: Status Response
       type: object
-      x-ms-summary: Recipient
-    LogEntry:
-      description: Detailed log entry
-      properties:
-        created_at:
-          type: string
-        document_id:
-          type: string
-        email:
-          type: string
-        event_meta_data:
-          type: string
-        event_name:
-          type: string
-        first_name:
-          type: string
-        geo_city:
-          type: string
-        geo_country_name:
-          type: string
-        geo_ip:
-          type: string
-        last_name:
-          type: string
-      title: Log Entry
-      type: object
-    PreviewResponse:
-      description: Document preview response
-      properties:
-        preview_url:
-          description: URL to preview PDF
-          type: string
-      title: Preview Response
-      type: object
-    Field:
-      description: Field details
-      properties:
-        company_name:
-          description: Company Name
-          type: string
-          x-ms-summary: Company Name
-          x-ms-visibility: advanced
-        company_number:
-          description: Company Number
-          type: string
-          x-ms-summary: Company Number
-          x-ms-visibility: advanced
-        field_id:
-          description: Field ID
-          type: string
-          x-ms-summary: Field ID
-          x-ms-visibility: advanced
-        field_label:
-          description: Label
-          type: string
-          x-ms-summary: Label
-        field_options:
-          description: Options
-          items:
-            properties:
-              value:
-                type: string
-                x-ms-summary: Value
-            type: object
-          type: array
-          x-ms-summary: Options
-          x-ms-visibility: advanced
-        field_type:
-          description: Type
-          type: string
-          x-ms-summary: Type
-        field_value:
-          description: Value
-          type: string
-          x-ms-summary: Value
-        is_collectable:
-          description: Collecting field
-          type: boolean
-          x-ms-visibility: advanced
-        is_editable:
-          description: Editable field
-          type: boolean
-          x-ms-visibility: advanced
-        is_required:
-          description: Required field
-          type: boolean
-        page_id:
-          description: Page ID
-          type: string
-          x-ms-summary: Page ID
-          x-ms-visibility: advanced
-        recipient_id:
-          description: Recipient ID
-          type: string
-          x-ms-summary: Recipient ID
-          x-ms-visibility: advanced
-        recipient_name:
-          description: Recipient Name
-          type: string
-          x-ms-summary: Recipient Name
-          x-ms-visibility: advanced
-        role_name:
-          description: Role Name
-          type: string
-          x-ms-summary: Role Name
-          x-ms-visibility: advanced
-      title: Field
-      type: object
-      x-ms-summary: Field
-    Fields:
-      description: Field list
-      properties:
-        editor_fields:
-          items:
-            $ref: '#/components/schemas/EditorField'
-          type: array
-        fields:
-          items:
-            $ref: '#/components/schemas/Field'
-          type: array
-      title: Fields
-      type: object
-      x-ms-summary: Fields
-    Attachment:
-      description: Document attachment
-      properties:
-        access_recipient_names:
-          description: Recipients with access to the attachment
-          items:
-            type: string
-          type: array
-          x-ms-summary: Access Recipients
-          x-ms-visibility: advanced
-        attachment_description:
-          description: Description of the attachment
-          type: string
-          x-ms-summary: Description
-        attachment_download_url:
-          description: URL to download the attachment
-          type: string
-          x-ms-summary: Download URL
-        attachment_extension:
-          description: File extension of the attachment
-          type: string
-          x-ms-summary: File Extension
-          x-ms-visibility: advanced
-        attachment_filename:
-          description: Filename of the attachment
-          type: string
-          x-ms-summary: Filename
-          x-ms-visibility: advanced
-        attachment_id:
-          description: ID of the attachment
-          type: string
-          x-ms-summary: ID
-        attachment_preview_url:
-          description: Internal URL to preview the attachment
-          type: string
-          x-ms-summary: Preview URL
-          x-ms-visibility: advanced
-        attachment_title:
-          description: Title of the attachment
-          type: string
-          x-ms-summary: Title
-        attachment_type:
-          description: Type of the attachment
-          type: string
-          x-ms-summary: Type
-        attachment_url:
-          description: Url of the attachment
-          type: string
-          x-ms-summary: URL
-        last_attachment_view:
-          description: Date and time when the attachment was last viewed
-          type: string
-          x-ms-summary: Last View
-          x-ms-visibility: advanced
-        restrict_access:
-          description: Attachment has restricted access
-          type: boolean
-          x-ms-summary: Restricted access
-          x-ms-visibility: advanced
-      title: Attachment
-      type: object
-      x-ms-summary: Attachment
-    Page:
-      description: Document page details
-      properties:
-        clicks:
-          type: integer
-        description:
-          type: string
-        order_num:
-          type: integer
-        page_height:
-          type: number
-        page_id:
-          type: string
-        page_num:
-          type: integer
-        page_time:
-          type: number
-        page_type:
-          type: integer
-        page_type_name:
-          type: string
-        page_width:
-          type: number
-        thumb_url:
-          type: string
-        title:
-          type: string
-        video_hash:
-          type: string
-        view_duration_seconds:
-          type: number
-      title: Page
-      type: object
-    CommentResponse:
-      description: Comment creation response
-      properties:
-        comment_id:
-          description: ID of the created comment
-          type: string
-      title: Comment Response
-      type: object
-    Recipients:
-      description: Recipient list
-      properties:
-        recipients:
-          items:
-            $ref: '#/components/schemas/Recipient'
-          type: array
-      title: Recipients
-      type: object
-      x-ms-summary: Recipients
     Document:
       description: A document is one or multiple uploaded file(s) that is to be sent to one or many recipients created by a user.
       properties:
@@ -2724,109 +2340,81 @@ components:
       title: Document
       type: object
       x-ms-summary: Document
-    Comment:
-      description: Document comment
-      properties:
-        created_at:
-          description: The timestamp when the comment was created
-          type: string
-        email:
-          description: Email of the person creating the comment
-          type: string
-        full_name:
-          description: Name of the person creating the comment
-          type: string
-        id:
-          description: Unique ID of the comment
-          type: string
-        self:
-          description: If this comment is created by the current authenticated user
-          type: integer
-        text:
-          description: The commented text
-          type: string
-        thumb_url:
-          description: Thumbnail of the person creating the comment
-          type: string
-      title: Comment
-      type: object
-    StatusResponse:
-      description: Document status response
-      properties:
-        status:
-          description: Current document status
-          type: string
-      title: Status Response
-      type: object
-    FieldResponse:
-      description: Field creation response
-      properties:
-        field_id:
-          description: ID of the created field
-          type: string
-      title: Field Response
-      type: object
-    Event:
-      description: Document event details
+    Field:
+      description: Field details
       properties:
         company_name:
+          description: Company Name
           type: string
-        created_at:
+          x-ms-summary: Company Name
+          x-ms-visibility: advanced
+        company_number:
+          description: Company Number
           type: string
-        document_id:
+          x-ms-summary: Company Number
+          x-ms-visibility: advanced
+        field_id:
+          description: Field ID
           type: string
-        document_name:
+          x-ms-summary: Field ID
+          x-ms-visibility: advanced
+        field_label:
+          description: Label
           type: string
-        document_status:
-          type: string
-        email:
-          type: string
-        event_meta_data:
-          type: string
-        event_name:
-          type: string
-        first_name:
-          type: string
-        gender:
-          type: string
-        last_name:
-          type: string
-        thumb_url:
-          type: string
-      title: Event
-      type: object
-    PricingSection:
-      description: Pricing Table Section
-      properties:
-        columns:
+          x-ms-summary: Label
+        field_options:
+          description: Options
           items:
-            $ref: '#/components/schemas/PricingColumn'
+            properties:
+              value:
+                type: string
+                x-ms-summary: Value
+            type: object
           type: array
-        display_name:
-          description: Display Name
+          x-ms-summary: Options
+          x-ms-visibility: advanced
+        field_type:
+          description: Type
           type: string
-          x-ms-summary: Display Name
-        name:
-          description: Name
+          x-ms-summary: Type
+        field_value:
+          description: Value
           type: string
-          x-ms-summary: Name
-        section_id:
-          description: ID
+          x-ms-summary: Value
+        is_collectable:
+          description: Collecting field
+          type: boolean
+          x-ms-visibility: advanced
+        is_editable:
+          description: Editable field
+          type: boolean
+          x-ms-visibility: advanced
+        is_required:
+          description: Required field
+          type: boolean
+        page_id:
+          description: Page ID
           type: string
-          x-ms-summary: ID
-      title: Section
+          x-ms-summary: Page ID
+          x-ms-visibility: advanced
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+          x-ms-visibility: advanced
+        recipient_name:
+          description: Recipient Name
+          type: string
+          x-ms-summary: Recipient Name
+          x-ms-visibility: advanced
+        role_name:
+          description: Role Name
+          type: string
+          x-ms-summary: Role Name
+          x-ms-visibility: advanced
+      title: Field
       type: object
-      x-ms-summary: Section
-    Attachments:
-      description: Attachment list
-      properties:
-        attachments:
-          items:
-            $ref: '#/components/schemas/Attachment'
-          type: array
-      title: Attachments
-      type: object
-      x-ms-summary: Attachments
+      x-ms-summary: Field
     Documents:
       description: Document list
       items:
@@ -2862,17 +2450,177 @@ components:
       title: Documents
       type: array
       x-ms-summary: Documents
-    Error:
+    Comment:
+      description: Document comment
       properties:
+        created_at:
+          description: The timestamp when the comment was created
+          type: string
+        email:
+          description: Email of the person creating the comment
+          type: string
+        full_name:
+          description: Name of the person creating the comment
+          type: string
+        id:
+          description: Unique ID of the comment
+          type: string
+        self:
+          description: If this comment is created by the current authenticated user
+          type: integer
+        text:
+          description: The commented text
+          type: string
+        thumb_url:
+          description: Thumbnail of the person creating the comment
+          type: string
+      title: Comment
+      type: object
+    PreviewResponse:
+      description: Document preview response
+      properties:
+        preview_url:
+          description: URL to preview PDF
+          type: string
+      title: Preview Response
+      type: object
+    Attachment:
+      description: Document attachment
+      properties:
+        access_recipient_names:
+          description: Recipients with access to the attachment
+          items:
+            type: string
+          type: array
+          x-ms-summary: Access Recipients
+          x-ms-visibility: advanced
+        attachment_description:
+          description: Description of the attachment
+          type: string
+          x-ms-summary: Description
+        attachment_download_url:
+          description: URL to download the attachment
+          type: string
+          x-ms-summary: Download URL
+        attachment_extension:
+          description: File extension of the attachment
+          type: string
+          x-ms-summary: File Extension
+          x-ms-visibility: advanced
+        attachment_filename:
+          description: Filename of the attachment
+          type: string
+          x-ms-summary: Filename
+          x-ms-visibility: advanced
+        attachment_id:
+          description: ID of the attachment
+          type: string
+          x-ms-summary: ID
+        attachment_preview_url:
+          description: Internal URL to preview the attachment
+          type: string
+          x-ms-summary: Preview URL
+          x-ms-visibility: advanced
+        attachment_title:
+          description: Title of the attachment
+          type: string
+          x-ms-summary: Title
+        attachment_type:
+          description: Type of the attachment
+          type: string
+          x-ms-summary: Type
+        attachment_url:
+          description: Url of the attachment
+          type: string
+          x-ms-summary: URL
+        last_attachment_view:
+          description: Date and time when the attachment was last viewed
+          type: string
+          x-ms-summary: Last View
+          x-ms-visibility: advanced
+        restrict_access:
+          description: Attachment has restricted access
+          type: boolean
+          x-ms-summary: Restricted access
+          x-ms-visibility: advanced
+      title: Attachment
+      type: object
+      x-ms-summary: Attachment
+    Page:
+      description: Document page details
+      properties:
+        clicks:
+          type: integer
         description:
           type: string
-        error:
-          type: string
-        status:
+        order_num:
+          type: integer
+        page_height:
           type: number
-      title: Error
+        page_id:
+          type: string
+        page_num:
+          type: integer
+        page_time:
+          type: number
+        page_type:
+          type: integer
+        page_type_name:
+          type: string
+        page_width:
+          type: number
+        thumb_url:
+          type: string
+        title:
+          type: string
+        video_hash:
+          type: string
+        view_duration_seconds:
+          type: number
+      title: Page
       type: object
-      x-ms-summary: Error
+    Recipients:
+      description: Recipient list
+      properties:
+        recipients:
+          items:
+            $ref: '#/components/schemas/Recipient'
+          type: array
+      title: Recipients
+      type: object
+      x-ms-summary: Recipients
+    PricingTable:
+      description: Pricing Table
+      properties:
+        currency_settings:
+          description: Currency Settings
+          properties:
+            currency:
+              description: Currency
+              type: string
+              x-ms-summary: Currency
+            locale:
+              description: Locale
+              type: string
+              x-ms-summary: Locale
+          title: Currency Settings
+          type: object
+          x-ms-summary: Currency Settings
+        pre_calculated:
+          description: Pre calculated totals
+          type: boolean
+          x-ms-summary: Pre calculated totals
+        sections:
+          items:
+            $ref: '#/components/schemas/PricingSection'
+          type: array
+        table_id:
+          description: Table ID
+          type: string
+          x-ms-summary: ID
+      title: Table
+      type: object
+      x-ms-summary: Table
     EditorField:
       description: Editor Field details
       properties:
@@ -2919,6 +2667,235 @@ components:
       title: Editor Field
       type: object
       x-ms-summary: Editor Field
+    Attachments:
+      description: Attachment list
+      properties:
+        attachments:
+          items:
+            $ref: '#/components/schemas/Attachment'
+          type: array
+      title: Attachments
+      type: object
+      x-ms-summary: Attachments
+    PricingTables:
+      description: Pricing Tables
+      properties:
+        pricing_tables:
+          items:
+            $ref: '#/components/schemas/PricingTable'
+          type: array
+      title: Pricing
+      type: object
+      x-ms-summary: Pricing
+    PricingSection:
+      description: Pricing Table Section
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
+      type: object
+      x-ms-summary: Section
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
+    FieldResponse:
+      description: Field creation response
+      properties:
+        field_id:
+          description: ID of the created field
+          type: string
+      title: Field Response
+      type: object
+    CommentResponse:
+      description: Comment creation response
+      properties:
+        comment_id:
+          description: ID of the created comment
+          type: string
+      title: Comment Response
+      type: object
+    Recipient:
+      description: Every unique e-mail address (or mobile number) that is connected to a document is a recipient.
+      properties:
+        company_name:
+          description: Company name of the recipient
+          type: string
+          x-ms-summary: Company name
+        company_number:
+          description: Company number of the recipient
+          type: string
+          x-ms-summary: Company number
+        document_url:
+          description: Unique URL for the recipient to view/sign
+          type: string
+          x-ms-summary: Document URL
+          x-ms-visibility: important
+        email:
+          description: Email of the recipient
+          type: string
+          x-ms-summary: Recipient email
+        first_name:
+          description: First name of the recipient
+          type: string
+          x-ms-summary: First name
+        fullname:
+          description: Full name of the recipient
+          type: string
+          x-ms-summary: Full name
+        gender:
+          description: Gender of the recipient
+          type: string
+          x-ms-summary: Gender
+          x-ms-visibility: advanced
+        id:
+          description: ID of the recipient
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        last_name:
+          description: Last name of the recipient
+          type: string
+          x-ms-summary: Last name
+        mobile:
+          description: Mobile number of the recipient
+          type: string
+          x-ms-summary: Mobile
+        note:
+          description: Note of the recipient
+          type: string
+          x-ms-summary: Note
+          x-ms-visibility: advanced
+        order_num:
+          description: Signing order of the recipient
+          type: string
+          x-ms-summary: Signing order num
+          x-ms-visibility: advanced
+        role:
+          type: string
+          x-ms-visibility: internal
+        settings:
+          description: Per-recipient signature settings.
+          properties:
+            exclude_verified_eid_signature:
+              description: 'Only applies when the document has external_eid_signature enabled. If true, this recipient may sign with a handwritten signature instead of verifying with a verified EID. Note: the additional non-QES signatures do not degrade the security of the document''s existing QES signatures, but are of a lower assurance level (advanced or SES). Someone inspecting the document may see that it contains non-QES signatures.'
+              type: boolean
+              x-ms-summary: Exclude verified EID signature
+              x-ms-visibility: advanced
+          type: object
+          x-ms-summary: Recipient settings
+          x-ms-visibility: advanced
+        signing_methods:
+          description: Signing methods used by the recipient
+          items:
+            $ref: '#/components/schemas/SigningMethod'
+          type: array
+          x-ms-summary: Signing methods
+          x-ms-visibility: advanced
+        status:
+          description: Status of the recipient
+          type: string
+          x-ms-summary: Status
+        thumb_url:
+          description: Thumb URL of the recipient
+          type: string
+          x-ms-summary: Thumb URL
+        title:
+          description: Title of the recipient
+          type: string
+          x-ms-summary: Title
+      title: Recipient
+      type: object
+      x-ms-summary: Recipient
+    Event:
+      description: Document event details
+      properties:
+        company_name:
+          type: string
+        created_at:
+          type: string
+        document_id:
+          type: string
+        document_name:
+          type: string
+        document_status:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        gender:
+          type: string
+        last_name:
+          type: string
+        thumb_url:
+          type: string
+      title: Event
+      type: object
+    LogEntry:
+      description: Detailed log entry
+      properties:
+        created_at:
+          type: string
+        document_id:
+          type: string
+        email:
+          type: string
+        event_meta_data:
+          type: string
+        event_name:
+          type: string
+        first_name:
+          type: string
+        geo_city:
+          type: string
+        geo_country_name:
+          type: string
+        geo_ip:
+          type: string
+        last_name:
+          type: string
+      title: Log Entry
+      type: object
+    Fields:
+      description: Field list
+      properties:
+        editor_fields:
+          items:
+            $ref: '#/components/schemas/EditorField'
+          type: array
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+      title: Fields
+      type: object
+      x-ms-summary: Fields
     PricingColumn:
       description: Pricing Table Column
       properties:
@@ -2945,19 +2922,30 @@ components:
       title: Column
       type: object
       x-ms-summary: Column
+    SigningMethod:
+      description: Details about a signing method used by the recipient
+      properties:
+        signed_at:
+          description: ISO 8601 timestamp of when the signing occurred
+          type: string
+        type:
+          description: The type of signing method used
+          enum:
+          - eid
+          - biometric
+          - sms
+          - initials
+          - signature
+          type: string
+        verified_name:
+          description: Name verified from eID transaction
+          type: string
+        verified_phone:
+          description: Phone number used for SMS verification
+          type: string
+      title: SigningMethod
+      type: object
   responses:
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
     NotFound:
       content:
         application/json:
@@ -2970,6 +2958,18 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
       description: Access denied
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

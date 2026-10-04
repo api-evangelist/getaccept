@@ -205,16 +205,6 @@ paths:
       summary: Delete contact
 components:
   schemas:
-    Contacts:
-      description: Contact list
-      properties:
-        contacts:
-          items:
-            $ref: '#/components/schemas/Contact'
-          type: array
-      title: Contacts
-      type: object
-      x-ms-summary: Contacts
     Error:
       properties:
         description:
@@ -226,6 +216,16 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
+    Contacts:
+      description: Contact list
+      properties:
+        contacts:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      title: Contacts
+      type: object
+      x-ms-summary: Contacts
     Contact:
       description: Every unique e-mail address (or mobile number) is defined as a contact.
       properties:
@@ -301,24 +301,24 @@ components:
       type: object
       x-ms-summary: Contact
   responses:
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     NotFound:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: The specified resource was not found
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

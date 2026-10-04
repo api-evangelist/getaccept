@@ -293,24 +293,24 @@ components:
       title: Communication Template
       type: object
   responses:
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     NotFound:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: The specified resource was not found
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**

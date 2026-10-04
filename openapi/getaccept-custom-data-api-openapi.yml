@@ -304,31 +304,6 @@ paths:
       summary: Update document custom data property
 components:
   schemas:
-    EntityCustomData:
-      description: Entity custom data settings
-      properties:
-        allowed_properties:
-          items:
-            properties:
-              key:
-                description: Property key
-                type: string
-              label:
-                description: Property label
-                type: string
-              property_type:
-                description: Property type
-                type: string
-              value_type:
-                description: Value type
-                type: string
-            type: object
-          type: array
-        entity_id:
-          description: Entity ID
-          type: string
-      title: Entity Custom Data
-      type: object
     Error:
       properties:
         description:
@@ -369,25 +344,50 @@ components:
           type: object
       title: Custom Data Property
       type: object
+    EntityCustomData:
+      description: Entity custom data settings
+      properties:
+        allowed_properties:
+          items:
+            properties:
+              key:
+                description: Property key
+                type: string
+              label:
+                description: Property label
+                type: string
+              property_type:
+                description: Property type
+                type: string
+              value_type:
+                description: Value type
+                type: string
+            type: object
+          type: array
+        entity_id:
+          description: Entity ID
+          type: string
+      title: Entity Custom Data
+      type: object
   responses:
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
     NotFound:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       description: The specified resource was not found
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**
