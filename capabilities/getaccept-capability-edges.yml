@@ -1,0 +1,26 @@
+slug: getaccept
+provider: GetAccept
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Subscriptions
+  spec_file: getaccept-subscriptions-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: 'POST /subscriptions  CreateSubscription  Subscribe to document events; GET /subscriptions/errors
+    GetSubscriptionErrors; schema: Webhook'
+  reason: Lifecycle of outbound webhook/event subscriptions including available event types, test delivery
+    and delivery errors — matches Webhook & Event Subscription Management rather than any commercial 'subscription'
+    meaning.

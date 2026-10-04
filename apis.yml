@@ -226,6 +226,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/getaccept-capability-edges.yml
+  name: GetAccept Business Capability Map
 - type: Overlay
   url: overlays/getaccept-openapi-overlay.yaml
 - type: DeveloperPortal
