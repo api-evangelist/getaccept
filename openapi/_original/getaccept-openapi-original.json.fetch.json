@@ -1,0 +1,12 @@
+{
+ "url": "https://raw.githubusercontent.com/getaccept/openapi/HEAD/openapi.json",
+ "requested_url": "https://raw.githubusercontent.com/getaccept/openapi/HEAD/openapi.json",
+ "status": 200,
+ "content_type": "text/plain; charset=utf-8",
+ "bytes": 264964,
+ "sha256": "4c65a99348695d3d7951965681b8dd1c6a647ee276c53e4c67b52854612f18e3",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
