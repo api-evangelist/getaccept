@@ -193,17 +193,6 @@ paths:
       summary: Update communication template
 components:
   schemas:
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
     CommunicationTemplate:
       description: Communication template details
       properties:
@@ -292,6 +281,17 @@ components:
           type: string
       title: Communication Template
       type: object
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
   responses:
     NotFound:
       content:

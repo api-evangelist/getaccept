@@ -205,27 +205,6 @@ paths:
       summary: Delete contact
 components:
   schemas:
-    Error:
-      properties:
-        description:
-          type: string
-        error:
-          type: string
-        status:
-          type: number
-      title: Error
-      type: object
-      x-ms-summary: Error
-    Contacts:
-      description: Contact list
-      properties:
-        contacts:
-          items:
-            $ref: '#/components/schemas/Contact'
-          type: array
-      title: Contacts
-      type: object
-      x-ms-summary: Contacts
     Contact:
       description: Every unique e-mail address (or mobile number) is defined as a contact.
       properties:
@@ -300,6 +279,27 @@ components:
       title: Contact
       type: object
       x-ms-summary: Contact
+    Contacts:
+      description: Contact list
+      properties:
+        contacts:
+          items:
+            $ref: '#/components/schemas/Contact'
+          type: array
+      title: Contacts
+      type: object
+      x-ms-summary: Contacts
+    Error:
+      properties:
+        description:
+          type: string
+        error:
+          type: string
+        status:
+          type: number
+      title: Error
+      type: object
+      x-ms-summary: Error
   responses:
     NotFound:
       content:

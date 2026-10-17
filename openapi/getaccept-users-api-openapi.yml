@@ -237,6 +237,61 @@ paths:
       summary: Get user statistics
 components:
   schemas:
+    Users:
+      description: User list
+      properties:
+        users:
+          items:
+            properties:
+              email:
+                type: string
+                x-ms-summary: Email
+              first_name:
+                type: string
+                x-ms-summary: First Name
+              last_login:
+                type: string
+                x-ms-summary: Last Login
+              last_name:
+                type: string
+                x-ms-summary: Last Name
+              name:
+                type: string
+                x-ms-summary: User Name
+              role:
+                type: string
+                x-ms-summary: Role
+              status:
+                type: string
+                x-ms-summary: Status
+              team_name:
+                type: string
+                x-ms-summary: Team Name
+              user_id:
+                type: string
+                x-ms-summary: User ID
+            type: object
+          type: array
+      title: Users
+      type: object
+      x-ms-summary: Users
+    Team:
+      description: Team details
+      properties:
+        name:
+          description: Team name
+          type: string
+        status:
+          description: Team status
+          type: string
+        team_id:
+          description: Team ID
+          type: string
+        team_user_count:
+          description: Number of users in team
+          type: integer
+      title: Team
+      type: object
     Error:
       properties:
         description:
@@ -361,61 +416,6 @@ components:
       title: User
       type: object
       x-ms-summary: User
-    Team:
-      description: Team details
-      properties:
-        name:
-          description: Team name
-          type: string
-        status:
-          description: Team status
-          type: string
-        team_id:
-          description: Team ID
-          type: string
-        team_user_count:
-          description: Number of users in team
-          type: integer
-      title: Team
-      type: object
-    Users:
-      description: User list
-      properties:
-        users:
-          items:
-            properties:
-              email:
-                type: string
-                x-ms-summary: Email
-              first_name:
-                type: string
-                x-ms-summary: First Name
-              last_login:
-                type: string
-                x-ms-summary: Last Login
-              last_name:
-                type: string
-                x-ms-summary: Last Name
-              name:
-                type: string
-                x-ms-summary: User Name
-              role:
-                type: string
-                x-ms-summary: Role
-              status:
-                type: string
-                x-ms-summary: Status
-              team_name:
-                type: string
-                x-ms-summary: Team Name
-              user_id:
-                type: string
-                x-ms-summary: User ID
-            type: object
-          type: array
-      title: Users
-      type: object
-      x-ms-summary: Users
   responses:
     NotFound:
       content:

@@ -407,6 +407,25 @@ paths:
       operationId: ListRoles
       summary: Get template roles
 components:
+  responses:
+    Unauthorized:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Unauthorized
+    NotFound:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: The specified resource was not found
+    Invalid:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      description: Invalid data
   schemas:
     PricingTables:
       description: Pricing Tables
@@ -418,28 +437,38 @@ components:
       title: Pricing
       type: object
       x-ms-summary: Pricing
-    PricingSection:
-      description: Pricing Table Section
+    PricingTable:
+      description: Pricing Table
       properties:
-        columns:
+        currency_settings:
+          description: Currency Settings
+          properties:
+            currency:
+              description: Currency
+              type: string
+              x-ms-summary: Currency
+            locale:
+              description: Locale
+              type: string
+              x-ms-summary: Locale
+          title: Currency Settings
+          type: object
+          x-ms-summary: Currency Settings
+        pre_calculated:
+          description: Pre calculated totals
+          type: boolean
+          x-ms-summary: Pre calculated totals
+        sections:
           items:
-            $ref: '#/components/schemas/PricingColumn'
+            $ref: '#/components/schemas/PricingSection'
           type: array
-        display_name:
-          description: Display Name
-          type: string
-          x-ms-summary: Display Name
-        name:
-          description: Name
-          type: string
-          x-ms-summary: Name
-        section_id:
-          description: ID
+        table_id:
+          description: Table ID
           type: string
           x-ms-summary: ID
-      title: Section
+      title: Table
       type: object
-      x-ms-summary: Section
+      x-ms-summary: Table
     PricingColumn:
       description: Pricing Table Column
       properties:
@@ -466,6 +495,52 @@ components:
       title: Column
       type: object
       x-ms-summary: Column
+    EditorField:
+      description: Editor Field details
+      properties:
+        id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+          x-ms-visibility: advanced
+        input_settings:
+          description: Settings
+          properties:
+            label:
+              description: Label
+              type: string
+              x-ms-summary: Label
+            options:
+              description: Options
+              items:
+                type: string
+              type: array
+              x-ms-summary: Options
+            required:
+              description: Required
+              type: boolean
+              x-ms-summary: Required
+            type:
+              description: Type
+              type: string
+              x-ms-summary: Type
+          type: object
+          x-ms-summary: Settings
+        recipient_id:
+          description: Recipient ID
+          type: string
+          x-ms-summary: Recipient ID
+        type:
+          description: Type
+          type: string
+          x-ms-summary: Type
+        user_id:
+          description: User ID
+          type: string
+          x-ms-summary: User ID
+      title: Editor Field
+      type: object
+      x-ms-summary: Editor Field
     Error:
       properties:
         description:
@@ -477,6 +552,45 @@ components:
       title: Error
       type: object
       x-ms-summary: Error
+    PricingSection:
+      description: Pricing Table Section
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/PricingColumn'
+          type: array
+        display_name:
+          description: Display Name
+          type: string
+          x-ms-summary: Display Name
+        name:
+          description: Name
+          type: string
+          x-ms-summary: Name
+        section_id:
+          description: ID
+          type: string
+          x-ms-summary: ID
+      title: Section
+      type: object
+      x-ms-summary: Section
+    EmailTemplate:
+      description: Email template details
+      properties:
+        code:
+          description: Template HTML code
+          type: string
+        entity_id:
+          description: Entity ID
+          type: string
+        id:
+          description: Template ID
+          type: string
+        name:
+          description: Template name
+          type: string
+      title: Email Template
+      type: object
     Field:
       description: Field details
       properties:
@@ -552,55 +666,6 @@ components:
       title: Field
       type: object
       x-ms-summary: Field
-    EmailTemplate:
-      description: Email template details
-      properties:
-        code:
-          description: Template HTML code
-          type: string
-        entity_id:
-          description: Entity ID
-          type: string
-        id:
-          description: Template ID
-          type: string
-        name:
-          description: Template name
-          type: string
-      title: Email Template
-      type: object
-    PricingTable:
-      description: Pricing Table
-      properties:
-        currency_settings:
-          description: Currency Settings
-          properties:
-            currency:
-              description: Currency
-              type: string
-              x-ms-summary: Currency
-            locale:
-              description: Locale
-              type: string
-              x-ms-summary: Locale
-          title: Currency Settings
-          type: object
-          x-ms-summary: Currency Settings
-        pre_calculated:
-          description: Pre calculated totals
-          type: boolean
-          x-ms-summary: Pre calculated totals
-        sections:
-          items:
-            $ref: '#/components/schemas/PricingSection'
-          type: array
-        table_id:
-          description: Table ID
-          type: string
-          x-ms-summary: ID
-      title: Table
-      type: object
-      x-ms-summary: Table
     Fields:
       description: Field list
       properties:
@@ -615,71 +680,6 @@ components:
       title: Fields
       type: object
       x-ms-summary: Fields
-    EditorField:
-      description: Editor Field details
-      properties:
-        id:
-          description: ID
-          type: string
-          x-ms-summary: ID
-          x-ms-visibility: advanced
-        input_settings:
-          description: Settings
-          properties:
-            label:
-              description: Label
-              type: string
-              x-ms-summary: Label
-            options:
-              description: Options
-              items:
-                type: string
-              type: array
-              x-ms-summary: Options
-            required:
-              description: Required
-              type: boolean
-              x-ms-summary: Required
-            type:
-              description: Type
-              type: string
-              x-ms-summary: Type
-          type: object
-          x-ms-summary: Settings
-        recipient_id:
-          description: Recipient ID
-          type: string
-          x-ms-summary: Recipient ID
-        type:
-          description: Type
-          type: string
-          x-ms-summary: Type
-        user_id:
-          description: User ID
-          type: string
-          x-ms-summary: User ID
-      title: Editor Field
-      type: object
-      x-ms-summary: Editor Field
-  responses:
-    NotFound:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: The specified resource was not found
-    Unauthorized:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Unauthorized
-    Invalid:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-      description: Invalid data
   securitySchemes:
     Oauth2:
       description: For testing purpose, use client_id **api** and client_secret **app**
