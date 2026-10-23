@@ -226,3 +226,9 @@ x-ms-connector-metadata:
   propertyValue: https://www.getaccept.com/privacy-policy
 - propertyName: Categories
   propertyValue: Sales and CRM;Productivity
+x-provenance:
+  method: harvested
+  publisher: GetAccept
+  source: https://raw.githubusercontent.com/getaccept/openapi/HEAD/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
