@@ -1,883 +1,888 @@
 {
+  "info": {
+    "_postman_id": "9b03e266-7f77-436a-98a1-c9b5192e17dc",
+    "name": "GetAccept Communication Templates API",
+    "description": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:01.000Z",
+    "updatedAt": "2026-10-22T03:16:01.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9b03e266-7f77-436a-98a1-c9b5192e17dc"
+  },
   "item": [
     {
-      "id": "3f1b28d3-d22a-4b88-8958-62ea0bb69676",
-      "name": "Communication Templates",
-      "description": {
-        "content": "Communication templates allow you to customize email and SMS messages sent to recipients.",
-        "type": "text/plain"
-      },
+      "name": "communication-templates",
       "item": [
         {
-          "id": "f96a9fc1-237b-4990-b571-5a70e5370256",
-          "name": "Get communication templates",
-          "request": {
-            "name": "Get communication templates",
-            "description": {
-              "content": "Receive a list of available communication templates.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "communication-templates"
+          "name": "{communicationTemplateId}",
+          "item": [
+            {
+              "name": "Get communication template",
+              "id": "1195c4af-e61f-4a03-ab1c-b0ae79d89e40",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates",
+                    ":communicationTemplateId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "dd243eae-a8bf-40e8-88c3-3234671ee227",
+                      "key": "communicationTemplateId",
+                      "value": "<string>",
+                      "description": "(Required) Communication Template ID"
+                    }
+                  ]
+                },
+                "description": "Receive a specific communication template."
+              },
+              "response": [
+                {
+                  "id": "b9f45daf-0b26-4f74-a4b1-e5ac7818357e",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"automatic_reminder_message\": \"<boolean>\",\n    \"conversation_starter\": \"<string>\",\n    \"reminder_message\": \"<string>\"\n  },\n  \"created_at\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"email_sendout_reminder_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\",\n    \"sms_message\": \"<string>\"\n  },\n  \"email_sendout_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\",\n    \"sms_message\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\"\n  },\n  \"status\": \"draft\",\n  \"type\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"updated_by\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-b9f45daf-0b26-4f74-a4b1-e5ac7818357e"
+                },
+                {
+                  "id": "196919e1-c98b-4b00-bb1d-87c5665dd912",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-196919e1-c98b-4b00-bb1d-87c5665dd912"
+                },
+                {
+                  "id": "00888d7c-dbf4-436a-b672-7a864b13a31d",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-00888d7c-dbf4-436a-b672-7a864b13a31d"
+                }
               ],
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-1195c4af-e61f-4a03-ab1c-b0ae79d89e40"
+            },
+            {
+              "name": "Update communication template",
+              "id": "5be15a5f-f533-4cab-a254-279411d54753",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {},\n  \"status\": \"published\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates",
+                    ":communicationTemplateId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "4b9eabba-29b4-41a8-aee6-dee71ebf176d",
+                      "key": "communicationTemplateId",
+                      "value": "<string>",
+                      "description": "(Required) Communication Template ID"
+                    }
+                  ]
+                },
+                "description": "Updates a specific communication template."
+              },
+              "response": [
+                {
+                  "id": "22f2ad99-0c21-4638-ac5e-8fa342709e08",
+                  "name": "No Content",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {},\n  \"status\": \"published\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-22f2ad99-0c21-4638-ac5e-8fa342709e08"
+                },
+                {
+                  "id": "b1a9304d-d6c3-49f1-8a21-e97edf52f007",
+                  "name": "Invalid data",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {},\n  \"status\": \"published\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-b1a9304d-d6c3-49f1-8a21-e97edf52f007"
+                },
+                {
+                  "id": "e67784f6-bd5e-4bfc-8bdf-555874529538",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {},\n  \"status\": \"published\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-e67784f6-bd5e-4bfc-8bdf-555874529538"
+                },
+                {
+                  "id": "7aafd773-1817-4caa-9883-22afcd8c0ecc",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {},\n  \"status\": \"published\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/communication-templates/:communicationTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "communication-templates",
+                        ":communicationTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "communicationTemplateId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:02.000Z",
+                  "updatedAt": "2026-10-22T03:16:02.000Z",
+                  "uid": "35240-7aafd773-1817-4caa-9883-22afcd8c0ecc"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-5be15a5f-f533-4cab-a254-279411d54753"
+            }
+          ],
+          "id": "9b6b0fc6-e9f0-4fae-818b-65855248e5da",
+          "createdAt": "2026-10-22T03:16:02.000Z",
+          "updatedAt": "2026-10-22T03:16:02.000Z",
+          "uid": "35240-9b6b0fc6-e9f0-4fae-818b-65855248e5da"
+        },
+        {
+          "name": "Get communication templates",
+          "id": "b06ee684-c90e-4f8b-9e16-f9eed16404c4",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/communication-templates?offset=0&limit=20&statuses=published",
               "host": [
                 "{{baseUrl}}"
+              ],
+              "path": [
+                "communication-templates"
               ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Start list from record x",
                   "key": "offset",
-                  "value": "0",
-                  "description": "Start list from record x"
+                  "value": "0"
                 },
                 {
-                  "disabled": false,
+                  "description": "Number of records to list",
                   "key": "limit",
-                  "value": "20",
-                  "description": "Number of records to list"
+                  "value": "20"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter list on status",
                   "key": "statuses",
-                  "value": "<string>",
-                  "description": "Filter list on status"
+                  "value": "published"
+                }
+              ]
+            },
+            "description": "Receive a list of available communication templates."
+          },
+          "response": [
+            {
+              "id": "5434125a-4261-4951-995a-096f95ae6262",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates?offset=0&limit=20&statuses=published",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start list from record x",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Number of records to list",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Filter list on status",
+                      "key": "statuses",
+                      "value": "published"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"communication_templates\": [\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"conversation_sendout_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"automatic_reminder_message\": \"<boolean>\",\n        \"conversation_starter\": \"<string>\",\n        \"reminder_message\": \"<string>\"\n      },\n      \"created_at\": \"<string>\",\n      \"created_by\": \"<string>\",\n      \"email_sendout_reminder_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\",\n        \"sms_message\": \"<string>\"\n      },\n      \"email_sendout_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\",\n        \"sms_message\": \"<string>\"\n      },\n      \"entity_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"language\": \"<string>\",\n      \"name\": \"<string>\",\n      \"signed_sendout_template\": {\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"status\": \"draft\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"<string>\",\n      \"updated_by\": \"<string>\"\n    },\n    {\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"conversation_sendout_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"automatic_reminder_message\": \"<boolean>\",\n        \"conversation_starter\": \"<string>\",\n        \"reminder_message\": \"<string>\"\n      },\n      \"created_at\": \"<string>\",\n      \"created_by\": \"<string>\",\n      \"email_sendout_reminder_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\",\n        \"sms_message\": \"<string>\"\n      },\n      \"email_sendout_template\": {\n        \"automatic_message\": \"<boolean>\",\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\",\n        \"sms_message\": \"<string>\"\n      },\n      \"entity_id\": \"<string>\",\n      \"id\": \"<string>\",\n      \"language\": \"<string>\",\n      \"name\": \"<string>\",\n      \"signed_sendout_template\": {\n        \"button_text\": \"<string>\",\n        \"email_subject\": \"<string>\",\n        \"footer\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"status\": \"draft\",\n      \"type\": \"<string>\",\n      \"updated_at\": \"<string>\",\n      \"updated_by\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-5434125a-4261-4951-995a-096f95ae6262"
             },
+            {
+              "id": "8166d41c-b907-4ebf-9256-dae478a81f6d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates?offset=0&limit=20&statuses=published",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates"
+                  ],
+                  "query": [
+                    {
+                      "description": "Start list from record x",
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Number of records to list",
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Filter list on status",
+                      "key": "statuses",
+                      "value": "published"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-8166d41c-b907-4ebf-9256-dae478a81f6d"
+            }
+          ],
+          "createdAt": "2026-10-22T03:16:02.000Z",
+          "updatedAt": "2026-10-22T03:16:02.000Z",
+          "uid": "35240-b06ee684-c90e-4f8b-9e16-f9eed16404c4"
+        },
+        {
+          "name": "Create communication template",
+          "id": "7caa340d-43df-47e2-b590-373e0c5ad41e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
             "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "cd6c1cbc-bc9d-41d7-b1f3-3835555ae96e",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    },
-                    {
-                      "key": "statuses",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"signed_sendout_template\": {},\n  \"status\": \"draft\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
                 }
-              ],
-              "body": "{\n  \"communication_templates\": [\n    {\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conversation_sendout_template\": {\n        \"automatic_message\": false,\n        \"automatic_reminder_message\": false,\n        \"conversation_starter\": \"string\",\n        \"reminder_message\": \"string\"\n      },\n      \"created_at\": \"string\",\n      \"created_by\": \"string\",\n      \"email_sendout_reminder_template\": {\n        \"automatic_message\": true,\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\",\n        \"sms_message\": \"string\"\n      },\n      \"email_sendout_template\": {\n        \"automatic_message\": true,\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\",\n        \"sms_message\": \"string\"\n      },\n      \"entity_id\": \"string\",\n      \"id\": \"string\",\n      \"language\": \"string\",\n      \"name\": \"string\",\n      \"signed_sendout_template\": {\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\"\n      },\n      \"status\": \"published\",\n      \"type\": \"string\",\n      \"updated_at\": \"string\",\n      \"updated_by\": \"string\"\n    },\n    {\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"conversation_sendout_template\": {\n        \"automatic_message\": false,\n        \"automatic_reminder_message\": true,\n        \"conversation_starter\": \"string\",\n        \"reminder_message\": \"string\"\n      },\n      \"created_at\": \"string\",\n      \"created_by\": \"string\",\n      \"email_sendout_reminder_template\": {\n        \"automatic_message\": false,\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\",\n        \"sms_message\": \"string\"\n      },\n      \"email_sendout_template\": {\n        \"automatic_message\": false,\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\",\n        \"sms_message\": \"string\"\n      },\n      \"entity_id\": \"string\",\n      \"id\": \"string\",\n      \"language\": \"string\",\n      \"name\": \"string\",\n      \"signed_sendout_template\": {\n        \"button_text\": \"string\",\n        \"email_subject\": \"string\",\n        \"footer\": \"string\",\n        \"message\": \"string\"\n      },\n      \"status\": \"published\",\n      \"type\": \"string\",\n      \"updated_at\": \"string\",\n      \"updated_by\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a7773858-cbca-4f9e-b3ed-8a4e862a9cc9",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "20"
-                    },
-                    {
-                      "key": "statuses",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6849d9c1-1c91-481b-8032-4ae5eab51848",
-          "name": "Create communication template",
-          "request": {
-            "name": "Create communication template",
-            "description": {
-              "content": "Create a communication template.",
-              "type": "text/plain"
+              }
             },
             "url": {
+              "raw": "{{baseUrl}}/communication-templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "communication-templates"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "description": "Create a communication template."
           },
           "response": [
             {
-              "id": "3d76f6d6-9774-4330-9209-9a1580142c81",
+              "id": "783ca886-4037-491b-a3ff-79f7d038287c",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"signed_sendout_template\": {},\n  \"status\": \"draft\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates"
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"conversation_sendout_template\": {\n    \"automatic_message\": false,\n    \"automatic_reminder_message\": true,\n    \"conversation_starter\": \"string\",\n    \"reminder_message\": \"string\"\n  },\n  \"created_at\": \"string\",\n  \"created_by\": \"string\",\n  \"email_sendout_reminder_template\": {\n    \"automatic_message\": true,\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\",\n    \"sms_message\": \"string\"\n  },\n  \"email_sendout_template\": {\n    \"automatic_message\": true,\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\",\n    \"sms_message\": \"string\"\n  },\n  \"entity_id\": \"string\",\n  \"id\": \"string\",\n  \"language\": \"string\",\n  \"name\": \"string\",\n  \"signed_sendout_template\": {\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": \"published\",\n  \"type\": \"string\",\n  \"updated_at\": \"string\",\n  \"updated_by\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"automatic_reminder_message\": \"<boolean>\",\n    \"conversation_starter\": \"<string>\",\n    \"reminder_message\": \"<string>\"\n  },\n  \"created_at\": \"<string>\",\n  \"created_by\": \"<string>\",\n  \"email_sendout_reminder_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\",\n    \"sms_message\": \"<string>\"\n  },\n  \"email_sendout_template\": {\n    \"automatic_message\": \"<boolean>\",\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\",\n    \"sms_message\": \"<string>\"\n  },\n  \"entity_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": {\n    \"button_text\": \"<string>\",\n    \"email_subject\": \"<string>\",\n    \"footer\": \"<string>\",\n    \"message\": \"<string>\"\n  },\n  \"status\": \"draft\",\n  \"type\": \"<string>\",\n  \"updated_at\": \"<string>\",\n  \"updated_by\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-783ca886-4037-491b-a3ff-79f7d038287c"
             },
             {
-              "id": "cd55b631-bf68-47e6-8d8b-a3e91bedcdae",
+              "id": "fca975e7-e461-4b95-88a6-9a0175c41040",
               "name": "Invalid data",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"signed_sendout_template\": {},\n  \"status\": \"draft\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/communication-templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "communication-templates"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-fca975e7-e461-4b95-88a6-9a0175c41040"
             },
             {
-              "id": "975f5950-0763-45c4-ae54-ac792dd59350",
+              "id": "25dc39d0-12e2-4cef-a49d-afc15b332463",
               "name": "Unauthorized",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": {},\n  \"email_sendout_reminder_template\": {},\n  \"email_sendout_template\": {},\n  \"signed_sendout_template\": {},\n  \"status\": \"draft\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/communication-templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "communication-templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"language\": \"<string>\",\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:02.000Z",
+              "updatedAt": "2026-10-22T03:16:02.000Z",
+              "uid": "35240-25dc39d0-12e2-4cef-a49d-afc15b332463"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7dce5438-0030-4a09-b03a-8516f041958d",
-          "name": "Get communication template",
-          "request": {
-            "name": "Get communication template",
-            "description": {
-              "content": "Receive a specific communication template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "communication-templates",
-                ":communicationTemplateId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "communicationTemplateId",
-                  "description": "(Required) Communication Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "9bb20fc2-a4d9-4d20-9720-c5b826ea281b",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"conversation_sendout_template\": {\n    \"automatic_message\": false,\n    \"automatic_reminder_message\": true,\n    \"conversation_starter\": \"string\",\n    \"reminder_message\": \"string\"\n  },\n  \"created_at\": \"string\",\n  \"created_by\": \"string\",\n  \"email_sendout_reminder_template\": {\n    \"automatic_message\": true,\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\",\n    \"sms_message\": \"string\"\n  },\n  \"email_sendout_template\": {\n    \"automatic_message\": true,\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\",\n    \"sms_message\": \"string\"\n  },\n  \"entity_id\": \"string\",\n  \"id\": \"string\",\n  \"language\": \"string\",\n  \"name\": \"string\",\n  \"signed_sendout_template\": {\n    \"button_text\": \"string\",\n    \"email_subject\": \"string\",\n    \"footer\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": \"published\",\n  \"type\": \"string\",\n  \"updated_at\": \"string\",\n  \"updated_by\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6cec45c3-b24f-4dee-93c1-2276514a4421",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7e61fb7c-0a18-4c31-bba8-73d546781fe1",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d3ae48fa-8c0f-4e9f-ade0-515195730307",
-          "name": "Update communication template",
-          "request": {
-            "name": "Update communication template",
-            "description": {
-              "content": "Updates a specific communication template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "communication-templates",
-                ":communicationTemplateId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "communicationTemplateId",
-                  "description": "(Required) Communication Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f1026704-3c1b-4944-8194-48b728cc5391",
-              "name": "No Content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "c9b60890-a869-4665-935d-bda7ed6c08ba",
-              "name": "Invalid data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f0daccb8-7dfd-4cc1-8352-10ab604b263f",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "180e0e60-27a7-4ce3-ae4b-63a3c9c1e3d1",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "communication-templates",
-                    ":communicationTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "communicationTemplateId",
-                      "description": "(Required) Communication Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"conversation_sendout_template\": \"<object>\",\n  \"email_sendout_reminder_template\": \"<object>\",\n  \"email_sendout_template\": \"<object>\",\n  \"language\": \"<string>\",\n  \"name\": \"<string>\",\n  \"signed_sendout_template\": \"<object>\",\n  \"status\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 9236.759064908632\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:16:02.000Z",
+          "updatedAt": "2026-10-22T03:16:02.000Z",
+          "uid": "35240-7caa340d-43df-47e2-b590-373e0c5ad41e"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.getaccept.com/v1",
-      "key": "baseUrl"
+      "id": "f09970bd-b0c1-4f61-9945-dff123a60864",
+      "createdAt": "2026-10-22T03:16:02.000Z",
+      "updatedAt": "2026-10-22T03:16:02.000Z",
+      "uid": "35240-f09970bd-b0c1-4f61-9945-dff123a60864"
     }
   ],
   "auth": {
@@ -885,33 +890,35 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "basic"
+        "value": "basic",
+        "type": "string"
       },
       {
         "key": "redirect_uri",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://app.getaccept.com/oauth2/authorize"
+        "value": "https://app.getaccept.com/oauth2/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "860db374-8190-42c8-a09e-b92a1b3062d8",
-    "name": "GetAccept Archive Communication Templates API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.getaccept.com/v1"
     }
-  }
+  ]
 }

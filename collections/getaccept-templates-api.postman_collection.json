@@ -1,2026 +1,2016 @@
 {
+  "info": {
+    "_postman_id": "dd23b005-66be-4402-b71b-46d096e0989f",
+    "name": "GetAccept Templates API",
+    "description": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:56.000Z",
+    "updatedAt": "2026-10-22T03:16:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-dd23b005-66be-4402-b71b-46d096e0989f"
+  },
   "item": [
     {
-      "id": "ad3c80ce-dc11-40d3-9d52-aaabc3738d91",
-      "name": "Templates",
-      "description": {
-        "content": "GetAccept has extensive support for creating templates in different formats. You can use form fields to receive input data from a recipient or word files to merge custom data into a document.",
-        "type": "text/plain"
-      },
+      "name": "email",
       "item": [
         {
-          "id": "2ce8f498-aeb0-4691-993e-f06e78c5f01f",
-          "name": "List email templates",
-          "request": {
-            "name": "List email templates",
-            "description": {
-              "content": "Get a list of email templates on the entity.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "email",
-                "templates"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "templates",
+          "item": [
             {
-              "id": "07bca18d-baf7-416c-8ac8-eaba8d09e838",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "{emailTemplateId}",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"key_0\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1b96f57c-9bd6-4cf4-b668-099a55493a03",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                  "name": "Get email template details",
+                  "id": "796c72ab-7e9a-42ed-9a8b-9791514ff693",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates",
+                        ":emailTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "72572ea7-ddea-420d-b337-30b79d0bc7d3",
+                          "key": "emailTemplateId",
+                          "value": "<string>",
+                          "description": "(Required) Email Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Get detailed information about an email template."
+                  },
+                  "response": [
+                    {
+                      "id": "72ee2805-b5aa-4094-bf93-d819f68944cd",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-72ee2805-b5aa-4094-bf93-d819f68944cd"
+                    },
+                    {
+                      "id": "6dfa6f93-4594-4117-af92-c6a59c6c2694",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-6dfa6f93-4594-4117-af92-c6a59c6c2694"
+                    },
+                    {
+                      "id": "04f84cb8-ebd7-48c4-a3fd-377ad282fa72",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-04f84cb8-ebd7-48c4-a3fd-377ad282fa72"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-796c72ab-7e9a-42ed-9a8b-9791514ff693"
+                },
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "fee0747f-3a06-4f95-a055-ed59b2b4c1ba",
-          "name": "Create email template",
-          "request": {
-            "name": "Create email template",
-            "description": {
-              "content": "Create a new email template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "email",
-                "templates"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "720b5668-6c89-41ce-86ba-d6c97e2b11fe",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                  "name": "Update email template",
+                  "id": "4025cb1e-e084-4b74-b1cf-2d02610b9042",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
                   },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates",
+                        ":emailTemplateId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c9904591-e273-4fa4-8278-338c1d41bdfd",
+                          "key": "emailTemplateId",
+                          "value": "<string>",
+                          "description": "(Required) Email Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Update an existing email template."
+                  },
+                  "response": [
+                    {
+                      "id": "42a88916-1a95-4d24-91d6-2123ea32e8cb",
+                      "name": "No Content",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-42a88916-1a95-4d24-91d6-2123ea32e8cb"
+                    },
+                    {
+                      "id": "abfbf2d5-5b03-4299-8035-5a767159ee14",
+                      "name": "Invalid data",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-abfbf2d5-5b03-4299-8035-5a767159ee14"
+                    },
+                    {
+                      "id": "4d8ed34f-c252-44ad-b36b-8203a6b01e25",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-4d8ed34f-c252-44ad-b36b-8203a6b01e25"
+                    },
+                    {
+                      "id": "dfba4362-f390-406a-a7f4-dcda249e641f",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/email/templates/:emailTemplateId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "email",
+                            "templates",
+                            ":emailTemplateId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "emailTemplateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-dfba4362-f390-406a-a7f4-dcda249e641f"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-4025cb1e-e084-4b74-b1cf-2d02610b9042"
+                }
+              ],
+              "id": "8e818b94-4ec6-49c8-a9b6-7f98d9592687",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-8e818b94-4ec6-49c8-a9b6-7f98d9592687"
+            },
+            {
+              "name": "List email templates",
+              "id": "ccd170e6-bf7a-4ed6-a28f-64300813d118",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
+                "url": {
+                  "raw": "{{baseUrl}}/email/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "email",
+                    "templates"
+                  ]
+                },
+                "description": "Get a list of email templates on the entity."
+              },
+              "response": [
+                {
+                  "id": "b36e35f7-69c7-47b4-811a-d3caf9f2b632",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"laborum375\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"deserunt_274\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"Utf\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ],\n  \"ullamco_1\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-b36e35f7-69c7-47b4-811a-d3caf9f2b632"
+                },
+                {
+                  "id": "067f5e63-1041-4a40-a545-8040e0c82ac5",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-067f5e63-1041-4a40-a545-8040e0c82ac5"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-ccd170e6-bf7a-4ed6-a28f-64300813d118"
+            },
+            {
+              "name": "Create email template",
+              "id": "5a242f06-b521-4646-8ef4-3ea72ae44954",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"code\": \"string\",\n  \"entity_id\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "73084d1d-7e22-4f53-bbd1-9477a028b839",
-              "name": "Invalid data",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/email/templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "email",
                     "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
+                "description": "Create a new email template."
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "ff38f669-fcf7-4ee0-8f73-d0c879d32173",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"entity_id\": \"<string>\",\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-ff38f669-fcf7-4ee0-8f73-d0c879d32173"
+                },
+                {
+                  "id": "24e21a67-e616-40f5-979b-00aac433f48f",
+                  "name": "Invalid data",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-24e21a67-e616-40f5-979b-00aac433f48f"
+                },
+                {
+                  "id": "4b99cccf-ffb6-4e6f-ad82-439c32d446a8",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/email/templates",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "email",
+                        "templates"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-4b99cccf-ffb6-4e6f-ad82-439c32d446a8"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "04c0841c-f354-4c76-ae10-09215b845b11",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"<string>\",\n  \"code\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-5a242f06-b521-4646-8ef4-3ea72ae44954"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
+          "id": "d19c6453-4128-4e16-97c6-bb63381d9fd5",
+          "createdAt": "2026-10-22T03:16:56.000Z",
+          "updatedAt": "2026-10-22T03:16:56.000Z",
+          "uid": "35240-d19c6453-4128-4e16-97c6-bb63381d9fd5"
+        }
+      ],
+      "id": "f0917d59-f8c4-4e93-833f-2faf1105a2a6",
+      "createdAt": "2026-10-22T03:16:56.000Z",
+      "updatedAt": "2026-10-22T03:16:56.000Z",
+      "uid": "35240-f0917d59-f8c4-4e93-833f-2faf1105a2a6"
+    },
+    {
+      "name": "templates",
+      "item": [
         {
-          "id": "7c6ad3fa-bd40-4b75-9a8f-87f88c11d7d6",
-          "name": "Get email template details",
-          "request": {
-            "name": "Get email template details",
-            "description": {
-              "content": "Get detailed information about an email template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "email",
-                "templates",
-                ":emailTemplateId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "emailTemplateId",
-                  "description": "(Required) Email Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{templateId}",
+          "item": [
             {
-              "id": "05a50bb4-268a-4a27-9fbe-379bf0acfd28",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "custom-images",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Get template custom images",
+                  "id": "4368cfa0-3e48-4917-aa8b-474768cd7474",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:templateId/custom-images",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":templateId",
+                        "custom-images"
+                      ],
+                      "variable": [
+                        {
+                          "id": "61f0346c-86e0-4936-b864-f749af1b59ea",
+                          "key": "templateId",
+                          "value": "<string>",
+                          "description": "(Required) Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Get a list of custom images on a template."
+                  },
+                  "response": [
+                    {
+                      "id": "42ef859e-1a50-4acb-8d0b-9179aede775d",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/custom-images",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "custom-images"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"custom_images\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-42ef859e-1a50-4acb-8d0b-9179aede775d"
+                    },
+                    {
+                      "id": "1b6f7bed-c2c5-4526-bcac-709bf2bc7637",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/custom-images",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "custom-images"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-1b6f7bed-c2c5-4526-bcac-709bf2bc7637"
+                    },
+                    {
+                      "id": "f0da52a4-207d-49ee-aa64-b6d5debb9a50",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/custom-images",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "custom-images"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-f0da52a4-207d-49ee-aa64-b6d5debb9a50"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-4368cfa0-3e48-4917-aa8b-474768cd7474"
                 }
               ],
-              "body": "{\n  \"code\": \"string\",\n  \"entity_id\": \"string\",\n  \"id\": \"string\",\n  \"name\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "252fa040-5011-40cf-b98f-92dc08c991b2",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-252fa040-5011-40cf-b98f-92dc08c991b2"
             },
             {
-              "id": "85f333ad-8dd7-4d8f-8b33-9de71db0a518",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "name": "fields",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Get template fields",
+                  "id": "dacc44ab-4497-472e-9f64-8e04eecd9e5b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:templateId/fields",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":templateId",
+                        "fields"
+                      ],
+                      "variable": [
+                        {
+                          "id": "84fe16a3-31ca-44a1-9e0b-dd4e0b6ba04c",
+                          "key": "templateId",
+                          "value": "<string>",
+                          "description": "(Required) Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Receive a list of fields for a specific template."
+                  },
+                  "response": [
+                    {
+                      "id": "368f8ba4-8e83-421e-9447-629aee57862a",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"editor_fields\": [\n    {\n      \"id\": \"<string>\",\n      \"input_settings\": {\n        \"label\": \"<string>\",\n        \"options\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"required\": \"<boolean>\",\n        \"type\": \"<string>\"\n      },\n      \"recipient_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_id\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"input_settings\": {\n        \"label\": \"<string>\",\n        \"options\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"required\": \"<boolean>\",\n        \"type\": \"<string>\"\n      },\n      \"recipient_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_id\": \"<string>\"\n    }\n  ],\n  \"fields\": [\n    {\n      \"company_name\": \"<string>\",\n      \"company_number\": \"<string>\",\n      \"field_id\": \"<string>\",\n      \"field_label\": \"<string>\",\n      \"field_options\": [\n        {\n          \"value\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\"\n        }\n      ],\n      \"field_type\": \"<string>\",\n      \"field_value\": \"<string>\",\n      \"is_collectable\": \"<boolean>\",\n      \"is_editable\": \"<boolean>\",\n      \"is_required\": \"<boolean>\",\n      \"page_id\": \"<string>\",\n      \"recipient_id\": \"<string>\",\n      \"recipient_name\": \"<string>\",\n      \"role_name\": \"<string>\"\n    },\n    {\n      \"company_name\": \"<string>\",\n      \"company_number\": \"<string>\",\n      \"field_id\": \"<string>\",\n      \"field_label\": \"<string>\",\n      \"field_options\": [\n        {\n          \"value\": \"<string>\"\n        },\n        {\n          \"value\": \"<string>\"\n        }\n      ],\n      \"field_type\": \"<string>\",\n      \"field_value\": \"<string>\",\n      \"is_collectable\": \"<boolean>\",\n      \"is_editable\": \"<boolean>\",\n      \"is_required\": \"<boolean>\",\n      \"page_id\": \"<string>\",\n      \"recipient_id\": \"<string>\",\n      \"recipient_name\": \"<string>\",\n      \"role_name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-368f8ba4-8e83-421e-9447-629aee57862a"
+                    },
+                    {
+                      "id": "59becde4-e8fb-4c2b-baee-54391a6c67bf",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-59becde4-e8fb-4c2b-baee-54391a6c67bf"
+                    },
+                    {
+                      "id": "83be13ce-08d6-41d0-acb7-2cfa076ba399",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-83be13ce-08d6-41d0-acb7-2cfa076ba399"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-dacc44ab-4497-472e-9f64-8e04eecd9e5b"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "99eaf578-b826-4849-9054-23480b0b3220",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-99eaf578-b826-4849-9054-23480b0b3220"
             },
             {
-              "id": "d62e1fd4-0eac-45ec-a96d-70826e603ccc",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+              "name": "fields_roles",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "Get template field roles",
+                  "id": "96729e8b-d621-4718-b97e-380528b5f016",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:templateId/fields_roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":templateId",
+                        "fields_roles"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5c60d952-09a4-4d74-87ab-313a1c00dc02",
+                          "key": "templateId",
+                          "value": "<string>",
+                          "description": "(Required) Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Receive a list of fields and associated role for a specific template."
+                  },
+                  "response": [
+                    {
+                      "id": "c75718b7-6abc-4464-b42d-59911fae97d7",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields_roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields_roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"fields\": [\n    {\n      \"field_id\": \"<string>\",\n      \"role_name\": \"<string>\"\n    },\n    {\n      \"field_id\": \"<string>\",\n      \"role_name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-c75718b7-6abc-4464-b42d-59911fae97d7"
+                    },
+                    {
+                      "id": "4884f5b9-2765-4f7b-9148-abf1ce3381a7",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields_roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields_roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-4884f5b9-2765-4f7b-9148-abf1ce3381a7"
+                    },
+                    {
+                      "id": "74ce01fb-ade9-47e8-9f5e-2a0563533df4",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/fields_roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "fields_roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-74ce01fb-ade9-47e8-9f5e-2a0563533df4"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-96729e8b-d621-4718-b97e-380528b5f016"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "0548ee7d-7986-4d1d-a1fe-c7528a81d637",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-0548ee7d-7986-4d1d-a1fe-c7528a81d637"
+            },
+            {
+              "name": "pricing-tables",
+              "item": [
+                {
+                  "name": "Get template pricing tables",
+                  "id": "622e59d6-4d95-46c9-bf57-14db2797a5c6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:templateId/pricing-tables",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":templateId",
+                        "pricing-tables"
+                      ],
+                      "variable": [
+                        {
+                          "id": "0e033f1a-689b-468a-9b35-ea7584053477",
+                          "key": "templateId",
+                          "value": "<string>",
+                          "description": "(Required) Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Receive a list of pricing-table items for a specific template."
+                  },
+                  "response": [
+                    {
+                      "id": "e604c101-95da-4092-ac71-fe62245dc931",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/pricing-tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "pricing-tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"pricing_tables\": [\n    {\n      \"currency_settings\": {\n        \"currency\": \"<string>\",\n        \"locale\": \"<string>\"\n      },\n      \"pre_calculated\": \"<boolean>\",\n      \"sections\": [\n        {\n          \"columns\": [\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": true,\n              \"name\": \"<string>\"\n            },\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": false,\n              \"name\": \"<string>\"\n            }\n          ],\n          \"display_name\": \"<string>\",\n          \"name\": \"<string>\",\n          \"section_id\": \"<string>\"\n        },\n        {\n          \"columns\": [\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": false,\n              \"name\": \"<string>\"\n            },\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": true,\n              \"name\": \"<string>\"\n            }\n          ],\n          \"display_name\": \"<string>\",\n          \"name\": \"<string>\",\n          \"section_id\": \"<string>\"\n        }\n      ],\n      \"table_id\": \"<string>\"\n    },\n    {\n      \"currency_settings\": {\n        \"currency\": \"<string>\",\n        \"locale\": \"<string>\"\n      },\n      \"pre_calculated\": \"<boolean>\",\n      \"sections\": [\n        {\n          \"columns\": [\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": false,\n              \"name\": \"<string>\"\n            },\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": false,\n              \"name\": \"<string>\"\n            }\n          ],\n          \"display_name\": \"<string>\",\n          \"name\": \"<string>\",\n          \"section_id\": \"<string>\"\n        },\n        {\n          \"columns\": [\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": true,\n              \"name\": \"<string>\"\n            },\n            {\n              \"column_id\": \"<string>\",\n              \"display_name\": \"<string>\",\n              \"enabled\": false,\n              \"name\": \"<string>\"\n            }\n          ],\n          \"display_name\": \"<string>\",\n          \"name\": \"<string>\",\n          \"section_id\": \"<string>\"\n        }\n      ],\n      \"table_id\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-e604c101-95da-4092-ac71-fe62245dc931"
+                    },
+                    {
+                      "id": "e61bcfc5-fecf-4d7a-abbe-f2249196a677",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/pricing-tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "pricing-tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-e61bcfc5-fecf-4d7a-abbe-f2249196a677"
+                    },
+                    {
+                      "id": "ea96a425-923f-4b22-b77c-ff0a78773789",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/pricing-tables",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "pricing-tables"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-ea96a425-923f-4b22-b77c-ff0a78773789"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-622e59d6-4d95-46c9-bf57-14db2797a5c6"
+                }
+              ],
+              "id": "4ac5d7e3-de78-4445-907e-7782622be8a8",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-4ac5d7e3-de78-4445-907e-7782622be8a8"
+            },
+            {
+              "name": "roles",
+              "item": [
+                {
+                  "name": "Get template roles",
+                  "id": "cea7bc0b-4c7d-47ea-9751-3b91c4858189",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/templates/:templateId/roles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "templates",
+                        ":templateId",
+                        "roles"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5a696312-f894-4717-ab4a-2e774acc6766",
+                          "key": "templateId",
+                          "value": "<string>",
+                          "description": "(Required) Template ID"
+                        }
+                      ]
+                    },
+                    "description": "Receive a list of roles for a specific template."
+                  },
+                  "response": [
+                    {
+                      "id": "71543749-9e1e-4606-9c82-5d3c3c604263",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"roles\": [\n    {\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"mobile\": \"<string>\",\n      \"role\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"role_name\": \"<string>\"\n    },\n    {\n      \"email\": \"<string>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"mobile\": \"<string>\",\n      \"role\": \"<string>\",\n      \"role_id\": \"<string>\",\n      \"role_name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-71543749-9e1e-4606-9c82-5d3c3c604263"
+                    },
+                    {
+                      "id": "922928aa-d3f7-4a06-88aa-5ee85cf46bb4",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-922928aa-d3f7-4a06-88aa-5ee85cf46bb4"
+                    },
+                    {
+                      "id": "1782cd99-cac0-46c5-a8c0-cadd4397a21e",
+                      "name": "The specified resource was not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: oauth2",
+                            "key": "Authorization",
+                            "value": "<token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/templates/:templateId/roles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "templates",
+                            ":templateId",
+                            "roles"
+                          ],
+                          "variable": [
+                            {
+                              "key": "templateId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                      "createdAt": "2026-10-22T03:16:56.000Z",
+                      "updatedAt": "2026-10-22T03:16:56.000Z",
+                      "uid": "35240-1782cd99-cac0-46c5-a8c0-cadd4397a21e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T03:16:56.000Z",
+                  "updatedAt": "2026-10-22T03:16:56.000Z",
+                  "uid": "35240-cea7bc0b-4c7d-47ea-9751-3b91c4858189"
+                }
+              ],
+              "id": "5abbd44f-06b3-4383-9b99-db5c3f342fa6",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-5abbd44f-06b3-4383-9b99-db5c3f342fa6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "c4b3cd43-f582-4e59-83b9-04d250ef2ccf",
+          "createdAt": "2026-10-22T03:16:56.000Z",
+          "updatedAt": "2026-10-22T03:16:56.000Z",
+          "uid": "35240-c4b3cd43-f582-4e59-83b9-04d250ef2ccf"
         },
         {
-          "id": "db1b01e5-1b9c-4039-b06f-b5da44e07679",
-          "name": "Update email template",
-          "request": {
-            "name": "Update email template",
-            "description": {
-              "content": "Update an existing email template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "email",
-                "templates",
-                ":emailTemplateId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "emailTemplateId",
-                  "description": "(Required) Email Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "42415f3a-a42a-4328-bc25-0c92fd8da7c7",
-              "name": "No Content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "f89f753e-3540-46a0-83ef-fbf65353c11f",
-              "name": "Invalid data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "20ecb17f-1015-4e01-a4e2-8afccc948487",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0e7ab2fc-b52d-4e1f-95c9-dc36692dd671",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "email",
-                    "templates",
-                    ":emailTemplateId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "emailTemplateId",
-                      "description": "(Required) Email Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"code\": \"<string>\",\n  \"name\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "10feaac5-5e5a-4ae3-b61a-ea8f5f8afe31",
           "name": "List templates",
+          "id": "435a72f5-7715-44ab-a13d-4318a3b69df5",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List templates",
-            "description": {
-              "content": "Receive a list of available document templates. You can add new templates under the Templates-section in GetAccept.",
-              "type": "text/plain"
-            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "path": [
-                "templates"
-              ],
+              "raw": "{{baseUrl}}/templates?showall=true&folder_id=<string>",
               "host": [
                 "{{baseUrl}}"
+              ],
+              "path": [
+                "templates"
               ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Show all templates for entity",
                   "key": "showall",
-                  "value": "true",
-                  "description": "Show all templates for entity"
+                  "value": "true"
                 },
                 {
-                  "disabled": false,
+                  "description": "Show templates in a specific folder",
                   "key": "folder_id",
-                  "value": "<string>",
-                  "description": "Show templates in a specific folder"
+                  "value": "<string>"
                 }
-              ],
-              "variable": []
+              ]
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
+            "description": "Receive a list of available document templates. You can add new templates under the Templates-section in GetAccept."
           },
           "response": [
             {
-              "id": "7fdd3f97-43e8-4b4e-963f-00e1a2fd7400",
+              "id": "9423b0aa-70f5-4740-918b-e9d05b043bc7",
               "name": "OK",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "templates"
-                  ],
+                  "raw": "{{baseUrl}}/templates?showall=true&folder_id=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "templates"
+                  ],
                   "query": [
                     {
+                      "description": "Show all templates for entity",
                       "key": "showall",
                       "value": "true"
                     },
                     {
+                      "description": "Show templates in a specific folder",
                       "key": "folder_id",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"templates\": [\n    {\n      \"tags\": \"string\",\n      \"created_at\": \"string\",\n      \"external_editor_type\": \"string\",\n      \"field_count\": 4377,\n      \"id\": \"string\",\n      \"is_editable\": true,\n      \"is_private\": true,\n      \"name\": \"string\",\n      \"page_count\": 3530,\n      \"role_count\": 6942,\n      \"sender_name\": \"string\",\n      \"sender_thumb_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"type\": \"string\",\n      \"user_id\": \"string\",\n      \"video_id\": \"string\",\n      \"video_thumb_url\": \"string\"\n    },\n    {\n      \"tags\": \"string\",\n      \"created_at\": \"string\",\n      \"external_editor_type\": \"string\",\n      \"field_count\": 9719,\n      \"id\": \"string\",\n      \"is_editable\": true,\n      \"is_private\": true,\n      \"name\": \"string\",\n      \"page_count\": 1317,\n      \"role_count\": 5806,\n      \"sender_name\": \"string\",\n      \"sender_thumb_url\": \"string\",\n      \"thumb_url\": \"string\",\n      \"type\": \"string\",\n      \"user_id\": \"string\",\n      \"video_id\": \"string\",\n      \"video_thumb_url\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"templates\": [\n    {\n      \"tags\": \"<string>\",\n      \"created_at\": \"<string>\",\n      \"external_editor_type\": \"<string>\",\n      \"field_count\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"is_editable\": \"<boolean>\",\n      \"is_private\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"page_count\": \"<integer>\",\n      \"role_count\": \"<integer>\",\n      \"sender_name\": \"<string>\",\n      \"sender_thumb_url\": \"<string>\",\n      \"thumb_url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"video_id\": \"<string>\",\n      \"video_thumb_url\": \"<string>\"\n    },\n    {\n      \"tags\": \"<string>\",\n      \"created_at\": \"<string>\",\n      \"external_editor_type\": \"<string>\",\n      \"field_count\": \"<integer>\",\n      \"id\": \"<string>\",\n      \"is_editable\": \"<boolean>\",\n      \"is_private\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"page_count\": \"<integer>\",\n      \"role_count\": \"<integer>\",\n      \"sender_name\": \"<string>\",\n      \"sender_thumb_url\": \"<string>\",\n      \"thumb_url\": \"<string>\",\n      \"type\": \"<string>\",\n      \"user_id\": \"<string>\",\n      \"video_id\": \"<string>\",\n      \"video_thumb_url\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-9423b0aa-70f5-4740-918b-e9d05b043bc7"
             },
             {
-              "id": "a9c0938a-48e4-4d68-a59a-661151c0f381",
+              "id": "1e215a22-eb2f-4fa1-a4c3-5ed0789755f8",
               "name": "Unauthorized",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "templates"
-                  ],
+                  "raw": "{{baseUrl}}/templates?showall=true&folder_id=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "templates"
+                  ],
                   "query": [
                     {
+                      "description": "Show all templates for entity",
                       "key": "showall",
                       "value": "true"
                     },
                     {
+                      "description": "Show templates in a specific folder",
                       "key": "folder_id",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:56.000Z",
+              "updatedAt": "2026-10-22T03:16:56.000Z",
+              "uid": "35240-1e215a22-eb2f-4fa1-a4c3-5ed0789755f8"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1c8b6906-9112-4989-b183-9af551ef2079",
-          "name": "Get template custom images",
-          "request": {
-            "name": "Get template custom images",
-            "description": {
-              "content": "Get a list of custom images on a template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "templates",
-                ":templateId",
-                "custom-images"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "templateId",
-                  "description": "(Required) Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "798bdcc3-e198-4351-a326-3e020d7425f2",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "custom-images"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"custom_images\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6d2bfe2c-cab1-454d-9f86-9cd7e9f02a52",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "custom-images"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7d1777ba-a6f0-4159-93e0-d9fe58765a11",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "custom-images"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f83c5473-da4b-4301-afab-9df79457fa6d",
-          "name": "Get template fields",
-          "request": {
-            "name": "Get template fields",
-            "description": {
-              "content": "Receive a list of fields for a specific template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "templates",
-                ":templateId",
-                "fields"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "templateId",
-                  "description": "(Required) Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d90d6538-7dd7-4a9f-8d98-2a1a20dec5b6",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"editor_fields\": [\n    {\n      \"id\": \"string\",\n      \"input_settings\": {\n        \"label\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": true,\n        \"type\": \"string\"\n      },\n      \"recipient_id\": \"string\",\n      \"type\": \"string\",\n      \"user_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"input_settings\": {\n        \"label\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ],\n        \"required\": true,\n        \"type\": \"string\"\n      },\n      \"recipient_id\": \"string\",\n      \"type\": \"string\",\n      \"user_id\": \"string\"\n    }\n  ],\n  \"fields\": [\n    {\n      \"company_name\": \"string\",\n      \"company_number\": \"string\",\n      \"field_id\": \"string\",\n      \"field_label\": \"string\",\n      \"field_options\": [\n        {\n          \"value\": \"string\"\n        },\n        {\n          \"value\": \"string\"\n        }\n      ],\n      \"field_type\": \"string\",\n      \"field_value\": \"string\",\n      \"is_collectable\": true,\n      \"is_editable\": false,\n      \"is_required\": false,\n      \"page_id\": \"string\",\n      \"recipient_id\": \"string\",\n      \"recipient_name\": \"string\",\n      \"role_name\": \"string\"\n    },\n    {\n      \"company_name\": \"string\",\n      \"company_number\": \"string\",\n      \"field_id\": \"string\",\n      \"field_label\": \"string\",\n      \"field_options\": [\n        {\n          \"value\": \"string\"\n        },\n        {\n          \"value\": \"string\"\n        }\n      ],\n      \"field_type\": \"string\",\n      \"field_value\": \"string\",\n      \"is_collectable\": true,\n      \"is_editable\": false,\n      \"is_required\": false,\n      \"page_id\": \"string\",\n      \"recipient_id\": \"string\",\n      \"recipient_name\": \"string\",\n      \"role_name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "347484e1-789a-4816-a205-b071f0a63951",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "532e179b-fd27-411b-88f6-14ee75210960",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "07e60b31-70bf-45fe-af9a-31d17a4089cf",
-          "name": "Get template field roles",
-          "request": {
-            "name": "Get template field roles",
-            "description": {
-              "content": "Receive a list of fields and associated role for a specific template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "templates",
-                ":templateId",
-                "fields_roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "templateId",
-                  "description": "(Required) Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "524f3624-60f1-4a8c-a256-55bf178c7148",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields_roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"fields\": [\n    {\n      \"field_id\": \"string\",\n      \"role_name\": \"string\"\n    },\n    {\n      \"field_id\": \"string\",\n      \"role_name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f6b4e424-4a92-4d69-a735-896c5e98d12e",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields_roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "020107c3-f160-4f58-9e10-d1d498d3b00e",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "fields_roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "abbcfb43-e46b-438c-bf47-593c0e8480c9",
-          "name": "Get template pricing tables",
-          "request": {
-            "name": "Get template pricing tables",
-            "description": {
-              "content": "Receive a list of pricing-table items for a specific template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "templates",
-                ":templateId",
-                "pricing-tables"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "templateId",
-                  "description": "(Required) Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "6ae61134-ff9a-4cd9-a0d2-76cd2ffd3700",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "pricing-tables"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"pricing_tables\": [\n    {\n      \"currency_settings\": {\n        \"currency\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"pre_calculated\": false,\n      \"sections\": [\n        {\n          \"columns\": [\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"display_name\": \"string\",\n          \"name\": \"string\",\n          \"section_id\": \"string\"\n        },\n        {\n          \"columns\": [\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"display_name\": \"string\",\n          \"name\": \"string\",\n          \"section_id\": \"string\"\n        }\n      ],\n      \"table_id\": \"string\"\n    },\n    {\n      \"currency_settings\": {\n        \"currency\": \"string\",\n        \"locale\": \"string\"\n      },\n      \"pre_calculated\": false,\n      \"sections\": [\n        {\n          \"columns\": [\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"display_name\": \"string\",\n          \"name\": \"string\",\n          \"section_id\": \"string\"\n        },\n        {\n          \"columns\": [\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"column_id\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"display_name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"enabled\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"display_name\": \"string\",\n          \"name\": \"string\",\n          \"section_id\": \"string\"\n        }\n      ],\n      \"table_id\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4871e300-b274-472d-ac97-e31a67315580",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "pricing-tables"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "488f3043-7a35-4c30-8779-178bd7b82bb3",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "pricing-tables"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f32c77ef-2346-499b-9352-04b56e661419",
-          "name": "Get template roles",
-          "request": {
-            "name": "Get template roles",
-            "description": {
-              "content": "Receive a list of roles for a specific template.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "templates",
-                ":templateId",
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "templateId",
-                  "description": "(Required) Template ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "3a436297-e3d1-410e-86b3-6844e27eb6d0",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"roles\": [\n    {\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"mobile\": \"string\",\n      \"role\": \"string\",\n      \"role_id\": \"string\",\n      \"role_name\": \"string\"\n    },\n    {\n      \"email\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"mobile\": \"string\",\n      \"role\": \"string\",\n      \"role_id\": \"string\",\n      \"role_name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9da20f0b-92f6-4587-8fe8-083bcda22e84",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0063014c-3a18-436d-bd78-d136d1c254ef",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "templates",
-                    ":templateId",
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "templateId",
-                      "description": "(Required) Template ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 7789.631214112073\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:16:56.000Z",
+          "updatedAt": "2026-10-22T03:16:56.000Z",
+          "uid": "35240-435a72f5-7715-44ab-a13d-4318a3b69df5"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.getaccept.com/v1",
-      "key": "baseUrl"
+      "id": "a1e3bd1c-0263-43f4-a300-157c8fcceee3",
+      "createdAt": "2026-10-22T03:16:56.000Z",
+      "updatedAt": "2026-10-22T03:16:56.000Z",
+      "uid": "35240-a1e3bd1c-0263-43f4-a300-157c8fcceee3"
     }
   ],
   "auth": {
@@ -2028,33 +2018,35 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "basic"
+        "value": "basic",
+        "type": "string"
       },
       {
         "key": "redirect_uri",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://app.getaccept.com/oauth2/authorize"
+        "value": "https://app.getaccept.com/oauth2/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "83c61034-3ab4-411b-936b-d46c074b25f2",
-    "name": "GetAccept Archive Templates API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.getaccept.com/v1"
     }
-  }
+  ]
 }

@@ -1,1124 +1,1132 @@
 {
+  "info": {
+    "_postman_id": "a6ea88bb-267a-47f6-9819-5df164d1854d",
+    "name": "GetAccept Subscriptions API",
+    "description": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:16:45.000Z",
+    "updatedAt": "2026-10-22T03:16:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a6ea88bb-267a-47f6-9819-5df164d1854d"
+  },
   "item": [
     {
-      "id": "c22e20fa-ebed-4820-9f13-174402ecfe64",
-      "name": "Subscriptions",
-      "description": {
-        "content": "To simplify the process of checking a documents status and make it more efficient in an integrated application, you can enable API Webhooks. Enable webhooks as a user with administrator privileges in the Settings | Integration | Webhooks. We support multiple webhooks for one application. Events will be POSTed to your webhook URLs and should be handled by you. A POST must be answered and your endpoint will need to return a 2xx HTTP. Otherwise, the callback will be considered a failure and will be retried later. Retries will be made after 1, 12, 24, and 48 hours. The sender (or notification_email) will receive an email notification after a failed attempt.",
-        "type": "text/plain"
-      },
+      "name": "subscriptions",
       "item": [
         {
-          "id": "0739cb0a-3575-4ede-9110-05b5d3f457a0",
-          "name": "List subscriptions",
-          "request": {
-            "name": "List subscriptions",
-            "description": {
-              "content": "Receive a list of available subscriptions for the current entity.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "errors",
+          "item": [
             {
-              "id": "67b3efaa-7219-4027-8eb5-87c0cddc72c8",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
+              "name": "Get subscription errors",
+              "id": "34f862bf-94fe-4f65-81a9-46ace3fc3152",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"host\": \"string\",\n    \"created_at\": \"string\",\n    \"event\": \"string\",\n    \"global\": true,\n    \"id\": \"string\",\n    \"notification_email\": \"string\",\n    \"payload\": \"string\",\n    \"status\": 8035,\n    \"subscription_id\": \"string\",\n    \"target_url\": \"string\"\n  },\n  {\n    \"host\": \"string\",\n    \"created_at\": \"string\",\n    \"event\": \"string\",\n    \"global\": true,\n    \"id\": \"string\",\n    \"notification_email\": \"string\",\n    \"payload\": \"string\",\n    \"status\": 3632,\n    \"subscription_id\": \"string\",\n    \"target_url\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3e476228-3eea-4273-bed9-617a8c2d845a",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0ad4cc21-ad5f-479b-842e-5215c6e3fb4e",
-          "name": "Subscribe to document events",
-          "request": {
-            "name": "Subscribe to document events",
-            "description": {
-              "content": "This call will create a new subscription.\nThe response will be wrapped in an array even for single object according to REST hook standards.\n\n>Events\n  * `document.created` - Document is created\n  * `document.sent` - Document is sent\n  * `document.viewed` - Document is sent\n  * `document.signed` - Document is signed\n  * `document.approved` - Document is approved\n  * `document.expired` - Document has expired\n  * `document.rejected` - Document is rejected\n  * `document.downloaded` - Document is downloaded\n  * `document.printed` - Document is printed\n  * `document.forwarded` - Document is forwarded\n  * `document.partially_signed` - Document has been partially signed\n  * `document.commented` - Document is commented\n  * `document.hardbounced` - Document is hardbounced\n  * `document.imported` - Document is imported",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"event\": \"<string>\",\n  \"target_url\": \"<string>\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "83fec4fc-fee7-4dc6-a290-4edd29f9e3c4",
-              "name": "OK",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "subscriptions"
-                  ],
+                  "raw": "{{baseUrl}}/subscriptions/errors",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"document.signed\",\n  \"target_url\": \"https://abc.x.pipedream.net/\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"hostmaster@example.com\",\n  \"payload\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"host\": \"string\",\n  \"created_at\": \"string\",\n  \"event\": \"string\",\n  \"global\": true,\n  \"id\": \"string\",\n  \"notification_email\": \"string\",\n  \"payload\": \"string\",\n  \"status\": 7121,\n  \"subscription_id\": \"string\",\n  \"target_url\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "141dc0f2-f00e-4045-b035-6b3744f97fb2",
-              "name": "Invalid data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"document.signed\",\n  \"target_url\": \"https://abc.x.pipedream.net/\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"hostmaster@example.com\",\n  \"payload\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d287beeb-ec4c-4907-972d-7b60f979429b",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"document.signed\",\n  \"target_url\": \"https://abc.x.pipedream.net/\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"hostmaster@example.com\",\n  \"payload\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "184eee9c-9ea4-4383-b62a-7240d67ac84b",
-          "name": "Get subscription errors",
-          "request": {
-            "name": "Get subscription errors",
-            "description": {
-              "content": "Get the last errors for active subscriptions.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions",
-                "errors"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "cbdaefe7-77c5-4287-8f35-14a502da8897",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "subscriptions",
                     "errors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"created_at\": \"string\",\n    \"event\": \"string\",\n    \"payload\": \"string\",\n    \"result\": \"string\",\n    \"retry\": \"string\",\n    \"status\": \"string\",\n    \"target_url\": \"string\"\n  },\n  {\n    \"created_at\": \"string\",\n    \"event\": \"string\",\n    \"payload\": \"string\",\n    \"result\": \"string\",\n    \"retry\": \"string\",\n    \"status\": \"string\",\n    \"target_url\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "2c75695c-7c98-49f1-b2a1-9fa7f07996d4",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "errors"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7e3ed6a3-afb8-4f38-aaa9-f260ee81d96f",
-          "name": "List available subscription events",
-          "request": {
-            "name": "List available subscription events",
-            "description": {
-              "content": "This call will return a list of available subscription events",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions",
-                "events"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "cd5837fd-ff2f-432e-8b69-d5afa97b6edd",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"name\": \"string\",\n    \"value\": \"string\"\n  },\n  {\n    \"name\": \"string\",\n    \"value\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1dd195e9-0239-4362-bae7-55ec1311a024",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4d0a26f9-ea2c-4411-a7b5-91396b10412f",
-              "name": "The specified resource was not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7390b9f1-93fd-4a78-bbca-e7e683916d2d",
-          "name": "Test subscription",
-          "request": {
-            "name": "Test subscription",
-            "description": {
-              "content": "Simulate or test a subscription / webhook event.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions",
-                "test"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "adf71f9e-c4a6-4952-9d94-12cd3e4b3cd1",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "test"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "6cae3f29-9551-43f4-b8ef-675385f77b70",
-              "name": "Invalid data",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "test"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "afa2f04a-3b34-4038-962c-9c5ca3b2c908",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    "test"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "eddca5b4-d4d2-4534-a28e-f2efe81bb028",
-          "name": "Delete subscription",
-          "request": {
-            "name": "Delete subscription",
-            "description": {
-              "content": "Delete a single subscription.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions",
-                ":subscriptionId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subscriptionId",
-                  "description": "(Required) Subscription ID"
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "74b965f7-09a6-44bc-8605-d0361fb0712c",
-              "name": "No Content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    ":subscriptionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subscriptionId",
-                      "description": "(Required) Subscription ID"
-                    }
                   ]
                 },
+                "description": "Get the last errors for active subscriptions."
+              },
+              "response": [
+                {
+                  "id": "00035c09-066f-40ee-85d4-4832dadb9e32",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/errors",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "errors"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"created_at\": \"<string>\",\n    \"event\": \"<string>\",\n    \"payload\": \"<string>\",\n    \"result\": \"<string>\",\n    \"retry\": \"<string>\",\n    \"status\": \"<string>\",\n    \"target_url\": \"<string>\"\n  },\n  {\n    \"created_at\": \"<string>\",\n    \"event\": \"<string>\",\n    \"payload\": \"<string>\",\n    \"result\": \"<string>\",\n    \"retry\": \"<string>\",\n    \"status\": \"<string>\",\n    \"target_url\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-00035c09-066f-40ee-85d4-4832dadb9e32"
+                },
+                {
+                  "id": "696287fa-2b58-4930-90c7-8406445cac3b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/errors",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "errors"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-696287fa-2b58-4930-90c7-8406445cac3b"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-34f862bf-94fe-4f65-81a9-46ace3fc3152"
+            }
+          ],
+          "id": "65540644-9fed-43a7-9034-f675a6ff1c08",
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-65540644-9fed-43a7-9034-f675a6ff1c08"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "List available subscription events",
+              "id": "7b56ccdd-d201-44bb-9de5-950ce50b0d5b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Accept",
+                    "value": "application/json"
                   }
                 ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "events"
+                  ]
+                },
+                "description": "This call will return a list of available subscription events"
+              },
+              "response": [
+                {
+                  "id": "a7a2c0f4-cb3f-4c74-947f-955cee7a2f0d",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"name\": \"<string>\",\n    \"value\": \"<string>\"\n  },\n  {\n    \"name\": \"<string>\",\n    \"value\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-a7a2c0f4-cb3f-4c74-947f-955cee7a2f0d"
+                },
+                {
+                  "id": "3271da45-be6a-4d0f-a11f-b9d4bdff7698",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-3271da45-be6a-4d0f-a11f-b9d4bdff7698"
+                },
+                {
+                  "id": "44fae69c-63bc-4119-8399-ab0c2e10bd1f",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-44fae69c-63bc-4119-8399-ab0c2e10bd1f"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-7b56ccdd-d201-44bb-9de5-950ce50b0d5b"
+            }
+          ],
+          "id": "903cb41b-5932-40ce-b752-aa84efa833b4",
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-903cb41b-5932-40ce-b752-aa84efa833b4"
+        },
+        {
+          "name": "test",
+          "item": [
+            {
+              "name": "Test subscription",
+              "id": "8f5e3099-2adf-443e-b379-a70cdb9f6f85",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/test",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    "test"
+                  ]
+                },
+                "description": "Simulate or test a subscription / webhook event."
+              },
+              "response": [
+                {
+                  "id": "86cbaa2a-f66f-4245-a4d9-80a65513ab13",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/test",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "test"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-86cbaa2a-f66f-4245-a4d9-80a65513ab13"
+                },
+                {
+                  "id": "bd6c6f92-cdb0-41c6-bd3a-0a3b7f05a70b",
+                  "name": "Invalid data",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/test",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "test"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-bd6c6f92-cdb0-41c6-bd3a-0a3b7f05a70b"
+                },
+                {
+                  "id": "e94f1b9d-f948-4c5d-9baa-27f12ad12e9c",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"event\": \"<string>\",\n  \"document_id\": \"<string>\",\n  \"recipient_id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/test",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        "test"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-e94f1b9d-f948-4c5d-9baa-27f12ad12e9c"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-8f5e3099-2adf-443e-b379-a70cdb9f6f85"
+            }
+          ],
+          "id": "36275eeb-1847-4bd8-83f1-bf0d388984fa",
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-36275eeb-1847-4bd8-83f1-bf0d388984fa"
+        },
+        {
+          "name": "{subscriptionId}",
+          "item": [
+            {
+              "name": "Delete subscription",
+              "id": "eb2a429c-fc62-4c41-816d-94c2fedf470a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
                 "method": "DELETE",
-                "body": {}
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "26f5f3c8-14e6-4ecb-bdf1-d46bd3f5bd53",
+                      "key": "subscriptionId",
+                      "value": "<string>",
+                      "description": "(Required) Subscription ID"
+                    }
+                  ]
+                },
+                "description": "Delete a single subscription."
               },
-              "status": "No Content",
-              "code": 204,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "dca241d1-b806-4d6a-83c4-15121fcd2b65",
+                  "name": "No Content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-dca241d1-b806-4d6a-83c4-15121fcd2b65"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-eb2a429c-fc62-4c41-816d-94c2fedf470a"
+            },
+            {
+              "name": "Get subscription details",
+              "id": "fcd00671-0fe3-494e-9fa3-843a8120a367",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions",
+                    ":subscriptionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "40a86d78-4ee6-4b54-b74f-3699974833c8",
+                      "key": "subscriptionId",
+                      "value": "<string>",
+                      "description": "(Required) Subscription ID"
+                    }
+                  ]
+                },
+                "description": "This call will return details of a single subscription"
+              },
+              "response": [
+                {
+                  "id": "89de7777-a27f-41e4-8220-ed640dc4fbf6",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"host\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"event\": \"<string>\",\n  \"global\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"status\": \"<integer,null>\",\n  \"subscription_id\": \"<string>\",\n  \"target_url\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-89de7777-a27f-41e4-8220-ed640dc4fbf6"
+                },
+                {
+                  "id": "86cc2bb0-705a-4ea0-bb34-d65a6989607b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-86cc2bb0-705a-4ea0-bb34-d65a6989607b"
+                },
+                {
+                  "id": "5a9af3da-9282-4455-961d-59462ffe9148",
+                  "name": "The specified resource was not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/subscriptions/:subscriptionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "subscriptions",
+                        ":subscriptionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "subscriptionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+                  "createdAt": "2026-10-22T03:16:45.000Z",
+                  "updatedAt": "2026-10-22T03:16:45.000Z",
+                  "uid": "35240-5a9af3da-9282-4455-961d-59462ffe9148"
+                }
+              ],
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-fcd00671-0fe3-494e-9fa3-843a8120a367"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "fb7b1f99-8bb2-4701-8347-c7c8dc7a83bc",
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-fb7b1f99-8bb2-4701-8347-c7c8dc7a83bc"
         },
         {
-          "id": "e75c72ac-97e4-4f8f-9373-ae5140f643b4",
-          "name": "Get subscription details",
+          "name": "List subscriptions",
+          "id": "18a1aa4b-a4ff-4ec7-a135-d63aea32fbff",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Get subscription details",
-            "description": {
-              "content": "This call will return details of a single subscription",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "subscriptions",
-                ":subscriptionId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subscriptionId",
-                  "description": "(Required) Subscription ID"
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "Receive a list of available subscriptions for the current entity."
           },
           "response": [
             {
-              "id": "c2d63262-a5b9-4ce2-b004-4e8555ff4c49",
+              "id": "05107d1f-8409-4a19-a8c2-6a5eb8e207ce",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    ":subscriptionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subscriptionId",
-                      "description": "(Required) Subscription ID"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"host\": \"string\",\n  \"created_at\": \"string\",\n  \"event\": \"string\",\n  \"global\": true,\n  \"id\": \"string\",\n  \"notification_email\": \"string\",\n  \"payload\": \"string\",\n  \"status\": 7121,\n  \"subscription_id\": \"string\",\n  \"target_url\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"host\": \"<string>\",\n    \"created_at\": \"<string>\",\n    \"event\": \"<string>\",\n    \"global\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"notification_email\": \"<string>\",\n    \"payload\": \"<string>\",\n    \"status\": \"<integer,null>\",\n    \"subscription_id\": \"<string>\",\n    \"target_url\": \"<string>\"\n  },\n  {\n    \"host\": \"<string>\",\n    \"created_at\": \"<string>\",\n    \"event\": \"<string>\",\n    \"global\": \"<boolean>\",\n    \"id\": \"<string>\",\n    \"notification_email\": \"<string>\",\n    \"payload\": \"<string>\",\n    \"status\": \"<integer,null>\",\n    \"subscription_id\": \"<string>\",\n    \"target_url\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-05107d1f-8409-4a19-a8c2-6a5eb8e207ce"
             },
             {
-              "id": "a893ed09-961f-452f-a8ee-c13912bc54cf",
+              "id": "9b1663d7-1966-4655-87e7-98943b54887c",
               "name": "Unauthorized",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    ":subscriptionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subscriptionId",
-                      "description": "(Required) Subscription ID"
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
               },
               "status": "Unauthorized",
               "code": 401,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-9b1663d7-1966-4655-87e7-98943b54887c"
+            }
+          ],
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-18a1aa4b-a4ff-4ec7-a135-d63aea32fbff"
+        },
+        {
+          "name": "Subscribe to document events",
+          "id": "dd8b7de1-e812-4494-987a-bf57f6543fbf",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": \"document.printed\",\n  \"target_url\": \"<string>\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
             },
+            "url": {
+              "raw": "{{baseUrl}}/subscriptions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "subscriptions"
+              ]
+            },
+            "description": "This call will create a new subscription.\nThe response will be wrapped in an array even for single object according to REST hook standards.\n\n>Events\n* `document.created` - Document is created\n* `document.sent` - Document is sent\n* `document.viewed` - Document is sent\n* `document.signed` - Document is signed\n* `document.approved` - Document is approved\n* `document.expired` - Document has expired\n* `document.rejected` - Document is rejected\n* `document.downloaded` - Document is downloaded\n* `document.printed` - Document is printed\n* `document.forwarded` - Document is forwarded\n* `document.partially_signed` - Document has been partially signed\n* `document.commented` - Document is commented\n* `document.hardbounced` - Document is hardbounced\n* `document.imported` - Document is imported"
+          },
+          "response": [
             {
-              "id": "e48e2516-480b-4996-bd8a-730c7aa52b40",
-              "name": "The specified resource was not found",
+              "id": "7b660381-c884-4590-b31b-eef16ee0cc51",
+              "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "subscriptions",
-                    ":subscriptionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subscriptionId",
-                      "description": "(Required) Subscription ID"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"document.printed\",\n  \"target_url\": \"<string>\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
               },
-              "status": "Not Found",
-              "code": 404,
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"error\": \"string\",\n  \"status\": 5032.21582129754\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"host\": \"<string>\",\n  \"created_at\": \"<string>\",\n  \"event\": \"<string>\",\n  \"global\": \"<boolean>\",\n  \"id\": \"<string>\",\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\",\n  \"status\": \"<integer,null>\",\n  \"subscription_id\": \"<string>\",\n  \"target_url\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-7b660381-c884-4590-b31b-eef16ee0cc51"
+            },
+            {
+              "id": "604ff0b8-26d9-4d11-b0a2-8961937cecdb",
+              "name": "Invalid data",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"document.printed\",\n  \"target_url\": \"<string>\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-604ff0b8-26d9-4d11-b0a2-8961937cecdb"
+            },
+            {
+              "id": "46b2f45c-061f-4c2f-920d-2f27c7671ee0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"event\": \"document.printed\",\n  \"target_url\": \"<string>\",\n  \"host\": \"<string>\",\n  \"global\": true,\n  \"notification_email\": \"<string>\",\n  \"payload\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscriptions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "subscriptions"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"error\": \"<string>\",\n  \"status\": \"<number>\"\n}",
+              "createdAt": "2026-10-22T03:16:45.000Z",
+              "updatedAt": "2026-10-22T03:16:45.000Z",
+              "uid": "35240-46b2f45c-061f-4c2f-920d-2f27c7671ee0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T03:16:45.000Z",
+          "updatedAt": "2026-10-22T03:16:45.000Z",
+          "uid": "35240-dd8b7de1-e812-4494-987a-bf57f6543fbf"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.getaccept.com/v1",
-      "key": "baseUrl"
+      "id": "68ddcd19-9d2d-40c0-9b10-a4bd851dd70b",
+      "createdAt": "2026-10-22T03:16:45.000Z",
+      "updatedAt": "2026-10-22T03:16:45.000Z",
+      "uid": "35240-68ddcd19-9d2d-40c0-9b10-a4bd851dd70b"
     }
   ],
   "auth": {
@@ -1126,33 +1134,35 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "basic"
+        "value": "basic",
+        "type": "string"
       },
       {
         "key": "redirect_uri",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://app.getaccept.com/oauth2/token"
+        "value": "https://app.getaccept.com/oauth2/token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://app.getaccept.com/oauth2/authorize"
+        "value": "https://app.getaccept.com/oauth2/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "46944915-5c3d-458c-8ec5-99906df26f3b",
-    "name": "GetAccept Archive Subscriptions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "GetAccept provides a sales enablement platform for sales to design, send, promote, track, and e-sign sales documents, leveraging sales collateral, contract management, proposals, and electronic signatures in one place.\n\nContact Support:\n Name: GetAccept API Team\n Email: integrations@getaccept.com",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.getaccept.com/v1"
     }
-  }
+  ]
 }
